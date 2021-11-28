@@ -73,9 +73,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.ipadx = 40;
-            gbc.ipady = 30;
-            gbc.insets = new Insets(0, 0, 0, 100);
+            gbc.insets = new Insets(0, 0, 0, 50);
             return gbc;
         }
     },
@@ -85,13 +83,11 @@ public enum LayoutScheme implements innerLayoutScheme {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 1;
             gbc.gridy = 0;
-            gbc.ipadx = 40;
-            gbc.ipady = 30;
-            gbc.insets = new Insets(0, 100, 0, 0);
+            gbc.insets = new Insets(0, 50, 0, 0);
             return gbc;
         }
     },
-    TOP_BUTTONFIELD {
+    TOP_BUTTONAREA {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();

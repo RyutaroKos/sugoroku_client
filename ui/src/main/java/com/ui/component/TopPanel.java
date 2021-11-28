@@ -1,6 +1,7 @@
 package com.ui.component;
 
 import com.ui.scheme.*;
+import com.ui.component.button.TopPanelButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class TopPanel extends JPanel {
     JButton loginButton;
     JButton signupButton;
     Container inputField;
-    Container buttonField;
+    Container buttonArea;
 
     TopPanel(MainFrame parentFrame) {
         this.setBackground(ColorScheme.LIGHT_ORANGE.getColor());
@@ -37,10 +38,10 @@ public class TopPanel extends JPanel {
         passwordLabel = new JLabel("パスワード：");
         usernameInput = new JTextField(10);
         passwordInput = new JPasswordField(10);
-        loginButton = new JButton("ログイン");
-        signupButton = new JButton("初回登録");
+        loginButton = TopPanelButton.getButton("ログイン");
+        signupButton = TopPanelButton.getButton("初回登録");
         inputField = new Container();
-        buttonField = new Container();
+        buttonArea = new Container();
 
         usernameLabel.setFont(FontScheme.TOP_INPUTFIELD_KANJI.getFont());
         passwordLabel.setFont(FontScheme.TOP_INPUTFIELD_KANJI.getFont());
@@ -55,17 +56,13 @@ public class TopPanel extends JPanel {
         inputField.add(passwordInput, LayoutScheme.TOP_PASSWORDINPUT.getLayout());
         this.add(inputField, LayoutScheme.TOP_INPUTFIELD.getLayout());
 
-        loginButton.setFont(FontScheme.TOP_BUTTON.getFont());
-        loginButton.setBackground(ColorScheme.LIGHT_BRICK.getColor());
         loginButton.addActionListener(new loginAction());
-        signupButton.setFont(FontScheme.TOP_BUTTON.getFont());
-        signupButton.setBackground(ColorScheme.LIGHT_YELLOW.getColor());
         signupButton.addActionListener(new signupAction());
 
-        buttonField.setLayout(new GridBagLayout());
-        buttonField.add(loginButton, LayoutScheme.TOP_LOGINBUTTON.getLayout());
-        buttonField.add(signupButton, LayoutScheme.TOP_SIGNUPBUTTON.getLayout());
-        this.add(buttonField, LayoutScheme.TOP_BUTTONFIELD.getLayout());
+        buttonArea.setLayout(new GridBagLayout());
+        buttonArea.add(loginButton, LayoutScheme.TOP_LOGINBUTTON.getLayout());
+        buttonArea.add(signupButton, LayoutScheme.TOP_SIGNUPBUTTON.getLayout());
+        this.add(buttonArea, LayoutScheme.TOP_BUTTONAREA.getLayout());
     }
 
     class loginAction implements ActionListener {
