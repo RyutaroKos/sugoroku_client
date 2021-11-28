@@ -113,7 +113,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    MATCHING_BUTTONFIELD {
+    MATCHING_BUTTONAREA {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
@@ -124,7 +124,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    MATCHING_RANDOMBUTTON {
+    MATCHING_BUTTON {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
@@ -134,49 +134,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    MATCHING_RANDOMLABEL {
-        @Override
-        public GridBagConstraints getLayout() {
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 1;
-            gbc.insets = new Insets(10, 0, 0, 0);
-            gbc.anchor = GridBagConstraints.NORTHWEST;
-            return gbc;
-        }
-    },
-    MATCHING_PRIVATEBUTTON {
-        @Override
-        public GridBagConstraints getLayout() {
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
-            return gbc;
-        }
-    },
-    MATCHING_PRIVATELABEL {
-        @Override
-        public GridBagConstraints getLayout() {
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 1;
-            gbc.insets = new Insets(10, 0, 0, 0);
-            gbc.anchor = GridBagConstraints.NORTHWEST;
-            return gbc;
-        }
-    },
-    MATCHING_CHECKRECORDBUTTON {
-        @Override
-        public GridBagConstraints getLayout() {
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
-            return gbc;
-        }
-    },
-    MATCHING_CHECKRECORDLABEL {
+    MATCHING_LABEL {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();

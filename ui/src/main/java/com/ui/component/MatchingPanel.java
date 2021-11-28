@@ -22,7 +22,7 @@ public class MatchingPanel extends JPanel {
     Container randomField;
     Container privateField;
     Container checkRecordField;
-    Container buttonField;
+    Container buttonArea;
 
     MatchingPanel(MainFrame parentFrame) {
         this.setBackground(ColorScheme.LIGHT_ORANGE.getColor());
@@ -40,7 +40,7 @@ public class MatchingPanel extends JPanel {
         randomField = new Container();
         privateField = new Container();
         checkRecordField = new Container();
-        buttonField = new Container();
+        buttonArea = new Container();
 
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         scrollPane.setPreferredSize(new Dimension(400, 600)); //TODO: ウインドウサイズがこれより小さい場合、表示異常が発生
@@ -50,19 +50,19 @@ public class MatchingPanel extends JPanel {
         randomField.setLayout(new GridBagLayout());
         privateField.setLayout(new GridBagLayout());
         checkRecordField.setLayout(new GridBagLayout());
-        buttonField.setLayout(new GridLayout(3, 1));
+        buttonArea.setLayout(new GridLayout(3, 1));
 
         this.add(scrollPane, LayoutScheme.MATCHING_SCROLLPANEL.getLayout());
-        randomField.add(randomMatchButton, LayoutScheme.MATCHING_RANDOMBUTTON.getLayout());
-        randomField.add(randomMatchLabel, LayoutScheme.MATCHING_RANDOMLABEL.getLayout());
-        privateField.add(privateMatchButton, LayoutScheme.MATCHING_PRIVATEBUTTON.getLayout());
-        privateField.add(privateMatchLabel, LayoutScheme.MATCHING_PRIVATELABEL.getLayout());
-        checkRecordField.add(checkRecordButton, LayoutScheme.MATCHING_CHECKRECORDBUTTON.getLayout());
-        checkRecordField.add(checkRecordLabel, LayoutScheme.MATCHING_CHECKRECORDLABEL.getLayout());
-        buttonField.add(randomField);
-        buttonField.add(privateField);
-        buttonField.add(checkRecordField);
-        this.add(buttonField, LayoutScheme.MATCHING_BUTTONFIELD.getLayout());
+        randomField.add(randomMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
+        randomField.add(randomMatchLabel, LayoutScheme.MATCHING_LABEL.getLayout());
+        privateField.add(privateMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
+        privateField.add(privateMatchLabel, LayoutScheme.MATCHING_LABEL.getLayout());
+        checkRecordField.add(checkRecordButton, LayoutScheme.MATCHING_BUTTON.getLayout());
+        checkRecordField.add(checkRecordLabel, LayoutScheme.MATCHING_LABEL.getLayout());
+        buttonArea.add(randomField);
+        buttonArea.add(privateField);
+        buttonArea.add(checkRecordField);
+        this.add(buttonArea, LayoutScheme.MATCHING_BUTTONAREA.getLayout());
     }
 
     class randomMatchingAction implements ActionListener {
