@@ -7,17 +7,17 @@ public class MainFrame extends JFrame {
 
     MainFrame(String title) {
         super(title);
-        this.setVisible(true);
         this.setSize(1200, 800);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        this.topPanel = new TopPanel();
+        topPanel = new TopPanel();
     }
 
     public void init() {
-        this.add(this.topPanel);
+        this.add(topPanel);
         this.validate();
         this.repaint();
+        this.setVisible(true);
     }
 
     public static MainFrame createFrame(String title) {
