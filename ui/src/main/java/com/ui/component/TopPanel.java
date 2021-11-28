@@ -3,12 +3,12 @@ package com.ui.component;
 import com.ui.scheme.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Objects;
 import javax.swing.*;
 
 public class TopPanel extends JPanel {
+    MainFrame parentFrame;
     JLabel logo;
     JLabel usernameLabel;
     JLabel passwordLabel;
@@ -19,9 +19,11 @@ public class TopPanel extends JPanel {
     Container inputField;
     Container buttonField;
 
-    TopPanel() {
+    TopPanel(MainFrame parentFrame) {
         this.setBackground(ColorScheme.LIGHT_ORANGE.getColor());
         this.setLayout(new GridBagLayout());
+
+        this.parentFrame = parentFrame;
 
         try {
             logo = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));
@@ -68,6 +70,8 @@ public class TopPanel extends JPanel {
     class loginAction implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             //TODO: add login action
+
+            parentFrame.changePanel(parentFrame.matchingPanel);
         }
     }
 
