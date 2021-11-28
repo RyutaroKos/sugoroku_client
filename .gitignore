@@ -1,6 +1,12 @@
 # Project exclude paths
+
+# Gradle Setting Path
 /.gradle/
+
+# IDE Setting Path
 /.idea/
+
+# Build Path
 /app/build/
 /app/build/classes/java/main/
 /ui/build/
