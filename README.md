@@ -1,5 +1,5 @@
-# 2021 - Information Experiment 2 / 2021 - 情報実験2
+# 2021 - 情報実験2
 
-## Sugoroku Game Client App / すごろくゲームクライアントアプリ
+## すごろくゲーム：クライアントアプリケーション
 
 現在工事中…
