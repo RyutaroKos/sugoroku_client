@@ -5,6 +5,7 @@ import java.awt.*;
 interface innerColorScheme {
     Color getColor();
 }
+
 public enum ColorScheme implements innerColorScheme {
     LIGHT_ORANGE {
         public Color getColor() {
