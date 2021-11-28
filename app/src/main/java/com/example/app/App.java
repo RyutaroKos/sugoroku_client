@@ -21,6 +21,5 @@ public class App {
         }
 
         MainFrame mainFrame = createFrame(new App().appTitle);
-        mainFrame.init();
     }
 }

@@ -16,13 +16,13 @@ public class MainFrame extends JFrame {
         container = this.getContentPane();
         topPanel = new TopPanel(this);
         matchingPanel = new MatchingPanel(this);
+
+        init();
     }
 
     public void init() {
         container.add(topPanel);
-        container.validate();
-        container.repaint();
-        container.setVisible(true);
+        this.setVisible(true);
     }
 
     public void changePanel(JPanel nextPanel) {

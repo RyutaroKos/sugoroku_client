@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class MatchingPanel extends JPanel {
     MainFrame parentFrame;
+    JScrollPane scrollPane;
+    JTextArea textArea;
 
     MatchingPanel(MainFrame parentFrame) {
         this.setBackground(ColorScheme.LIGHT_ORANGE.getColor());
