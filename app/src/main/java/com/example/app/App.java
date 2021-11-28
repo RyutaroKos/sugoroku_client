@@ -1,7 +1,6 @@
 package com.example.app;
 
 import com.ui.component.MainFrame;
-import static com.ui.component.MainFrame.createFrame;
 
 import javax.swing.*;
 
@@ -20,6 +19,6 @@ public class App {
             System.out.println("Nimbus look and feel not found, using default look and feel instead.");
         }
 
-        MainFrame mainFrame = createFrame(new App().appTitle);
+        MainFrame.createFrame(new App().appTitle);
     }
 }

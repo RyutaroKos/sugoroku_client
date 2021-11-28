@@ -11,6 +11,7 @@ public class MainFrame extends JFrame {
     MainFrame(String title) {
         super(title);
         this.setSize(1200, 800);
+//        this.setResizable(false); //ウインドウサイズ変更不可（非推奨）
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         container = this.getContentPane();

@@ -2,10 +2,11 @@ package com.ui.component;
 
 import com.ui.scheme.*;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.Objects;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class TopPanel extends JPanel {
     MainFrame parentFrame;
@@ -54,10 +55,10 @@ public class TopPanel extends JPanel {
         inputField.add(passwordInput, LayoutScheme.TOP_PASSWORDINPUT.getLayout());
         this.add(inputField, LayoutScheme.TOP_INPUTFIELD.getLayout());
 
-        loginButton.setFont(FontScheme.TOP_BUTTONFIELD.getFont());
+        loginButton.setFont(FontScheme.TOP_BUTTON.getFont());
         loginButton.setBackground(ColorScheme.LIGHT_BRICK.getColor());
         loginButton.addActionListener(new loginAction());
-        signupButton.setFont(FontScheme.TOP_BUTTONFIELD.getFont());
+        signupButton.setFont(FontScheme.TOP_BUTTON.getFont());
         signupButton.setBackground(ColorScheme.LIGHT_YELLOW.getColor());
         signupButton.addActionListener(new signupAction());
 
@@ -68,7 +69,8 @@ public class TopPanel extends JPanel {
     }
 
     class loginAction implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add login action
 
             parentFrame.changePanel(parentFrame.matchingPanel);
@@ -76,7 +78,8 @@ public class TopPanel extends JPanel {
     }
 
     class signupAction implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add signup action
         }
     }

@@ -8,6 +8,7 @@ interface innerLayoutScheme {
 
 public enum LayoutScheme implements innerLayoutScheme {
     TOP_LOGO {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 1;
@@ -18,6 +19,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_NAMELABEL {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
@@ -27,6 +29,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_NAMEINPUT {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 1;
@@ -36,6 +39,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_PASSWORDLABEL {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
@@ -44,6 +48,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_PASSWORDINPUT {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 1;
@@ -52,6 +57,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_INPUTFIELD {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 2;
@@ -62,6 +68,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_LOGINBUTTON {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
@@ -73,6 +80,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_SIGNUPBUTTON {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 1;
@@ -84,6 +92,7 @@ public enum LayoutScheme implements innerLayoutScheme {
         }
     },
     TOP_BUTTONFIELD {
+        @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 2;
@@ -92,4 +101,90 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
+    MATCHING_SCROLLPANEL {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.fill = GridBagConstraints.VERTICAL;
+            gbc.insets = new Insets(0, 0, 0, 150);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    MATCHING_BUTTONFIELD {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            gbc.fill = GridBagConstraints.VERTICAL;
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    MATCHING_RANDOMBUTTON {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            return gbc;
+        }
+    },
+    MATCHING_RANDOMLABEL {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(10, 0, 0, 0);
+            gbc.anchor = GridBagConstraints.NORTHWEST;
+            return gbc;
+        }
+    },
+    MATCHING_PRIVATEBUTTON {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            return gbc;
+        }
+    },
+    MATCHING_PRIVATELABEL {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(10, 0, 0, 0);
+            gbc.anchor = GridBagConstraints.NORTHWEST;
+            return gbc;
+        }
+    },
+    MATCHING_CHECKRECORDBUTTON {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            return gbc;
+        }
+    },
+    MATCHING_CHECKRECORDLABEL {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(10, 0, 0, 0);
+            gbc.anchor = GridBagConstraints.NORTHWEST;
+            return gbc;
+        }
+    }
 }
