@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class MatchingPanel extends JPanel {
     MainFrame parentFrame;
@@ -42,8 +45,17 @@ public class MatchingPanel extends JPanel {
         checkRecordField = new Container();
         buttonArea = new Container();
 
+        try {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule");
+            String str = new String(Objects.requireNonNull(inputStream).readAllBytes(), StandardCharsets.UTF_8);
+            textArea.setText(str);
+        } catch (Exception e) {
+            System.out.println("Failed to load game rule: " + e);
+        }
+        textArea.setEditable(false);
+        textArea.setFont(FontScheme.MATCHING_LABEL.getFont());
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
-        scrollPane.setPreferredSize(new Dimension(400, 600)); //TODO: ウインドウサイズがこれより小さい場合、表示異常が発生
+        scrollPane.setPreferredSize(new Dimension(400, 600));
         randomMatchButton.addActionListener(new randomMatchingAction());
         privateMatchButton.addActionListener(new privateMatchingAction());
         checkRecordButton.addActionListener(new checkRecordAction());

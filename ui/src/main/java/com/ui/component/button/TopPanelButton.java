@@ -8,7 +8,7 @@ import java.awt.*;
 public class TopPanelButton extends JButton {
     TopPanelButton(String label) {
         super(label);
-        this.setPreferredSize(new Dimension(200, 80));
+        this.setPreferredSize(new Dimension(250, 100));
         this.setFont(FontScheme.TOP_BUTTON.getFont());
         setBackgroundColor(label);
     }
