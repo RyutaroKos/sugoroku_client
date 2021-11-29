@@ -46,7 +46,7 @@ public class MatchingPanel extends JPanel {
         buttonArea = new Container();
 
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule");
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule.txt");
             String str = new String(Objects.requireNonNull(inputStream).readAllBytes(), StandardCharsets.UTF_8);
             textArea.setText(str);
         } catch (Exception e) {
