@@ -5,7 +5,7 @@ import com.ui.component.MainFrame;
 import javax.swing.*;
 
 public class App {
-    private final String appTitle = "Sugoroku";
+    private static final String appTitle = "Sugoroku";
 
     public static void main(String[] args) {
         try {
@@ -19,6 +19,6 @@ public class App {
             System.out.println("Nimbus look and feel not found, using default look and feel instead.");
         }
 
-        MainFrame.createFrame(new App().appTitle);
+        MainFrame.createFrame(appTitle);
     }
 }

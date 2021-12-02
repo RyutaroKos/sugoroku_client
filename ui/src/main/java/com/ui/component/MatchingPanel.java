@@ -82,6 +82,8 @@ public class MatchingPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add random matching action
+
+            parentFrame.changePanel(new LobbyPanel(parentFrame));
         }
     }
 
@@ -89,6 +91,8 @@ public class MatchingPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add private matching action
+
+            parentFrame.changePanel(new LobbyPanel(parentFrame));
         }
     }
 

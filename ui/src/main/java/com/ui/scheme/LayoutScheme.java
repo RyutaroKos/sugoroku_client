@@ -140,5 +140,39 @@ public enum LayoutScheme implements innerLayoutScheme {
             gbc.anchor = GridBagConstraints.NORTHWEST;
             return gbc;
         }
+    },
+    LOBBY_TITLE {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 2;
+            gbc.insets = new Insets(0, 0, 70, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_PLAYERLIST{
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(0, 0, 0, 80);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_CHATPANEL{
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(0, 80, 0, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
     }
 }

@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
-    public void changePanel(JPanel nextPanel) {
+    public void changePanel(JComponent nextPanel) {
         container.removeAll();
         container.add(nextPanel);
         container.validate();
