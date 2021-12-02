@@ -9,5 +9,7 @@
 # Build Path
 /app/build/
 /app/build/classes/java/main/
+/netcom/build/
+/netcom/build/classes/java/main/
 /ui/build/
 /ui/build/classes/java/main/
