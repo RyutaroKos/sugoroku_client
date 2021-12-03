@@ -8,16 +8,17 @@ import java.awt.*;
 
 public class LobbyPanelBottom extends JPanel {
     LobbyPanelBottom(String title) {
-        this.setPreferredSize(new Dimension(400, 600));
-        this.setBorder(new LineBorder(Color.BLACK, 1, false));
-        setPanelColor(title);
+        setPreferredSize(new Dimension(400, 600));
+        setBorder(new LineBorder(Color.BLACK, 1, false));
+        setColor(title);
+        setLayout(new GridBagLayout());
     }
 
-    void setPanelColor(String title) {
+    private void setColor(String title) {
         if (title.equals("playerList")) {
-            this.setBackground(ColorScheme.LIGHT_GOLD.getColor());
+            setBackground(ColorScheme.LIGHT_GOLD.getColor());
         } else {
-            this.setBackground(ColorScheme.LIGHT_BLUE.getColor());
+            setBackground(ColorScheme.LIGHT_BLUE.getColor());
         }
     }
 

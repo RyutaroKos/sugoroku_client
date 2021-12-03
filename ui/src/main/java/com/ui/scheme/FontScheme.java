@@ -7,6 +7,18 @@ interface innerFontScheme {
 }
 
 public enum FontScheme implements innerFontScheme {
+    DIALOG_MESSAGE {
+        @Override
+        public Font getFont() {
+            return new Font(Font.SANS_SERIF, Font.PLAIN, 18);
+        }
+    },
+    DIALOG_BUTTON {
+        @Override
+        public Font getFont() {
+            return new Font(Font.SANS_SERIF, Font.PLAIN, 20);
+        }
+    },
     TOP_INPUTFIELD_KANJI {
         @Override
         public Font getFont() {
@@ -35,6 +47,18 @@ public enum FontScheme implements innerFontScheme {
         @Override
         public Font getFont() {
             return new Font(Font.SANS_SERIF, Font.PLAIN, 16);
+        }
+    },
+    LOBBY_TOP_BUTTON {
+        @Override
+        public Font getFont() {
+            return new Font(Font.SANS_SERIF, Font.PLAIN, 24);
+        }
+    },
+    LOBBY_BUTTOM_BUTTON {
+        @Override
+        public Font getFont() {
+            return new Font(Font.SANS_SERIF, Font.BOLD, 16);
         }
     }
 }

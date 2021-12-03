@@ -10,10 +10,10 @@ public class MainFrame extends JFrame {
 
     MainFrame(String title) {
         super(title);
-        this.setMinimumSize(new Dimension(1280, 960));
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(1280, 960));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        container = this.getContentPane();
+        container = getContentPane();
         topPanel = new TopPanel(this);
         matchingPanel = new MatchingPanel(this);
 
@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
 
     public void init() {
         container.add(topPanel);
-        this.setVisible(true);
+        setVisible(true);
     }
 
     public void changePanel(JComponent nextPanel) {

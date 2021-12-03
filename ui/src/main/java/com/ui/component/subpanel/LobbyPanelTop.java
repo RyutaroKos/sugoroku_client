@@ -8,9 +8,10 @@ import java.awt.*;
 
 public class LobbyPanelTop extends JPanel {
     LobbyPanelTop() {
-        this.setPreferredSize(new Dimension(800, 100));
-        this.setBorder(new LineBorder(Color.BLACK, 1, false));
-        this.setBackground(ColorScheme.LIGHT_RED.getColor());
+        setPreferredSize(new Dimension(800, 100));
+        setBorder(new LineBorder(Color.BLACK, 1, false));
+        setBackground(ColorScheme.LIGHT_RED.getColor());
+        setLayout(new GridBagLayout());
     }
 
     public static LobbyPanelTop getPanel() {

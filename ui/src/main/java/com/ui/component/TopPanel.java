@@ -1,5 +1,7 @@
 package com.ui.component;
 
+import com.ui.component.dialog.LoginDialog;
+import com.ui.component.dialog.SignupDialog;
 import com.ui.scheme.*;
 import com.ui.component.button.TopPanelButton;
 
@@ -22,8 +24,8 @@ public class TopPanel extends JPanel {
     Container buttonArea;
 
     TopPanel(MainFrame parentFrame) {
-        this.setBackground(ColorScheme.LIGHT_ORANGE.getColor());
-        this.setLayout(new GridBagLayout());
+        setBackground(ColorScheme.LIGHT_ORANGE.getColor());
+        setLayout(new GridBagLayout());
 
         this.parentFrame = parentFrame;
 
@@ -54,7 +56,7 @@ public class TopPanel extends JPanel {
         inputField.add(usernameInput, LayoutScheme.TOP_NAMEINPUT.getLayout());
         inputField.add(passwordLabel, LayoutScheme.TOP_PASSWORDLABEL.getLayout());
         inputField.add(passwordInput, LayoutScheme.TOP_PASSWORDINPUT.getLayout());
-        this.add(inputField, LayoutScheme.TOP_INPUTFIELD.getLayout());
+        add(inputField, LayoutScheme.TOP_INPUTFIELD.getLayout());
 
         loginButton.addActionListener(new loginAction());
         signupButton.addActionListener(new signupAction());
@@ -62,7 +64,7 @@ public class TopPanel extends JPanel {
         buttonArea.setLayout(new GridBagLayout());
         buttonArea.add(loginButton, LayoutScheme.TOP_LOGINBUTTON.getLayout());
         buttonArea.add(signupButton, LayoutScheme.TOP_SIGNUPBUTTON.getLayout());
-        this.add(buttonArea, LayoutScheme.TOP_BUTTONAREA.getLayout());
+        add(buttonArea, LayoutScheme.TOP_BUTTONAREA.getLayout());
     }
 
     class loginAction implements ActionListener {
@@ -70,7 +72,11 @@ public class TopPanel extends JPanel {
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add login action
 
-            parentFrame.changePanel(parentFrame.matchingPanel);
+            if (false) {
+                LoginDialog.getDialog(parentFrame).setVisible(true);
+            } else {
+                parentFrame.changePanel(parentFrame.matchingPanel);
+            }
         }
     }
 
@@ -78,6 +84,8 @@ public class TopPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add signup action
+
+            SignupDialog.getDialog(parentFrame, false).setVisible(true);
         }
     }
 }

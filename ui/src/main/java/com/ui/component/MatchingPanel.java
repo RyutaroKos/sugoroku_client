@@ -1,8 +1,10 @@
 package com.ui.component;
 
+import com.ui.component.dialog.GameRecordDialog;
 import com.ui.scheme.*;
 import com.ui.component.button.MatchingPanelButton;
 import com.ui.component.label.MatchingPanelLabel;
+import com.ui.component.dialog.GameDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,8 +30,8 @@ public class MatchingPanel extends JPanel {
     Container buttonArea;
 
     MatchingPanel(MainFrame parentFrame) {
-        this.setBackground(ColorScheme.LIGHT_ORANGE.getColor());
-        this.setLayout(new GridBagLayout());
+        setBackground(ColorScheme.LIGHT_ORANGE.getColor());
+        setLayout(new GridBagLayout());
 
         this.parentFrame = parentFrame;
         textArea = new JTextArea(60, 20);
@@ -65,7 +67,7 @@ public class MatchingPanel extends JPanel {
         checkRecordField.setLayout(new GridBagLayout());
         buttonArea.setLayout(new GridLayout(3, 1));
 
-        this.add(scrollPane, LayoutScheme.MATCHING_SCROLLPANEL.getLayout());
+        add(scrollPane, LayoutScheme.MATCHING_SCROLLPANEL.getLayout());
         randomField.add(randomMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
         randomField.add(randomMatchLabel, LayoutScheme.MATCHING_LABEL.getLayout());
         privateField.add(privateMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
@@ -75,7 +77,7 @@ public class MatchingPanel extends JPanel {
         buttonArea.add(randomField);
         buttonArea.add(privateField);
         buttonArea.add(checkRecordField);
-        this.add(buttonArea, LayoutScheme.MATCHING_BUTTONAREA.getLayout());
+        add(buttonArea, LayoutScheme.MATCHING_BUTTONAREA.getLayout());
     }
 
     class randomMatchingAction implements ActionListener {
@@ -100,6 +102,8 @@ public class MatchingPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add check record action
+
+            GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できる").setVisible(true);
         }
     }
 }
