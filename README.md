@@ -6,4 +6,6 @@
 
 1. Windowsでの文字化け：システムロケールにUnicodeへの支援をオンにしてください。
 
+2. Windowsでの画面崩れ：MainFrame.javaのsetMinimumSizeを1280*1024に変更してください。
+
 ### 現在工事中…
