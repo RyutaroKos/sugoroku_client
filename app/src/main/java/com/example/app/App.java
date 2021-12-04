@@ -8,6 +8,8 @@ public class App {
     private static final String appTitle = "Sugoroku";
 
     public static void main(String[] args) {
+        System.setProperty("awt.useSystemAAFontSettings", "on");
+        System.setProperty("swing.aatext", "true");
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
