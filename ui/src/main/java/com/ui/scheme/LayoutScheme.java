@@ -201,7 +201,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.gridheight = 2;
-            gbc.insets = new Insets(0, 10, 0, 0);
+            gbc.insets = new Insets(0, 15, 0, 0);
             gbc.anchor = GridBagConstraints.WEST;
             return gbc;
         }
@@ -236,12 +236,12 @@ public enum LayoutScheme implements innerLayoutScheme {
             gbc.gridx = 2;
             gbc.gridy = 0;
             gbc.gridheight = 2;
-            gbc.insets = new Insets(0, 0, 0, 10);
+            gbc.insets = new Insets(0, 0, 0, 15);
             gbc.anchor = GridBagConstraints.EAST;
             return gbc;
         }
     },
-    LOBBY_PLAYERLIST{
+    LOBBY_PLAYERLIST {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
@@ -252,13 +252,67 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    LOBBY_CHATPANEL{
+    LOBBY_CHATPANEL {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 1;
             gbc.gridy = 1;
             gbc.insets = new Insets(0, 80, 0, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_BOTTOMPANEL_LABEL {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(0, 0, 20, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_BOTTOMPANEL_TEXTAREA {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(0, 0, 0, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_CHATINPUTFIELD {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.insets = new Insets(10, 20, 0, 20);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_CHATINPUT {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(0, 0, 0, 6);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBT_SENDCHAT {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.CENTER;
             return gbc;
         }

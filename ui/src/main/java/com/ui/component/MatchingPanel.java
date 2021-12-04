@@ -6,6 +6,7 @@ import com.ui.component.button.MatchingPanelButton;
 import com.ui.component.label.MatchingPanelLabel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +34,7 @@ public class MatchingPanel extends JPanel {
         setLayout(new GridBagLayout());
 
         this.parentFrame = parentFrame;
-        textArea = new JTextArea(60, 20);
+        textArea = new JTextArea();
         scrollPane = new JScrollPane(textArea);
         randomMatchButton = MatchingPanelButton.getButton("ランダムマッチ");
         privateMatchButton = MatchingPanelButton.getButton("プライベートマッチ");
@@ -58,6 +59,7 @@ public class MatchingPanel extends JPanel {
         textArea.setFont(FontScheme.MATCHING_LABEL.getFont());
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         scrollPane.setPreferredSize(new Dimension(400, 600));
+        scrollPane.setBorder(new LineBorder(Color.BLACK, 1, false));
         randomMatchButton.addActionListener(new RandomMatchingAction());
         privateMatchButton.addActionListener(new PrivateMatchingAction());
         checkRecordButton.addActionListener(new CheckRecordAction());

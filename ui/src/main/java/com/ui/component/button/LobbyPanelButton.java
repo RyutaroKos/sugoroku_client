@@ -1,6 +1,7 @@
 package com.ui.component.button;
 
-import com.ui.scheme.*;
+import com.ui.scheme.ColorScheme;
+import com.ui.scheme.FontScheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +26,10 @@ public class LobbyPanelButton extends JButton {
                 break;
             case "送信":
                 this.setBackground(ColorScheme.LIGHT_INDIGO.getColor());
-                this.setPreferredSize(new Dimension(40, 20));
-                this.setFont(FontScheme.LOBBY_BUTTOM_BUTTON.getFont());
+                this.setPreferredSize(new Dimension(80, 45));
+                this.setFont(FontScheme.LOBBY_BOTTOM_BUTTON.getFont());
+                break;
+            default:
                 break;
         }
     }
