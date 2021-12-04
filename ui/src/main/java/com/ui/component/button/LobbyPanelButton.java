@@ -15,12 +15,12 @@ public class LobbyPanelButton extends JButton {
         switch (label) {
             case "退室":
                 this.setBackground(ColorScheme.LIGHT_BRICK.getColor());
-                this.setPreferredSize(new Dimension(100, 80));
+                this.setPreferredSize(new Dimension(150, 70));
                 this.setFont(FontScheme.LOBBY_TOP_BUTTON.getFont());
                 break;
             case "開始":
                 this.setBackground(ColorScheme.LIGHT_YELLOW.getColor());
-                this.setPreferredSize(new Dimension(100, 80));
+                this.setPreferredSize(new Dimension(150, 70));
                 this.setFont(FontScheme.LOBBY_TOP_BUTTON.getFont());
                 break;
             case "送信":

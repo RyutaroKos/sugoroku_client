@@ -18,12 +18,32 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    DIALOG_BUTTON {
+    DIALOG_BUTTONHOLDER {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 1;
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    DIALOG_POSITIVEBUTTON {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    DIALOG_NEGATIVEBUTTON {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.CENTER;
             return gbc;
         }
@@ -162,7 +182,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    LOBBY_TITLE {
+    LOBBY_TOP {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
@@ -171,6 +191,53 @@ public enum LayoutScheme implements innerLayoutScheme {
             gbc.gridwidth = 2;
             gbc.insets = new Insets(0, 0, 70, 0);
             gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_EXITBUTTON {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridheight = 2;
+            gbc.insets = new Insets(0, 10, 0, 0);
+            gbc.anchor = GridBagConstraints.WEST;
+            return gbc;
+        }
+    },
+    LOBBY_TYPEBANNER {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            gbc.weightx = 1;
+            gbc.insets = new Insets(0, 0, 2, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_IDBANNER {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(2, 0, 0, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    LOBBY_STARTBUTTON {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 2;
+            gbc.gridy = 0;
+            gbc.gridheight = 2;
+            gbc.insets = new Insets(0, 0, 0, 10);
+            gbc.anchor = GridBagConstraints.EAST;
             return gbc;
         }
     },

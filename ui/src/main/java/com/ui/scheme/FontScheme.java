@@ -49,6 +49,12 @@ public enum FontScheme implements innerFontScheme {
             return new Font(Font.SANS_SERIF, Font.PLAIN, 16);
         }
     },
+    LOBBY_BANNER {
+        @Override
+        public Font getFont() {
+            return new Font(Font.SANS_SERIF, Font.PLAIN, 24);
+        }
+    },
     LOBBY_TOP_BUTTON {
         @Override
         public Font getFont() {

@@ -4,7 +4,6 @@ import com.ui.component.dialog.GameRecordDialog;
 import com.ui.scheme.*;
 import com.ui.component.button.MatchingPanelButton;
 import com.ui.component.label.MatchingPanelLabel;
-import com.ui.component.dialog.GameDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,9 +58,9 @@ public class MatchingPanel extends JPanel {
         textArea.setFont(FontScheme.MATCHING_LABEL.getFont());
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         scrollPane.setPreferredSize(new Dimension(400, 600));
-        randomMatchButton.addActionListener(new randomMatchingAction());
-        privateMatchButton.addActionListener(new privateMatchingAction());
-        checkRecordButton.addActionListener(new checkRecordAction());
+        randomMatchButton.addActionListener(new RandomMatchingAction());
+        privateMatchButton.addActionListener(new PrivateMatchingAction());
+        checkRecordButton.addActionListener(new CheckRecordAction());
         randomField.setLayout(new GridBagLayout());
         privateField.setLayout(new GridBagLayout());
         checkRecordField.setLayout(new GridBagLayout());
@@ -80,30 +79,30 @@ public class MatchingPanel extends JPanel {
         add(buttonArea, LayoutScheme.MATCHING_BUTTONAREA.getLayout());
     }
 
-    class randomMatchingAction implements ActionListener {
+    class RandomMatchingAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add random matching action
 
-            parentFrame.changePanel(new LobbyPanel(parentFrame));
+            parentFrame.changePanel(new LobbyPanel(parentFrame, "random", "0023"));
         }
     }
 
-    class privateMatchingAction implements ActionListener {
+    class PrivateMatchingAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add private matching action
 
-            parentFrame.changePanel(new LobbyPanel(parentFrame));
+            parentFrame.changePanel(new LobbyPanel(parentFrame, "private", "0024"));
         }
     }
 
-    class checkRecordAction implements ActionListener {
+    class CheckRecordAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add check record action
 
-            GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できる").setVisible(true);
+            GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できます").setVisible(true);
         }
     }
 }

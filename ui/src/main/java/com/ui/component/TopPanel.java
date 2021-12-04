@@ -58,8 +58,8 @@ public class TopPanel extends JPanel {
         inputField.add(passwordInput, LayoutScheme.TOP_PASSWORDINPUT.getLayout());
         add(inputField, LayoutScheme.TOP_INPUTFIELD.getLayout());
 
-        loginButton.addActionListener(new loginAction());
-        signupButton.addActionListener(new signupAction());
+        loginButton.addActionListener(new LoginAction());
+        signupButton.addActionListener(new SignupAction());
 
         buttonArea.setLayout(new GridBagLayout());
         buttonArea.add(loginButton, LayoutScheme.TOP_LOGINBUTTON.getLayout());
@@ -67,7 +67,7 @@ public class TopPanel extends JPanel {
         add(buttonArea, LayoutScheme.TOP_BUTTONAREA.getLayout());
     }
 
-    class loginAction implements ActionListener {
+    class LoginAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add login action
@@ -80,7 +80,7 @@ public class TopPanel extends JPanel {
         }
     }
 
-    class signupAction implements ActionListener {
+    class SignupAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add signup action

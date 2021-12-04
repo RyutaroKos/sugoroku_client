@@ -4,7 +4,7 @@ import com.ui.component.MainFrame;
 
 import javax.swing.*;
 
-public class SignupDialog extends GameDialog {
+public class SignupDialog extends AppDialog {
     SignupDialog(MainFrame mainFrame, boolean bool) {
         super(mainFrame);
         if (bool) {
