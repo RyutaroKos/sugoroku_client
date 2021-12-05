@@ -8,10 +8,8 @@
 
 # Build Path
 /out/
-/app/out/
 /app/build/
 /app/build/classes/java/main/
-/netcom/out/
 /netcom/build/
 /netcom/build/classes/java/main/
 /ui/out/
