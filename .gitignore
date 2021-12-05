@@ -7,9 +7,12 @@
 /.idea/
 
 # Build Path
+/out/
 /app/build/
+/app/out/
 /app/build/classes/java/main/
 /netcom/build/
 /netcom/build/classes/java/main/
 /ui/build/
+/ui/out/
 /ui/build/classes/java/main/
