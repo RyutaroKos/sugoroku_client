@@ -19,13 +19,13 @@ public enum FontScheme implements innerFontScheme {
             return new Font(Font.SANS_SERIF, Font.PLAIN, 20);
         }
     },
-    TOP_INPUTFIELD_KANJI {
+    TOP_LABEL {
         @Override
         public Font getFont() {
             return new Font(Font.SANS_SERIF, Font.BOLD, 20);
         }
     },
-    TOP_INPUTFIELD_ALPHABET {
+    TOP_TEXTFIELD {
         @Override
         public Font getFont() {
             return new Font(Font.SANS_SERIF, Font.PLAIN, 20);

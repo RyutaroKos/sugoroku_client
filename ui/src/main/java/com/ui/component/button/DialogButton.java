@@ -14,15 +14,11 @@ public class DialogButton extends JButton {
         setColor(label);
     }
 
-    void setColor(String label) {
+    private void setColor(String label) {
         if (label.equals("はい")) {
             setBackground(ColorScheme.LIGHT_ORANGE.getColor());
         } else {
             setBackground(ColorScheme.LIGHT_YELLOW.getColor());
         }
-    }
-
-    public static DialogButton getButton(String label) {
-        return new DialogButton(label);
     }
 }

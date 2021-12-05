@@ -12,8 +12,4 @@ public class MatchingPanelButton extends JButton {
         this.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         this.setFont(FontScheme.MATCHING_BUTTON.getFont());
     }
-
-    public static MatchingPanelButton getButton(String label) {
-        return new MatchingPanelButton(label);
-    }
 }

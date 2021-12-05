@@ -2,7 +2,7 @@ package com.ui.component;
 
 import com.ui.component.dialog.GameRecordDialog;
 import com.ui.scheme.*;
-import com.ui.component.button.MatchingPanelButton;
+import com.ui.component.button.ButtonFactory;
 import com.ui.component.label.MatchingPanelLabel;
 
 import javax.swing.*;
@@ -36,9 +36,10 @@ public class MatchingPanel extends JPanel {
         this.parentFrame = parentFrame;
         textArea = new JTextArea();
         scrollPane = new JScrollPane(textArea);
-        randomMatchButton = MatchingPanelButton.getButton("ランダムマッチ");
-        privateMatchButton = MatchingPanelButton.getButton("プライベートマッチ");
-        checkRecordButton = MatchingPanelButton.getButton("対戦成績確認");
+        ButtonFactory buttonFactory = new ButtonFactory();
+        randomMatchButton = buttonFactory.getButton("matching", "ランダムマッチ");
+        privateMatchButton = buttonFactory.getButton("matching", "プライベートマッチ");
+        checkRecordButton = buttonFactory.getButton("matching", "対戦成績確認");
         randomMatchLabel = MatchingPanelLabel.getLabel("※世界中のプレイヤーと対戦しよう");
         privateMatchLabel = MatchingPanelLabel.getLabel("※友だちとプライベートで対戦しよう");
         checkRecordLabel = MatchingPanelLabel.getLabel("※自分の対戦成績を確認しよう");

@@ -3,7 +3,6 @@ package com.ui.component;
 import com.ui.component.dialog.LoginDialog;
 import com.ui.component.dialog.SignupDialog;
 import com.ui.scheme.*;
-import com.ui.component.button.TopPanelButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,50 +20,47 @@ public class TopPanel extends JPanel {
     JButton loginButton;
     JButton signupButton;
     Container inputField;
-    Container buttonArea;
+    Container buttonHolder;
+    ComponentFactory componentFactory;
 
     TopPanel(MainFrame parentFrame) {
         setBackground(ColorScheme.LIGHT_ORANGE.getColor());
         setLayout(new GridBagLayout());
 
         this.parentFrame = parentFrame;
-
         try {
             logo = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));
-            this.add(logo, LayoutScheme.TOP_LOGO.getLayout());
+            componentFactory = FactoryConstructor.getFactory("label");
+            usernameLabel = componentFactory.getLabel("top", "ユーザー名：");
+            passwordLabel = componentFactory.getLabel("top", "パスワード：");
+            componentFactory = FactoryConstructor.getFactory("button");
+            loginButton = componentFactory.getButton("top", "ログイン");
+            signupButton = componentFactory.getButton("top", "初回登録");
         } catch (Exception e) {
-            System.err.println("Failed to load logo: " + e);
+            e.printStackTrace();
         }
-
-        usernameLabel = new JLabel("ユーザー名：");
-        passwordLabel = new JLabel("パスワード：");
         usernameInput = new JTextField(10);
         passwordInput = new JPasswordField(10);
-        loginButton = TopPanelButton.getButton("ログイン");
-        signupButton = TopPanelButton.getButton("初回登録");
         inputField = new Container();
-        buttonArea = new Container();
+        buttonHolder = new Container();
 
-        usernameLabel.setFont(FontScheme.TOP_INPUTFIELD_KANJI.getFont());
-        passwordLabel.setFont(FontScheme.TOP_INPUTFIELD_KANJI.getFont());
-        usernameInput.setFont(FontScheme.TOP_INPUTFIELD_ALPHABET.getFont());
-        passwordInput.setFont(FontScheme.TOP_INPUTFIELD_ALPHABET.getFont());
-        passwordInput.setEchoChar('*');
-
+        usernameInput.setFont(FontScheme.TOP_TEXTFIELD.getFont());
+        passwordInput.setFont(FontScheme.TOP_TEXTFIELD.getFont());
+        passwordInput.setEchoChar('･');
+        loginButton.addActionListener(new LoginAction());
+        signupButton.addActionListener(new SignupAction());
         inputField.setLayout(new GridBagLayout());
+        buttonHolder.setLayout(new GridBagLayout());
+
         inputField.add(usernameLabel, LayoutScheme.TOP_NAMELABEL.getLayout());
         inputField.add(usernameInput, LayoutScheme.TOP_NAMEINPUT.getLayout());
         inputField.add(passwordLabel, LayoutScheme.TOP_PASSWORDLABEL.getLayout());
         inputField.add(passwordInput, LayoutScheme.TOP_PASSWORDINPUT.getLayout());
+        buttonHolder.add(loginButton, LayoutScheme.TOP_LOGINBUTTON.getLayout());
+        buttonHolder.add(signupButton, LayoutScheme.TOP_SIGNUPBUTTON.getLayout());
+        add(logo, LayoutScheme.TOP_LOGO.getLayout());
         add(inputField, LayoutScheme.TOP_INPUTFIELD.getLayout());
-
-        loginButton.addActionListener(new LoginAction());
-        signupButton.addActionListener(new SignupAction());
-
-        buttonArea.setLayout(new GridBagLayout());
-        buttonArea.add(loginButton, LayoutScheme.TOP_LOGINBUTTON.getLayout());
-        buttonArea.add(signupButton, LayoutScheme.TOP_SIGNUPBUTTON.getLayout());
-        add(buttonArea, LayoutScheme.TOP_BUTTONAREA.getLayout());
+        add(buttonHolder, LayoutScheme.TOP_BUTTONHOLDER.getLayout());
     }
 
     class LoginAction implements ActionListener {

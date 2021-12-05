@@ -1,6 +1,6 @@
 package com.ui.component;
 
-import com.ui.component.button.LobbyPanelButton;
+import com.ui.component.button.ButtonFactory;
 import com.ui.component.dialog.ExitLobbyDialog;
 import com.ui.scheme.*;
 import com.ui.component.subpanel.*;
@@ -34,9 +34,10 @@ public class LobbyPanel extends JPanel {
         lobbyTop = LobbyPanelTop.getPanel();
         lobbyLeft = LobbyPanelBottom.getPanel("参加者");
         lobbyRight = LobbyPanelBottom.getPanel("フリーチャット");
-        exitButton = LobbyPanelButton.getButton("退室");
-        startButton = LobbyPanelButton.getButton("開始");
-        sendMessageButton = LobbyPanelButton.getButton("送信");
+        ButtonFactory buttonFactory = new ButtonFactory();
+        exitButton = buttonFactory.getButton("lobby", "退室");
+        startButton = buttonFactory.getButton("lobby", "開始");
+        sendMessageButton = buttonFactory.getButton("lobby", "送信");
         typeBanner = new JLabel();
         idBanner = new JLabel();
 

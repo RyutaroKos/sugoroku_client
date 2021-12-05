@@ -20,8 +20,4 @@ public class TopPanelButton extends JButton {
             this.setBackground(ColorScheme.LIGHT_YELLOW.getColor());
         }
     }
-
-    public static TopPanelButton getButton(String label) {
-        return new TopPanelButton(label);
-    }
 }

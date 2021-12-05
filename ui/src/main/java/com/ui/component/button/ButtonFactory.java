@@ -1,8 +1,11 @@
 package com.ui.component.button;
 
+import com.ui.component.ComponentFactory;
+
 import javax.swing.*;
 
-public class ButtonFactory {
+public class ButtonFactory implements ComponentFactory {
+    @Override
     public JButton getButton(String type, String label) {
         switch (type) {
             case "top":
@@ -18,7 +21,11 @@ public class ButtonFactory {
             default:
                 return null;
         }
+        return null;
+    }
 
+    @Override
+    public JLabel getLabel(String type, String label) {
         return null;
     }
 }
