@@ -8,16 +8,16 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class LobbyPanelBottom extends JPanel {
-    LobbyPanelBottom(String title) {
+public class LobbyPanelBody extends JPanel {
+    LobbyPanelBody(String title) {
         setPreferredSize(new Dimension(400, 600));
         setBorder(new LineBorder(Color.BLACK, 1, false));
         setColor(title);
         setLayout(new GridBagLayout());
 
         JLabel panelTitle = new JLabel(title);
-        panelTitle.setFont(FontScheme.LOBBY_BOTTOM_TITLE.getFont());
-        add(panelTitle, LayoutScheme.LOBBY_BOTTOMPANEL_LABEL.getLayout());
+        panelTitle.setFont(FontScheme.LOBBY_BODYPANEL_TITLE.getFont());
+        add(panelTitle, LayoutScheme.LOBBY_BODYPANEL_LABEL.getLayout());
     }
 
     private void setColor(String title) {
@@ -28,7 +28,7 @@ public class LobbyPanelBottom extends JPanel {
         }
     }
 
-    public static LobbyPanelBottom getPanel(String title) {
-        return new LobbyPanelBottom(title);
+    public static LobbyPanelBody getPanel(String title) {
+        return new LobbyPanelBody(title);
     }
 }

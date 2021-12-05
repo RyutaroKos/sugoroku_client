@@ -267,7 +267,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    LOBBY_BOTTOMPANEL_LABEL {
+    LOBBY_BODYPANEL_LABEL {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
@@ -278,7 +278,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    LOBBY_BOTTOMPANEL_TEXTAREA {
+    LOBBY_BODYPANEL_TEXTAREA {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
@@ -311,7 +311,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    LOBBT_SENDCHAT {
+    LOBBY_SENDCHAT {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
