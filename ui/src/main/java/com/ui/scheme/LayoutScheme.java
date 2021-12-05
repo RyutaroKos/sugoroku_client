@@ -154,7 +154,7 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-    MATCHING_BUTTONAREA {
+    MATCHING_BUTTONHOLDER {
         @Override
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();

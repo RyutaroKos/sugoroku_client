@@ -10,8 +10,8 @@ public class DialogButton extends JButton {
     DialogButton(String label) {
         super(label);
         setPreferredSize(new Dimension(100, 50));
-        setFont(FontScheme.DIALOG_BUTTON.getFont());
         setColor(label);
+        setFont(FontScheme.DIALOG_BUTTON.getFont());
     }
 
     private void setColor(String label) {

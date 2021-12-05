@@ -2,8 +2,6 @@ package com.ui.component;
 
 import com.ui.component.dialog.GameRecordDialog;
 import com.ui.scheme.*;
-import com.ui.component.button.ButtonFactory;
-import com.ui.component.label.MatchingPanelLabel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -18,16 +16,17 @@ public class MatchingPanel extends JPanel {
     MainFrame parentFrame;
     JTextArea textArea;
     JScrollPane scrollPane;
-    JButton randomMatchButton;
-    JButton privateMatchButton;
-    JButton checkRecordButton;
     JLabel randomMatchLabel;
     JLabel privateMatchLabel;
     JLabel checkRecordLabel;
-    Container randomField;
-    Container privateField;
-    Container checkRecordField;
-    Container buttonArea;
+    JButton randomMatchButton;
+    JButton privateMatchButton;
+    JButton checkRecordButton;
+    Container randomMatchPane;
+    Container privateMatchPane;
+    Container checkRecordPane;
+    Container buttonHolder;
+    ComponentFactory componentFactory;
 
     MatchingPanel(MainFrame parentFrame) {
         setBackground(ColorScheme.LIGHT_ORANGE.getColor());
@@ -36,24 +35,29 @@ public class MatchingPanel extends JPanel {
         this.parentFrame = parentFrame;
         textArea = new JTextArea();
         scrollPane = new JScrollPane(textArea);
-        ButtonFactory buttonFactory = new ButtonFactory();
-        randomMatchButton = buttonFactory.getButton("matching", "ランダムマッチ");
-        privateMatchButton = buttonFactory.getButton("matching", "プライベートマッチ");
-        checkRecordButton = buttonFactory.getButton("matching", "対戦成績確認");
-        randomMatchLabel = MatchingPanelLabel.getLabel("※世界中のプレイヤーと対戦しよう");
-        privateMatchLabel = MatchingPanelLabel.getLabel("※友だちとプライベートで対戦しよう");
-        checkRecordLabel = MatchingPanelLabel.getLabel("※自分の対戦成績を確認しよう");
-        randomField = new Container();
-        privateField = new Container();
-        checkRecordField = new Container();
-        buttonArea = new Container();
+        try {
+            componentFactory = FactoryConstructor.getFactory("label");
+            randomMatchLabel = componentFactory.getLabel("matching", "※世界中のプレイヤーと対戦しよう");
+            privateMatchLabel = componentFactory.getLabel("matching", "※友だちとプライベートで対戦しよう");
+            checkRecordLabel = componentFactory.getLabel("matching", "※自分の対戦成績を確認しよう");
+            componentFactory = FactoryConstructor.getFactory("button");
+            randomMatchButton = componentFactory.getButton("matching", "ランダムマッチ");
+            privateMatchButton = componentFactory.getButton("matching", "プライベートマッチ");
+            checkRecordButton = componentFactory.getButton("matching", "対戦成績確認");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        randomMatchPane = new Container();
+        privateMatchPane = new Container();
+        checkRecordPane = new Container();
+        buttonHolder = new Container();
 
         try {
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule.txt");
             String str = new String(Objects.requireNonNull(inputStream).readAllBytes(), StandardCharsets.UTF_8);
             textArea.setText(str);
         } catch (Exception e) {
-            System.out.println("Failed to load game rule: " + e);
+            e.printStackTrace();
         }
         textArea.setEditable(false);
         textArea.setLineWrap(true);
@@ -64,22 +68,22 @@ public class MatchingPanel extends JPanel {
         randomMatchButton.addActionListener(new RandomMatchingAction());
         privateMatchButton.addActionListener(new PrivateMatchingAction());
         checkRecordButton.addActionListener(new CheckRecordAction());
-        randomField.setLayout(new GridBagLayout());
-        privateField.setLayout(new GridBagLayout());
-        checkRecordField.setLayout(new GridBagLayout());
-        buttonArea.setLayout(new GridLayout(3, 1));
+        randomMatchPane.setLayout(new GridBagLayout());
+        privateMatchPane.setLayout(new GridBagLayout());
+        checkRecordPane.setLayout(new GridBagLayout());
+        buttonHolder.setLayout(new GridLayout(3, 1));
 
+        randomMatchPane.add(randomMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
+        randomMatchPane.add(randomMatchLabel, LayoutScheme.MATCHING_LABEL.getLayout());
+        privateMatchPane.add(privateMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
+        privateMatchPane.add(privateMatchLabel, LayoutScheme.MATCHING_LABEL.getLayout());
+        checkRecordPane.add(checkRecordButton, LayoutScheme.MATCHING_BUTTON.getLayout());
+        checkRecordPane.add(checkRecordLabel, LayoutScheme.MATCHING_LABEL.getLayout());
+        buttonHolder.add(randomMatchPane);
+        buttonHolder.add(privateMatchPane);
+        buttonHolder.add(checkRecordPane);
         add(scrollPane, LayoutScheme.MATCHING_SCROLLPANEL.getLayout());
-        randomField.add(randomMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
-        randomField.add(randomMatchLabel, LayoutScheme.MATCHING_LABEL.getLayout());
-        privateField.add(privateMatchButton, LayoutScheme.MATCHING_BUTTON.getLayout());
-        privateField.add(privateMatchLabel, LayoutScheme.MATCHING_LABEL.getLayout());
-        checkRecordField.add(checkRecordButton, LayoutScheme.MATCHING_BUTTON.getLayout());
-        checkRecordField.add(checkRecordLabel, LayoutScheme.MATCHING_LABEL.getLayout());
-        buttonArea.add(randomField);
-        buttonArea.add(privateField);
-        buttonArea.add(checkRecordField);
-        add(buttonArea, LayoutScheme.MATCHING_BUTTONAREA.getLayout());
+        add(buttonHolder, LayoutScheme.MATCHING_BUTTONHOLDER.getLayout());
     }
 
     class RandomMatchingAction implements ActionListener {

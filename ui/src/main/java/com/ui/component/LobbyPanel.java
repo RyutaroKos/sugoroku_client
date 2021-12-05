@@ -1,6 +1,5 @@
 package com.ui.component;
 
-import com.ui.component.button.ButtonFactory;
 import com.ui.component.dialog.ExitLobbyDialog;
 import com.ui.scheme.*;
 import com.ui.component.subpanel.*;
@@ -13,76 +12,77 @@ import java.awt.event.ActionListener;
 
 public class LobbyPanel extends JPanel {
     MainFrame parentFrame;
-    JPanel lobbyTop;
-    JPanel lobbyLeft;
-    JPanel lobbyRight;
+    JPanel lobbyBannerPane;
+    JPanel playerListPane;
+    JPanel chatPane;
+    JLabel typeBanner;
+    JLabel idBanner;
     JButton exitButton;
     JButton startButton;
     JButton sendMessageButton;
-    JLabel typeBanner;
-    JLabel idBanner;
     JTextArea playerListArea;
     JTextArea chatArea;
     JScrollPane chatScrollPane;
-    JTextField chatInputField;
+    JTextField messageInput;
+    Container messageInputPane;
+    ComponentFactory componentFactory;
 
     LobbyPanel(MainFrame parentFrame, String lobbyType, String ID) {
         setBackground(ColorScheme.LIGHT_ORANGE.getColor());
         setLayout(new GridBagLayout());
+
         this.parentFrame = parentFrame;
+        lobbyBannerPane = LobbyPanelBanner.getPanel();
+        playerListPane = LobbyPanelBottom.getPanel("参加者");
+        chatPane = LobbyPanelBottom.getPanel("フリーチャット");
+        try {
+            componentFactory = FactoryConstructor.getFactory("label");
+            typeBanner = componentFactory.getLabel("lobby", lobbyType);
+            idBanner = componentFactory.getLabel("lobby", ID);
+            componentFactory = FactoryConstructor.getFactory("button");
+            exitButton = componentFactory.getButton("lobby", "退室");
+            startButton = componentFactory.getButton("lobby", "開始");
+            sendMessageButton = componentFactory.getButton("lobby", "送信");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        playerListArea = new JTextArea();
+        chatArea = new JTextArea();
+        chatScrollPane = new JScrollPane(chatArea);
+        messageInput = new JTextField();
+        messageInputPane = new Container();
 
-        lobbyTop = LobbyPanelTop.getPanel();
-        lobbyLeft = LobbyPanelBottom.getPanel("参加者");
-        lobbyRight = LobbyPanelBottom.getPanel("フリーチャット");
-        ButtonFactory buttonFactory = new ButtonFactory();
-        exitButton = buttonFactory.getButton("lobby", "退室");
-        startButton = buttonFactory.getButton("lobby", "開始");
-        sendMessageButton = buttonFactory.getButton("lobby", "送信");
-        typeBanner = new JLabel();
-        idBanner = new JLabel();
-
-        typeBanner.setFont(FontScheme.LOBBY_BANNER.getFont());
-        idBanner.setFont(FontScheme.LOBBY_BANNER.getFont());
         setLobbyBanner(lobbyType, ID);
         exitButton.addActionListener(new ExitLobbyAction());
         startButton.addActionListener(new StartGameAction());
-
-        lobbyTop.setLayout(new GridBagLayout());
-        lobbyTop.add(exitButton, LayoutScheme.LOBBY_EXITBUTTON.getLayout());
-        lobbyTop.add(typeBanner, LayoutScheme.LOBBY_TYPEBANNER.getLayout());
-        lobbyTop.add(idBanner, LayoutScheme.LOBBY_IDBANNER.getLayout());
-        lobbyTop.add(startButton, LayoutScheme.LOBBY_STARTBUTTON.getLayout());
-
-        playerListArea = new JTextArea();
         playerListArea.setEditable(false);
         playerListArea.setLineWrap(true);
         playerListArea.setBorder(new LineBorder(Color.BLACK, 1, false));
         playerListArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         playerListArea.setPreferredSize(new Dimension(350, 500));
-        lobbyLeft.add(playerListArea, LayoutScheme.LOBBY_BOTTOMPANEL_TEXTAREA.getLayout());
-
-        chatArea = new JTextArea();
         chatArea.setEditable(false);
         chatArea.setLineWrap(true);
         chatArea.setBorder(new LineBorder(Color.BLACK, 1, false));
         chatArea.setBackground(Color.WHITE);
-        chatScrollPane = new JScrollPane(chatArea);
         chatScrollPane.setPreferredSize(new Dimension(350, 455));
         chatScrollPane.setBorder(new LineBorder(Color.BLACK, 0, false));
-        chatInputField = new JTextField();
-        chatInputField.setPreferredSize(new Dimension(265, 40));
-        chatInputField.setBorder(new LineBorder(Color.BLACK, 1 , false));
-        chatInputField.setFont(FontScheme.LOBBY_BOTTOM_BUTTON.getFont());
-        Container inputField = new Container();
-        inputField.setLayout(new GridBagLayout());
-        inputField.add(chatInputField, LayoutScheme.LOBBY_CHATINPUT.getLayout());
-        inputField.add(sendMessageButton, LayoutScheme.LOBBT_SENDCHAT.getLayout());
-        lobbyRight.add(chatScrollPane, LayoutScheme.LOBBY_BOTTOMPANEL_TEXTAREA.getLayout());
-        lobbyRight.add(inputField, LayoutScheme.LOBBY_CHATINPUTFIELD.getLayout());
+        messageInput.setPreferredSize(new Dimension(265, 40));
+        messageInput.setBorder(new LineBorder(Color.BLACK, 1 , false));
+        messageInput.setFont(FontScheme.LOBBY_BOTTOM_BUTTON.getFont());
+        messageInputPane.setLayout(new GridBagLayout());
 
-        add(lobbyTop, LayoutScheme.LOBBY_TOP.getLayout());
-        add(lobbyLeft, LayoutScheme.LOBBY_PLAYERLIST.getLayout());
-        add(lobbyRight, LayoutScheme.LOBBY_CHATPANEL.getLayout());
+        lobbyBannerPane.add(exitButton, LayoutScheme.LOBBY_EXITBUTTON.getLayout());
+        lobbyBannerPane.add(typeBanner, LayoutScheme.LOBBY_TYPEBANNER.getLayout());
+        lobbyBannerPane.add(idBanner, LayoutScheme.LOBBY_IDBANNER.getLayout());
+        lobbyBannerPane.add(startButton, LayoutScheme.LOBBY_STARTBUTTON.getLayout());
+        playerListPane.add(playerListArea, LayoutScheme.LOBBY_BOTTOMPANEL_TEXTAREA.getLayout());
+        messageInputPane.add(messageInput, LayoutScheme.LOBBY_CHATINPUT.getLayout());
+        messageInputPane.add(sendMessageButton, LayoutScheme.LOBBT_SENDCHAT.getLayout());
+        chatPane.add(chatScrollPane, LayoutScheme.LOBBY_BOTTOMPANEL_TEXTAREA.getLayout());
+        chatPane.add(messageInputPane, LayoutScheme.LOBBY_CHATINPUTFIELD.getLayout());
+        add(lobbyBannerPane, LayoutScheme.LOBBY_TOP.getLayout());
+        add(playerListPane, LayoutScheme.LOBBY_PLAYERLIST.getLayout());
+        add(chatPane, LayoutScheme.LOBBY_CHATPANEL.getLayout());
     }
 
     private void setLobbyBanner(String lobbyType, String ID) {

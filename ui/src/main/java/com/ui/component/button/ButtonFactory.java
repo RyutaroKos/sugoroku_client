@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class ButtonFactory implements ComponentFactory {
     @Override
-    public JButton getButton(String type, String label) {
-        switch (type) {
+    public JButton getButton(String panel, String label) {
+        switch (panel) {
             case "top":
                 return new TopPanelButton(label);
             case "matching":
@@ -15,17 +15,16 @@ public class ButtonFactory implements ComponentFactory {
             case "lobby":
                 return new LobbyPanelButton(label);
             case "game":
-                break;
+                return null; //TODO: create GamePanelButton class
             case "dialog":
                 return new DialogButton(label);
             default:
                 return null;
         }
-        return null;
     }
 
     @Override
-    public JLabel getLabel(String type, String label) {
+    public JLabel getLabel(String panel, String label) {
         return null;
     }
 }

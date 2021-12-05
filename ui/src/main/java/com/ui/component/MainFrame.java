@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    Container container;
+    Container contentPane;
     TopPanel topPanel;
     MatchingPanel matchingPanel;
 
@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
         setMinimumSize(new Dimension(1280, 960));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        container = getContentPane();
+        contentPane = getContentPane();
         topPanel = new TopPanel(this);
         matchingPanel = new MatchingPanel(this);
 
@@ -21,7 +21,8 @@ public class MainFrame extends JFrame {
     }
 
     public void init() {
-        container.add(topPanel);
+        contentPane.add(topPanel);
+        pack();
         setVisible(true);
     }
 
@@ -29,11 +30,11 @@ public class MainFrame extends JFrame {
         return matchingPanel;
     }
 
-    public void changePanel(JComponent nextPanel) {
-        container.removeAll();
-        container.add(nextPanel);
-        container.validate();
-        container.repaint();
+    public void changePanel(JPanel nextPanel) {
+        contentPane.removeAll();
+        contentPane.add(nextPanel);
+        contentPane.validate();
+        contentPane.repaint();
     }
 
     public static MainFrame createFrame(String title) {

@@ -1,6 +1,7 @@
 package com.ui.component.button;
 
-import com.ui.scheme.*;
+import com.ui.scheme.ColorScheme;
+import com.ui.scheme.FontScheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +9,9 @@ import java.awt.*;
 public class TopPanelButton extends JButton {
     TopPanelButton(String label) {
         super(label);
-        this.setPreferredSize(new Dimension(250, 100));
-        this.setFont(FontScheme.TOP_BUTTON.getFont());
+        setPreferredSize(new Dimension(250, 100));
         setBackgroundColor(label);
+        setFont(FontScheme.TOP_BUTTON.getFont());
     }
 
     private void setBackgroundColor(String label) {
