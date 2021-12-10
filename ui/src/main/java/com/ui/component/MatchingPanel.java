@@ -1,6 +1,7 @@
 package com.ui.component;
 
 import com.ui.component.dialog.GameRecordDialog;
+import com.ui.component.dialog.RequestPrivateMatchDialog;
 import com.ui.scheme.*;
 
 import javax.swing.*;
@@ -100,7 +101,8 @@ public class MatchingPanel extends JPanel {
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: add private matching action
 
-            parentFrame.changePanel(new LobbyPanel(parentFrame, "private", "0024"));
+            RequestPrivateMatchDialog.getDialog(parentFrame, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
+//            parentFrame.changePanel(new LobbyPanel(parentFrame, "private", "0024"));
         }
     }
 

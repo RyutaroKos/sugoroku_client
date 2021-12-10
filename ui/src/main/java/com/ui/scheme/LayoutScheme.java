@@ -13,7 +13,17 @@ public enum LayoutScheme implements innerLayoutScheme {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.insets = new Insets(0, 0, 50, 0);
+            gbc.insets = new Insets(0, 0, 20, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    DIALOG_TEXTFIELD {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 1;
             gbc.anchor = GridBagConstraints.CENTER;
             return gbc;
         }
@@ -23,7 +33,8 @@ public enum LayoutScheme implements innerLayoutScheme {
         public GridBagConstraints getLayout() {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
-            gbc.gridy = 1;
+            gbc.gridy = 2;
+            gbc.insets = new Insets(20, 0, 0, 0);
             gbc.anchor = GridBagConstraints.CENTER;
             return gbc;
         }

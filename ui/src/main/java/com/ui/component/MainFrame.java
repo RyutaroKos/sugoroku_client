@@ -30,6 +30,10 @@ public class MainFrame extends JFrame {
         return matchingPanel;
     }
 
+    public LobbyPanel createLobbyPanel(String lobbyType, String lobbyID) {
+        return new LobbyPanel(this, lobbyType, lobbyID);
+    }
+
     public void changePanel(JPanel nextPanel) {
         contentPane.removeAll();
         contentPane.add(nextPanel);
