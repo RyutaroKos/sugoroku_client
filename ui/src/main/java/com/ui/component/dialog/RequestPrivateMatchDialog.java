@@ -45,7 +45,9 @@ public class RequestPrivateMatchDialog extends AppDialog {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             String id = privateMatchIDField.getText();
-            parentFrame.changePanel(parentFrame.createLobbyPanel("private", id));
+            if (id.length() == 4) { //TODO: need more work on invalid id handling
+                parentFrame.changePanel(parentFrame.createLobbyPanel("private", id));
+            }
         }
     }
 }
