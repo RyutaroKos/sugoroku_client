@@ -22,7 +22,5 @@ public class App {
         }
 
         MainFrame.createFrame(appTitle);
-
-        System.out.println("good");
     }
 }
