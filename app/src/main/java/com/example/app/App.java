@@ -22,8 +22,5 @@ public class App {
         }
 
         MainFrame.createFrame(appTitle);
-
-        System.out.println("This is the main branch.");
-        System.out.println("This is add from the test branch.");
     }
 }
