@@ -16,3 +16,9 @@
 /netcom/build/classes/java/main/
 /ui/build/
 /ui/build/classes/java/main/
+
+# Eclipse Exculdes
+/ui/.classpath
+/.classpath
+/ui/.project
+/.project
