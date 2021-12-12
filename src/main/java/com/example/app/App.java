@@ -23,5 +23,8 @@ public class App {
 
         MainFrame.createFrame(appTitle);
         System.out.println("test");
+        
+        System.out.println("Kosuge");
+        //Kosssssssssssssssssssssssssssssssss
     }
 }
