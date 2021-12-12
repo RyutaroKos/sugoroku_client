@@ -25,6 +25,5 @@ public class App {
         System.out.println("test");
         
         System.out.println("Kosuge");
-        //Kosssssssssssssssssssssssssssssssss
     }
 }
