@@ -23,6 +23,6 @@ public class App {
 
         MainFrame.createFrame(appTitle);
 
-        System.out.println("good");
+        System.out.println("This is the test branch.");
     }
 }
