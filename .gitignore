@@ -5,8 +5,11 @@
 
 # IDE Setting Path
 /.idea/
+/.settings/
+/.metadata/
 
 # Build Path
+/build/
 /app/build/
 /app/build/classes/java/main/
 /netcom/build/
