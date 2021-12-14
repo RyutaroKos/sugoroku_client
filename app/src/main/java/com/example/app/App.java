@@ -4,6 +4,10 @@ import com.ui.component.MainFrame;
 
 import javax.swing.*;
 
+/**
+ * クライアントのメインクラス
+ */
+
 public class App {
     private static final String appTitle = "Sugoroku";
 

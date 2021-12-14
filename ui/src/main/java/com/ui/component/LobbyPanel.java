@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 /**
  * マッチング成功後表示する第三の画面：ロビーパネル。
- * 現時点ではまた雛形、
+ * 現時点ではまだ雛形、
  * プレイヤーリストや、チャット内容の表示は未実装。
  * ArrayList<UserList>、ArrayList<ChatList>などが必要かも。
  */
