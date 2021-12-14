@@ -10,6 +10,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * マッチング成功後表示する第三の画面：ロビーパネル。
+ * 現時点ではまた雛形、
+ * プレイヤーリストや、チャット内容の表示は未実装。
+ * ArrayList<UserList>、ArrayList<ChatList>などが必要かも。
+ */
+
 public class LobbyPanel extends JPanel {
     MainFrame parentFrame;
     JPanel lobbyBannerPane;
@@ -99,28 +106,40 @@ public class LobbyPanel extends JPanel {
     }
 
     public void exitLobby() {
-        //TODO: add exit lobby action
+        //TODO: 具体的な退室処理が必要
     }
 
+    /**
+     * 退室ボタンに合わせた退室アクションクラス
+     */
     class ExitLobbyAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            //TODO: 具体的な退室処理が必要
+
+            //効果展示用、実装に合わせて調整する必要がある
             ExitLobbyDialog.getDialog(parentFrame, getLobbyPanel()).setVisible(true);
         }
     }
 
+    /**
+     * 開始ボタンに合わせたゲーム開始アクションクラス
+     */
     class StartGameAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add start game action
+            //TODO: 具体的なゲーム開始処理が必要
 
         }
     }
 
+    /**
+     * 送信ボタンに合わせたメッセージ送信アクションクラス
+     */
     class SendMessageAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-
+            //TODO: 具体的なチャット送信処理が必要
         }
     }
 }

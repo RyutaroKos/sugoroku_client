@@ -13,6 +13,10 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+/**
+ * ログイン成功後表示する第二の画面：マッチングパネル
+ */
+
 public class MatchingPanel extends JPanel {
     MainFrame parentFrame;
     JTextArea textArea;
@@ -54,7 +58,7 @@ public class MatchingPanel extends JPanel {
         buttonHolder = new Container();
 
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule.txt");
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule.txt"); //ゲームルールの編集はこちら、場所はmainのresourcesフォルダ
             String str = new String(Objects.requireNonNull(inputStream).readAllBytes(), StandardCharsets.UTF_8);
             textArea.setText(str);
         } catch (Exception e) {
@@ -87,30 +91,41 @@ public class MatchingPanel extends JPanel {
         add(buttonHolder, LayoutScheme.MATCHING_BUTTONHOLDER.getLayout());
     }
 
+    /**
+     * ランダムマッチボタンに合わせたランダムマッチングアクションクラス
+     */
     class RandomMatchingAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add random matching action
+            //TODO: 具体的なランダムマッチング処理が必要
 
+            //効果展示用、実装に合わせて調整する必要がある
             parentFrame.changePanel(new LobbyPanel(parentFrame, "random", "0023"));
         }
     }
 
+    /**
+     * プライベートマッチボタンに合わせたプライベートマッチングアクションクラス
+     */
     class PrivateMatchingAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add private matching action
+            //TODO: 具体的なプライベートマッチング処理が必要
 
+            //効果展示用、実装に合わせて調整する必要がある
             RequestPrivateMatchDialog.getDialog(parentFrame, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
-//            parentFrame.changePanel(new LobbyPanel(parentFrame, "private", "0024"));
         }
     }
 
+    /**
+     * 対戦成績確認ボタンに合わせた成績確認アクションクラス
+     */
     class CheckRecordAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add check record action
+            //TODO: 具体的な成績確認処理が必要
 
+            //効果展示用、実装に合わせて調整する必要がある
             GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できます").setVisible(true);
         }
     }

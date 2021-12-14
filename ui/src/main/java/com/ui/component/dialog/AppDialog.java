@@ -9,6 +9,15 @@ import com.ui.scheme.LayoutScheme;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * アプリケーションダイアログを定義するための親ダイアログクラス。
+ * 他のダイアログは全部このクラスを継承。
+ * デフォルトコンポーネントとして、
+ * 1つのメッセージ（JLabel）と2つのボタン（JButton、”はい”、または”いいえ”）を保持。
+ * 必要に応じて各子ダイアログクラスでコンポーネントを追加削減や、
+ * ボタンのアクションを調整可能。
+ */
+
 public class AppDialog extends JDialog {
     JLabel dialogMessage;
     JButton positiveButton;

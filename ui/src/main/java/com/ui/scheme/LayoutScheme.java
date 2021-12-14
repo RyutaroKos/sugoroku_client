@@ -2,6 +2,14 @@ package com.ui.scheme;
 
 import java.awt.*;
 
+/**
+ * UIコンポーネントのレイアウトをピックアップするためのライブラリクラス。
+ * 基本的にGridBagLayoutを採用したコンポーネントのレイアウト情報だけを記載。
+ * パネルや、ダイアログごとに分類、
+ * さらに細分すると、サブパネル、バナー、ラベル、ボタンなど、
+ * 必要に応じて追加可能。
+ */
+
 interface innerLayoutScheme {
     GridBagConstraints getLayout();
 }

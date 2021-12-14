@@ -3,6 +3,13 @@ package com.ui.component;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * クライアントの画面を管理するクラス：メインフレーム、
+ * デスクトップアプリケーションのウィンドウに相当、
+ * メインフレームを閉じる時点でプログラムは終了。
+ * すべてのパネルや、ダイアログはメインフレームに依存。
+ */
+
 public class MainFrame extends JFrame {
     Container contentPane;
     TopPanel topPanel;
@@ -10,7 +17,7 @@ public class MainFrame extends JFrame {
 
     MainFrame(String title) {
         super(title);
-        setMinimumSize(new Dimension(1280, 960));
+        setMinimumSize(new Dimension(1280, 960)); //画面の最小サイズを制限、画面内のコンポーネントが崩れた場合ここを拡大
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         contentPane = getContentPane();
@@ -37,7 +44,7 @@ public class MainFrame extends JFrame {
     public void changePanel(JPanel nextPanel) {
         contentPane.removeAll();
         contentPane.add(nextPanel);
-        contentPane.validate();
+        contentPane.validate(); //repaint()の前は必ずvalidate()
         contentPane.repaint();
     }
 
