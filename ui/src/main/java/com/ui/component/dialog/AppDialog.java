@@ -8,6 +8,8 @@ import com.ui.scheme.LayoutScheme;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * アプリケーションダイアログを定義するための親ダイアログクラス。
@@ -24,6 +26,7 @@ public class AppDialog extends JDialog {
     JButton negativeButton;
     Container contentPane;
     Container buttonHolder;
+    ActionListener disposeDialogListener;
 
     AppDialog(MainFrame mainFrame) {
         super(mainFrame, true);
@@ -40,8 +43,9 @@ public class AppDialog extends JDialog {
         ButtonFactory buttonFactory = new ButtonFactory();
         positiveButton = buttonFactory.getButton("dialog", "はい");
         negativeButton = buttonFactory.getButton("dialog", "いいえ");
-        positiveButton.addActionListener(actionEvent -> dispose());
-        negativeButton.addActionListener(actionEvent -> dispose());
+        disposeDialogListener = actionEvent -> dispose();
+        positiveButton.addActionListener(disposeDialogListener);
+        negativeButton.addActionListener(disposeDialogListener);
         buttonHolder = new Container();
         buttonHolder.setLayout(new GridLayout(1, 2, 50, 0));
         buttonHolder.add(positiveButton);

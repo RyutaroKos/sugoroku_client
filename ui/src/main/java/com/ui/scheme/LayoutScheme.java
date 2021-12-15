@@ -47,26 +47,6 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-//    DIALOG_POSITIVEBUTTON {
-//        @Override
-//        public GridBagConstraints getLayout() {
-//            GridBagConstraints gbc = new GridBagConstraints();
-//            gbc.gridx = 0;
-//            gbc.gridy = 0;
-//            gbc.anchor = GridBagConstraints.CENTER;
-//            return gbc;
-//        }
-//    },
-//    DIALOG_NEGATIVEBUTTON {
-//        @Override
-//        public GridBagConstraints getLayout() {
-//            GridBagConstraints gbc = new GridBagConstraints();
-//            gbc.gridx = 1;
-//            gbc.gridy = 0;
-//            gbc.anchor = GridBagConstraints.CENTER;
-//            return gbc;
-//        }
-//    },
     TOP_LOGO {
         @Override
         public GridBagConstraints getLayout() {
