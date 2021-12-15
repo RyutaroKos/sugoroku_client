@@ -28,15 +28,15 @@ public class RequestPrivateMatchDialog extends AppDialog {
                 if (!Character.isAlphabetic(e.getKeyChar())
                     && !Character.isDigit(e.getKeyChar())
                     || privateMatchIDField.getText().length() >= 4) {
-                    e.consume(); //Maximum private lobby ID length = 4, digit or alphabet only
+                    e.consume(); //IDの長さ上限は4
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {
-                positiveButton.setEnabled(privateMatchIDField.getText().length() > 3);
+                positiveButton.setEnabled(privateMatchIDField.getText().length() > 3); //IDの長さが4以外の場合、確認ボタンを無効化
             }
         });
-        positiveButton.setEnabled(false);
+        positiveButton.setEnabled(false); //確認ボタンの初期化（無効）
         positiveButton.addActionListener(new requestPrivateMatchAction());
         contentPane.add(privateMatchIDField, LayoutScheme.DIALOG_TEXTFIELD.getLayout());
     }
