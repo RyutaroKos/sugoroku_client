@@ -2,7 +2,9 @@
 
 ## すごろくゲーム：クライアントアプリケーション
 
-![Sugoroku Title](https://github.com/SergeFan/sugoroku_client/blob/test/ui/src/main/resources/logo.png)
+<p align="center">
+  <img src="https://github.com/SergeFan/sugoroku_client/blob/test/ui/src/main/resources/logo.png"/>
+</p>
 
 ### プログラム構造
 
