@@ -100,6 +100,7 @@ public class MatchingPanel extends JPanel {
             //TODO: 具体的なランダムマッチング処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            parentFrame.commandBuffer.registerCommand("RANDOM_MATCH");
             parentFrame.changePanel(parentFrame.getLobbyPanel("random", "0023"));
         }
     }
@@ -113,6 +114,7 @@ public class MatchingPanel extends JPanel {
             //TODO: 具体的なプライベートマッチング処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            parentFrame.commandBuffer.registerCommand("PRIVATE_MATCH");
             RequestPrivateMatchDialog.getDialog(parentFrame, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
         }
     }
@@ -126,6 +128,7 @@ public class MatchingPanel extends JPanel {
             //TODO: 具体的な成績確認処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            parentFrame.commandBuffer.registerCommand("CHECK_RECORD");
             GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できます").setVisible(true);
         }
     }

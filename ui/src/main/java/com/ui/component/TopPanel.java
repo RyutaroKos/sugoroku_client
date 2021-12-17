@@ -76,6 +76,7 @@ public class TopPanel extends JPanel {
             //TODO: 具体的なログイン処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            parentFrame.commandBuffer.registerCommand("LOGIN");
             if (false) {
                 LoginDialog.getDialog(parentFrame).setVisible(true);
             } else {
@@ -93,6 +94,7 @@ public class TopPanel extends JPanel {
             //TODO: 具体的な初回登録処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            parentFrame.commandBuffer.registerCommand("SIGNUP");
             SignupDialog.getDialog(parentFrame, false).setVisible(true);
         }
     }

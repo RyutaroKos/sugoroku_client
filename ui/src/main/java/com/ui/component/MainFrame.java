@@ -1,5 +1,7 @@
 package com.ui.component;
 
+import com.data.buffer.CommandBuffer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
@@ -12,6 +14,7 @@ import java.util.Objects;
  */
 
 public class MainFrame extends JFrame {
+    CommandBuffer commandBuffer;
     Container contentPane;
 
     MainFrame(String title) {
@@ -24,11 +27,9 @@ public class MainFrame extends JFrame {
             e.printStackTrace();
         }
 
+        commandBuffer = CommandBuffer.getInstance();
         contentPane = getContentPane();
-        init();
-    }
 
-    private void init() {
         contentPane.add(new TopPanel(this));
         pack();
         setVisible(true);

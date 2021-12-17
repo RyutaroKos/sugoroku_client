@@ -3,6 +3,8 @@ package com.example.app;
 import com.ui.component.MainFrame;
 
 import javax.swing.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * クライアントのメインクラス
@@ -25,6 +27,10 @@ public class App {
             System.out.println("Nimbus look and feel not found, using default look and feel instead.");
         }
 
-        MainFrame.getMainFrame(appTitle);
+        MainFrame mainFrame = MainFrame.getMainFrame(appTitle);
+        CommandManager commandManager = new CommandManager(mainFrame);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(commandManager);
+        executor.shutdown();
     }
 }

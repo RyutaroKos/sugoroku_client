@@ -1,24 +1,14 @@
-# Project exclude paths
-
+# - Project exclude paths -
 # Gradle Setting Path
 /.gradle/
 
 # IDE Setting Path
 /.idea/
-/.settings/
-/.metadata/
 
 # Build Path
-/build/
 /app/build/
-/app/build/classes/java/main/
 /netcom/build/
-/netcom/build/classes/java/main/
 /ui/build/
-/ui/build/classes/java/main/
+/data/build/
 
 # Eclipse Exculdes
-/ui/.classpath
-/.classpath
-/ui/.project
-/.project
