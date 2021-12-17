@@ -25,6 +25,6 @@ public class App {
             System.out.println("Nimbus look and feel not found, using default look and feel instead.");
         }
 
-        MainFrame.createFrame(appTitle);
+        MainFrame.getMainFrame(appTitle);
     }
 }

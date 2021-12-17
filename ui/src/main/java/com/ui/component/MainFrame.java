@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
         init();
     }
 
-    public void init() {
+    private void init() {
         contentPane.add(new TopPanel(this));
         pack();
         setVisible(true);
@@ -42,6 +42,10 @@ public class MainFrame extends JFrame {
         return new LobbyPanel(this, lobbyType, lobbyID);
     }
 
+    public GamePanel getGamePanel() {
+        return null; //TODO: ゲームパネルクラス完成後は要修正
+    }
+
     public void changePanel(JPanel nextPanel) {
         contentPane.removeAll();
         contentPane.add(nextPanel);
@@ -49,7 +53,7 @@ public class MainFrame extends JFrame {
         contentPane.repaint();
     }
 
-    public static MainFrame createFrame(String title) {
-        return new MainFrame(title);
+    public static MainFrame getMainFrame(String title) {
+        return new MainFrame(title); //return値は要検討
     }
 }
