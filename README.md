@@ -2,9 +2,14 @@
 
 ## すごろくゲーム：クライアントアプリケーション
 
-<p style="text-align: center">
-  <img src="https://github.com/SergeFan/sugoroku_client/blob/test/ui/src/main/resources/logo.png"/>
-</p>
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+}
+
+<img src="https://github.com/SergeFan/sugoroku_client/blob/test/ui/src/main/resources/logo.png" class="center"/>
 
 ### プログラム構造
 
