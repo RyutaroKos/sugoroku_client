@@ -2,6 +2,7 @@ package com.ui.component;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * クライアントの画面を管理するクラス：メインフレーム、
@@ -19,6 +20,11 @@ public class MainFrame extends JFrame {
         super(title);
         setMinimumSize(new Dimension(1280, 960)); //画面の最小サイズを制限、画面内のコンポーネントが崩れた場合ここを拡大
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        try {
+            setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("icon.png"))).getImage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         contentPane = getContentPane();
         topPanel = new TopPanel(this);
