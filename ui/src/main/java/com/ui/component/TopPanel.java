@@ -79,7 +79,7 @@ public class TopPanel extends JPanel {
             if (false) {
                 LoginDialog.getDialog(parentFrame).setVisible(true);
             } else {
-                parentFrame.changePanel(parentFrame.matchingPanel);
+                parentFrame.changePanel(parentFrame.getMatchingPanel());
             }
         }
     }

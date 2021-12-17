@@ -100,7 +100,7 @@ public class MatchingPanel extends JPanel {
             //TODO: 具体的なランダムマッチング処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            parentFrame.changePanel(new LobbyPanel(parentFrame, "random", "0023"));
+            parentFrame.changePanel(parentFrame.getLobbyPanel("random", "0023"));
         }
     }
 

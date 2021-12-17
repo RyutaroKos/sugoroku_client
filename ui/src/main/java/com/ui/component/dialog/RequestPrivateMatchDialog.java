@@ -49,7 +49,7 @@ public class RequestPrivateMatchDialog extends AppDialog {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             String id = privateMatchIDField.getText();
-            parentFrame.changePanel(parentFrame.createLobbyPanel("private", id));
+            parentFrame.changePanel(parentFrame.getLobbyPanel("private", id));
         }
     }
 }
