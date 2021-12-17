@@ -14,16 +14,13 @@ import javax.swing.*;
 public class LabelFactory implements ComponentFactory {
     @Override
     public JLabel getLabel(String panel, String label) {
-        switch (panel) {
-            case "top":
-                return new TopPanelLabel(label);
-            case "matching":
-                return new MatchingPanelLabel(label);
-            case "lobby":
-                return new LobbyPanelLabel();
-            default:
-                return null;
-        }
+        return switch (panel) {
+            case "top" -> new TopPanelLabel(label);
+            case "matching" -> new MatchingPanelLabel(label);
+            case "lobby" -> new LobbyPanelLabel();
+            case "game" -> null; //TODO: ゲームパネルラベルクラスは要作成
+            default -> null;
+        };
     }
 
     //ラベルファクトリーであるため、ラベル以外の生成メソッドはnullのまま
