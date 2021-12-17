@@ -11,6 +11,10 @@ public class CommandBuffer extends ArrayDeque<String> {
         instance.add(command);
     }
 
+    public String readCommand() {
+        return instance.peek();
+    }
+
     public String retrieveCommand() {
         return instance.poll();
     }

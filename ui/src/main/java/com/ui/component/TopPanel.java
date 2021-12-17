@@ -1,5 +1,7 @@
 package com.ui.component;
 
+import com.data.buffer.CommandBuffer;
+import com.data.buffer.DataBuffer;
 import com.ui.component.dialog.LoginDialog;
 import com.ui.component.dialog.SignupDialog;
 import com.ui.scheme.*;
@@ -67,6 +69,18 @@ public class TopPanel extends JPanel {
         add(buttonHolder, LayoutScheme.TOP_BUTTONHOLDER.getLayout());
     }
 
+    private void login() {
+        CommandBuffer.getInstance().registerCommand("LOGIN");
+        DataBuffer.getInstance().setUsername(usernameInput.getText());
+        DataBuffer.getInstance().setPassword(String.valueOf(passwordInput.getPassword()));
+    }
+
+    private void signup() {
+        CommandBuffer.getInstance().registerCommand("SIGNUP");
+        DataBuffer.getInstance().setUsername(usernameInput.getText());
+        DataBuffer.getInstance().setPassword(String.valueOf(passwordInput.getPassword()));
+    }
+
     /**
      * ログインボタンに合わせたログインアクションクラス
      */
@@ -76,7 +90,7 @@ public class TopPanel extends JPanel {
             //TODO: 具体的なログイン処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            parentFrame.commandBuffer.registerCommand("LOGIN");
+            login();
             if (false) {
                 LoginDialog.getDialog(parentFrame).setVisible(true);
             } else {
@@ -94,7 +108,7 @@ public class TopPanel extends JPanel {
             //TODO: 具体的な初回登録処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            parentFrame.commandBuffer.registerCommand("SIGNUP");
+            signup();
             SignupDialog.getDialog(parentFrame, false).setVisible(true);
         }
     }

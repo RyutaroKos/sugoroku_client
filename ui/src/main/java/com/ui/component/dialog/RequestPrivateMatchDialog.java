@@ -1,5 +1,7 @@
 package com.ui.component.dialog;
 
+import com.data.buffer.CommandBuffer;
+import com.data.buffer.DataBuffer;
 import com.ui.component.MainFrame;
 import com.ui.scheme.LayoutScheme;
 
@@ -49,6 +51,8 @@ public class RequestPrivateMatchDialog extends AppDialog {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             String id = privateMatchIDField.getText();
+            CommandBuffer.getInstance().registerCommand("PRIVATE_MATCH");
+            DataBuffer.getInstance().setLobbyID(id);
             parentFrame.changePanel(parentFrame.getLobbyPanel("private", id));
         }
     }

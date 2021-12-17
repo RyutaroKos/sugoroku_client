@@ -1,5 +1,7 @@
 package com.ui.component;
 
+import com.data.buffer.CommandBuffer;
+import com.data.buffer.DataBuffer;
 import com.ui.component.dialog.ExitLobbyDialog;
 import com.ui.scheme.*;
 import com.ui.component.subpanel.*;
@@ -76,6 +78,7 @@ public class LobbyPanel extends JPanel {
         messageInput.setPreferredSize(new Dimension(265, 40));
         messageInput.setBorder(new LineBorder(Color.BLACK, 1 , false));
         messageInput.setFont(FontScheme.LOBBY_BODYPANEL_BUTTON.getFont());
+        sendMessageButton.addActionListener(new SendMessageAction());
         messageInputPane.setLayout(new GridBagLayout());
 
         lobbyBannerPane.add(exitButton, LayoutScheme.LOBBY_EXITBUTTON.getLayout());
@@ -101,12 +104,22 @@ public class LobbyPanel extends JPanel {
         idBanner.setText("ID: " + ID);
     }
 
-    private LobbyPanel getLobbyPanel() {
+    private LobbyPanel getCurrentLobby() {
         return this;
     }
 
     public void exitLobby() {
         //TODO: 具体的な退室処理が必要
+        CommandBuffer.getInstance().registerCommand("EXIT_LOBBY");
+    }
+
+    public void startGame() {
+        CommandBuffer.getInstance().registerCommand("START_GAME");
+    }
+
+    public void sendMessage() {
+        CommandBuffer.getInstance().registerCommand("SEND_CHAT");
+        DataBuffer.getInstance().setMessage(messageInput.getText());
     }
 
     /**
@@ -118,7 +131,7 @@ public class LobbyPanel extends JPanel {
             //TODO: 具体的な退室処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            ExitLobbyDialog.getDialog(parentFrame, getLobbyPanel()).setVisible(true);
+            ExitLobbyDialog.getDialog(parentFrame, getCurrentLobby()).setVisible(true);
         }
     }
 
@@ -130,6 +143,7 @@ public class LobbyPanel extends JPanel {
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: 具体的なゲーム開始処理が必要
 
+            startGame();
         }
     }
 
@@ -140,6 +154,8 @@ public class LobbyPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: 具体的なチャット送信処理が必要
+
+            sendMessage();
         }
     }
 }
