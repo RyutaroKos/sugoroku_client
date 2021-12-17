@@ -2,6 +2,10 @@
 
 ## すごろくゲーム：クライアントアプリケーション
 
+<p align="center">
+    <img src="https://github.com/SergeFan/sugoroku_client/blob/main/ui/src/main/resources/logo.png" alt="Sugoroku Title"/>
+</p>
+
 ### プログラム構造
 
 今回では、Java 9から導入したモジュールの概念を利用しました。現時点では、全体的にapp、netcomとui、3つのモジュールに分けました。後ほど、開発および機能からの観点で追加する可能性があります。
