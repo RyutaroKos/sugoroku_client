@@ -8,22 +8,22 @@ public class JSONBuilder {
 
     JSONBuilder(String requestType) {
         jsonObject = new JSONObject();
-        jsonObject.put("REQUEST", requestType);
+        jsonObject.put("Request", requestType);
         switch (Request.valueOf(requestType)) {
             case LOGIN, SIGNUP -> {
-                jsonObject.put("USERNAME", DataBuffer.getInstance().getUsername());
-                jsonObject.put("PASSWORD", DataBuffer.getInstance().getPassword());
+                jsonObject.put("Username", DataBuffer.getInstance().getUsername());
+                jsonObject.put("Password", DataBuffer.getInstance().getPassword());
             }
-            case RANDOM_MATCH, CHECK_RECORD -> jsonObject.put("USERNAME", DataBuffer.getInstance().getUsername());
+            case RANDOM_MATCH, CHECK_RECORD -> jsonObject.put("Username", DataBuffer.getInstance().getUsername());
             case PRIVATE_MATCH, EXIT_LOBBY -> {
-                jsonObject.put("USERNAME", DataBuffer.getInstance().getUsername());
-                jsonObject.put("LOBBY_ID", DataBuffer.getInstance().getLobbyID());
+                jsonObject.put("Username", DataBuffer.getInstance().getUsername());
+                jsonObject.put("LobbyID", DataBuffer.getInstance().getLobbyID());
             }
-            case START_GAME -> jsonObject.put("LOBBY_ID", DataBuffer.getInstance().getLobbyID());
+            case START_GAME -> jsonObject.put("LobbyID", DataBuffer.getInstance().getLobbyID());
             case SEND_CHAT -> {
-                jsonObject.put("USERNAME", DataBuffer.getInstance().getUsername());
-                jsonObject.put("LOBBY_ID", DataBuffer.getInstance().getLobbyID());
-                jsonObject.put("MESSAGE", DataBuffer.getInstance().getMessage());
+                jsonObject.put("Username", DataBuffer.getInstance().getUsername());
+                jsonObject.put("LobbyID", DataBuffer.getInstance().getLobbyID());
+                jsonObject.put("Message", DataBuffer.getInstance().getMessage());
             }
         }
     }
