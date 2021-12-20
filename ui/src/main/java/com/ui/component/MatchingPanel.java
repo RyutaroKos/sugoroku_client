@@ -1,8 +1,12 @@
 package com.ui.component;
 
+import com.data.Flag;
+import com.data.Request;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.dialog.GameRecordDialog;
 import com.ui.component.dialog.RequestPrivateMatchDialog;
 import com.ui.scheme.*;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -70,8 +74,8 @@ public class MatchingPanel extends JPanel {
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         scrollPane.setPreferredSize(new Dimension(400, 600));
         scrollPane.setBorder(new LineBorder(Color.BLACK, 1, false));
-        randomMatchButton.addActionListener(new RandomMatchingAction());
-        privateMatchButton.addActionListener(new PrivateMatchingAction());
+        randomMatchButton.addActionListener(new RandomMatchAction());
+        privateMatchButton.addActionListener(new PrivateMatchAction());
         checkRecordButton.addActionListener(new CheckRecordAction());
         randomMatchPane.setLayout(new GridBagLayout());
         privateMatchPane.setLayout(new GridBagLayout());
@@ -91,29 +95,53 @@ public class MatchingPanel extends JPanel {
         add(buttonHolder, LayoutScheme.MATCHING_BUTTONHOLDER.getLayout());
     }
 
+    private MatchingPanel getCurrentPanel() {
+        return this;
+    }
+
+    private void randomMatch() {
+        JSONObject randomMatchRequest = RequestBuffer.getInstance().getRequestObject();
+        randomMatchRequest.put(Flag.Request.toString(), Request.RANDOM_MATCH);
+        RequestBuffer.getInstance().registerRequest(randomMatchRequest);
+    }
+
+    public void privateMatch(String privateMatchID) {
+        JSONObject privateMatchRequest = RequestBuffer.getInstance().getRequestObject();
+        privateMatchRequest.put(Flag.Request.toString(), Request.PRIVATE_MATCH);
+        privateMatchRequest.put(Flag.LobbyID.toString(), privateMatchID);
+        RequestBuffer.getInstance().registerRequest(privateMatchRequest);
+    }
+
+    private void checkRecord() {
+        JSONObject checkRecordRequest = RequestBuffer.getInstance().getRequestObject();
+        checkRecordRequest.put(Flag.Request.toString(), Request.CHECK_RECORD);
+        RequestBuffer.getInstance().registerRequest(checkRecordRequest);
+    }
+
     /**
      * ランダムマッチボタンに合わせたランダムマッチングアクションクラス
      */
-    class RandomMatchingAction implements ActionListener {
+    class RandomMatchAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: 具体的なランダムマッチング処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            parentFrame.changePanel(parentFrame.getLobbyPanel("random", "0023"));
+            randomMatch();
+            parentFrame.changePanel(parentFrame.getLobbyPanel("random", "xb23"));
         }
     }
 
     /**
      * プライベートマッチボタンに合わせたプライベートマッチングアクションクラス
      */
-    class PrivateMatchingAction implements ActionListener {
+    class PrivateMatchAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: 具体的なプライベートマッチング処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            RequestPrivateMatchDialog.getDialog(parentFrame, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
+            RequestPrivateMatchDialog.getDialog(parentFrame, getCurrentPanel(), "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
         }
     }
 
@@ -126,6 +154,7 @@ public class MatchingPanel extends JPanel {
             //TODO: 具体的な成績確認処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            checkRecord();
             GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できます").setVisible(true);
         }
     }

@@ -1,6 +1,7 @@
 package com.ui.component.dialog;
 
 import com.ui.component.MainFrame;
+import com.ui.component.MatchingPanel;
 import com.ui.scheme.LayoutScheme;
 
 import javax.swing.*;
@@ -12,12 +13,14 @@ import java.awt.event.KeyEvent;
 
 public class RequestPrivateMatchDialog extends AppDialog {
     MainFrame parentFrame;
+    MatchingPanel parentPanel;
     JTextField privateMatchIDField;
 
-    RequestPrivateMatchDialog(MainFrame mainFrame, String label) {
+    RequestPrivateMatchDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
         super(mainFrame);
         dialogMessage.setText(label);
         parentFrame = mainFrame;
+        parentPanel = matchingPanel;
 
         privateMatchIDField = new JTextField(10);
         privateMatchIDField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 24));
@@ -33,7 +36,7 @@ public class RequestPrivateMatchDialog extends AppDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {
-                positiveButton.setEnabled(privateMatchIDField.getText().length() > 3); //IDの長さが4以外の場合、確認ボタンを無効化
+                positiveButton.setEnabled(privateMatchIDField.getText().length() > 3); //IDの長さが4より短い場合、確認ボタンを無効化
             }
         });
         positiveButton.setEnabled(false); //確認ボタンの初期化（無効）
@@ -41,14 +44,17 @@ public class RequestPrivateMatchDialog extends AppDialog {
         contentPane.add(privateMatchIDField, LayoutScheme.DIALOG_TEXTFIELD.getLayout());
     }
 
-    public static RequestPrivateMatchDialog getDialog(MainFrame mainFrame, String label) {
-        return new RequestPrivateMatchDialog(mainFrame, label);
+    public static RequestPrivateMatchDialog getDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
+        return new RequestPrivateMatchDialog(mainFrame, matchingPanel, label);
     }
 
     class requestPrivateMatchAction implements ActionListener {
+        //TODO: 実装に合わせて調整する必要ある
+
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             String id = privateMatchIDField.getText();
+            parentPanel.privateMatch(id);
             parentFrame.changePanel(parentFrame.getLobbyPanel("private", id));
         }
     }

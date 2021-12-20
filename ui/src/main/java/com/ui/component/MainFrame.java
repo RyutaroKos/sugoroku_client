@@ -25,10 +25,7 @@ public class MainFrame extends JFrame {
         }
 
         contentPane = getContentPane();
-        init();
-    }
 
-    private void init() {
         contentPane.add(new TopPanel(this));
         pack();
         setVisible(true);

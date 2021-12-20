@@ -1,8 +1,12 @@
 package com.ui.component;
 
+import com.data.Flag;
+import com.data.Request;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.dialog.LoginDialog;
 import com.ui.component.dialog.SignupDialog;
 import com.ui.scheme.*;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,6 +71,22 @@ public class TopPanel extends JPanel {
         add(buttonHolder, LayoutScheme.TOP_BUTTONHOLDER.getLayout());
     }
 
+    private void login() {
+        JSONObject loginRequest = RequestBuffer.getInstance().getRequestObject();
+        loginRequest.put(Flag.Request.toString(), Request.LOGIN);
+        loginRequest.put(Flag.Username.toString(), String.valueOf(usernameInput.getText()));
+        loginRequest.put(Flag.Password.toString(), String.valueOf(passwordInput.getPassword()));
+        RequestBuffer.getInstance().registerRequest(loginRequest);
+    }
+
+    private void signup() {
+        JSONObject signupRequest = RequestBuffer.getInstance().getRequestObject();
+        signupRequest.put(Flag.Request.toString(), Request.SIGNUP);
+        signupRequest.put(Flag.Username.toString(), String.valueOf(usernameInput.getText()));
+        signupRequest.put(Flag.Password.toString(), String.valueOf(passwordInput.getPassword()));
+        RequestBuffer.getInstance().registerRequest(signupRequest);
+    }
+
     /**
      * ログインボタンに合わせたログインアクションクラス
      */
@@ -76,6 +96,7 @@ public class TopPanel extends JPanel {
             //TODO: 具体的なログイン処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            login();
             if (false) {
                 LoginDialog.getDialog(parentFrame).setVisible(true);
             } else {
@@ -93,6 +114,7 @@ public class TopPanel extends JPanel {
             //TODO: 具体的な初回登録処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
+            signup();
             SignupDialog.getDialog(parentFrame, false).setVisible(true);
         }
     }
