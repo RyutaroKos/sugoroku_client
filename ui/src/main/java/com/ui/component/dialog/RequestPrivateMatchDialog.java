@@ -1,11 +1,8 @@
 package com.ui.component.dialog;
 
-import com.data.Flag;
-import com.data.Request;
-import com.data.buffer.RequestBuffer;
 import com.ui.component.MainFrame;
+import com.ui.component.MatchingPanel;
 import com.ui.scheme.LayoutScheme;
-import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +13,14 @@ import java.awt.event.KeyEvent;
 
 public class RequestPrivateMatchDialog extends AppDialog {
     MainFrame parentFrame;
+    MatchingPanel parentPanel;
     JTextField privateMatchIDField;
 
-    RequestPrivateMatchDialog(MainFrame mainFrame, String label) {
+    RequestPrivateMatchDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
         super(mainFrame);
         dialogMessage.setText(label);
         parentFrame = mainFrame;
+        parentPanel = matchingPanel;
 
         privateMatchIDField = new JTextField(10);
         privateMatchIDField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 24));
@@ -45,15 +44,8 @@ public class RequestPrivateMatchDialog extends AppDialog {
         contentPane.add(privateMatchIDField, LayoutScheme.DIALOG_TEXTFIELD.getLayout());
     }
 
-    private void privateMatch() {
-        JSONObject privateMatchRequest = RequestBuffer.getInstance().getRequestObject();
-        privateMatchRequest.put(Flag.Request.toString(), Request.PRIVATE_MATCH);
-        privateMatchRequest.put(Flag.LobbyID.toString(), privateMatchIDField.getText());
-        RequestBuffer.getInstance().registerRequest(privateMatchRequest);
-    }
-
-    public static RequestPrivateMatchDialog getDialog(MainFrame mainFrame, String label) {
-        return new RequestPrivateMatchDialog(mainFrame, label);
+    public static RequestPrivateMatchDialog getDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
+        return new RequestPrivateMatchDialog(mainFrame, matchingPanel, label);
     }
 
     class requestPrivateMatchAction implements ActionListener {
@@ -62,7 +54,7 @@ public class RequestPrivateMatchDialog extends AppDialog {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             String id = privateMatchIDField.getText();
-            privateMatch();
+            parentPanel.privateMatch(id);
             parentFrame.changePanel(parentFrame.getLobbyPanel("private", id));
         }
     }

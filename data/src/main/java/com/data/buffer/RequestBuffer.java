@@ -1,6 +1,5 @@
 package com.data.buffer;
 
-import com.data.Request;
 import org.json.JSONObject;
 
 import java.util.ArrayDeque;

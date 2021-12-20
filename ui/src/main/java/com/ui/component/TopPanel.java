@@ -74,16 +74,16 @@ public class TopPanel extends JPanel {
     private void login() {
         JSONObject loginRequest = RequestBuffer.getInstance().getRequestObject();
         loginRequest.put(Flag.Request.toString(), Request.LOGIN);
-        loginRequest.put(Flag.Username.toString(), usernameInput.getText());
-        loginRequest.put(Flag.Password.toString(), passwordInput.getPassword());
+        loginRequest.put(Flag.Username.toString(), String.valueOf(usernameInput.getText()));
+        loginRequest.put(Flag.Password.toString(), String.valueOf(passwordInput.getPassword()));
         RequestBuffer.getInstance().registerRequest(loginRequest);
     }
 
     private void signup() {
         JSONObject signupRequest = RequestBuffer.getInstance().getRequestObject();
         signupRequest.put(Flag.Request.toString(), Request.SIGNUP);
-        signupRequest.put(Flag.Username.toString(), usernameInput.getText());
-        signupRequest.put(Flag.Password.toString(), passwordInput.getPassword());
+        signupRequest.put(Flag.Username.toString(), String.valueOf(usernameInput.getText()));
+        signupRequest.put(Flag.Password.toString(), String.valueOf(passwordInput.getPassword()));
         RequestBuffer.getInstance().registerRequest(signupRequest);
     }
 
