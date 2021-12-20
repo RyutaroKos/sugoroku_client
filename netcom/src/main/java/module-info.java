@@ -1,4 +1,4 @@
 module client.app.netcom.main {
-    requires javax.websocket.api;
+    requires jakarta.websocket;
     exports com.netcom.websocket;
 }

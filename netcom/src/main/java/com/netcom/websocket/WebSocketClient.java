@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class WebSocketClient implements Runnable {
     WebSocketManager webSocketManager;
 
-    WebSocketClient() {
+    public WebSocketClient() {
         String serverEndpoint = "ws://localhost:8080/app/sample";
         webSocketManager = new WebSocketManager(serverEndpoint);
         webSocketManager.connect();

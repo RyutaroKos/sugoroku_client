@@ -1,6 +1,6 @@
 package com.netcom.websocket;
 
-import javax.websocket.*;
+import jakarta.websocket.*;
 
 @ClientEndpoint
 public class WebSocketEndpoint {

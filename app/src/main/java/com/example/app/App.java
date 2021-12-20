@@ -1,5 +1,6 @@
 package com.example.app;
 
+import com.netcom.websocket.WebSocketClient;
 import com.ui.component.MainFrame;
 
 import javax.swing.*;

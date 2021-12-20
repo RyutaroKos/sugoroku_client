@@ -1,6 +1,7 @@
 module client.app.main {
+    requires org.json;
     requires java.desktop;
     requires client.app.ui.main;
     requires client.app.data.main;
-    requires org.json;
+    requires client.app.netcom.main;
 }
