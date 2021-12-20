@@ -1,10 +1,12 @@
 package com.ui.component;
 
-import com.data.buffer.CommandBuffer;
-import com.data.buffer.DataBuffer;
+import com.data.Flag;
+import com.data.Request;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.dialog.GameRecordDialog;
 import com.ui.component.dialog.RequestPrivateMatchDialog;
 import com.ui.scheme.*;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -72,8 +74,8 @@ public class MatchingPanel extends JPanel {
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         scrollPane.setPreferredSize(new Dimension(400, 600));
         scrollPane.setBorder(new LineBorder(Color.BLACK, 1, false));
-        randomMatchButton.addActionListener(new RandomMatchingAction());
-        privateMatchButton.addActionListener(new PrivateMatchingAction());
+        randomMatchButton.addActionListener(new RandomMatchAction());
+        privateMatchButton.addActionListener(new PrivateMatchAction());
         checkRecordButton.addActionListener(new CheckRecordAction());
         randomMatchPane.setLayout(new GridBagLayout());
         privateMatchPane.setLayout(new GridBagLayout());
@@ -93,17 +95,28 @@ public class MatchingPanel extends JPanel {
         add(buttonHolder, LayoutScheme.MATCHING_BUTTONHOLDER.getLayout());
     }
 
+    private void randomMatch() {
+        JSONObject randomMatchRequest = RequestBuffer.getInstance().getRequestObject();
+        randomMatchRequest.put(Flag.Request.toString(), Request.RANDOM_MATCH);
+        RequestBuffer.getInstance().registerRequest(randomMatchRequest);
+    }
+
+    private void checkRecord() {
+        JSONObject checkRecordRequest = RequestBuffer.getInstance().getRequestObject();
+        checkRecordRequest.put(Flag.Request.toString(), Request.CHECK_RECORD);
+        RequestBuffer.getInstance().registerRequest(checkRecordRequest);
+    }
+
     /**
      * ランダムマッチボタンに合わせたランダムマッチングアクションクラス
      */
-    class RandomMatchingAction implements ActionListener {
+    class RandomMatchAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: 具体的なランダムマッチング処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            CommandBuffer.getInstance().registerCommand("RANDOM_MATCH");
-            DataBuffer.getInstance().setLobbyID("xb23");
+            randomMatch();
             parentFrame.changePanel(parentFrame.getLobbyPanel("random", "xb23"));
         }
     }
@@ -111,7 +124,7 @@ public class MatchingPanel extends JPanel {
     /**
      * プライベートマッチボタンに合わせたプライベートマッチングアクションクラス
      */
-    class PrivateMatchingAction implements ActionListener {
+    class PrivateMatchAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             //TODO: 具体的なプライベートマッチング処理が必要
@@ -130,7 +143,7 @@ public class MatchingPanel extends JPanel {
             //TODO: 具体的な成績確認処理が必要
 
             //効果展示用、実装に合わせて調整する必要がある
-            CommandBuffer.getInstance().registerCommand("CHECK_RECORD");
+            checkRecord();
             GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できます").setVisible(true);
         }
     }

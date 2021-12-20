@@ -1,24 +1,16 @@
 package com.example.app;
 
-import com.data.JSONBuilder;
-import com.data.buffer.CommandBuffer;
-import com.ui.component.MainFrame;
+import com.data.buffer.RequestBuffer;
 
 import java.util.concurrent.TimeUnit;
 import org.json.JSONObject;
 
-public class CommandManager implements Runnable {
-    MainFrame mainFrame;
-
-    CommandManager(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
-    }
-
+public class RequestManager implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (!CommandBuffer.getInstance().isEmpty()) {
-                JSONObject jsonObject = JSONBuilder.getJsonObject(CommandBuffer.getInstance().retrieveCommand());
+            if (!RequestBuffer.getInstance().isEmpty()) {
+                JSONObject jsonObject = RequestBuffer.getInstance().retrieveRequest();
                 System.out.println(jsonObject);
             } else {
                 try {

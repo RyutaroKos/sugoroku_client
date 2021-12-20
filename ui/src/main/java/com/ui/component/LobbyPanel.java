@@ -1,10 +1,12 @@
 package com.ui.component;
 
-import com.data.buffer.CommandBuffer;
-import com.data.buffer.DataBuffer;
+import com.data.Flag;
+import com.data.Request;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.dialog.ExitLobbyDialog;
 import com.ui.scheme.*;
 import com.ui.component.subpanel.*;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -109,17 +111,22 @@ public class LobbyPanel extends JPanel {
     }
 
     public void exitLobby() {
-        //TODO: 具体的な退室処理が必要
-        CommandBuffer.getInstance().registerCommand("EXIT_LOBBY");
+        JSONObject exitLobbyRequest = RequestBuffer.getInstance().getRequestObject();
+        exitLobbyRequest.put(Flag.Request.toString(), Request.EXIT_LOBBY);
+        RequestBuffer.getInstance().registerRequest(exitLobbyRequest);
     }
 
     public void startGame() {
-        CommandBuffer.getInstance().registerCommand("START_GAME");
+        JSONObject startGameRequest = RequestBuffer.getInstance().getRequestObject();
+        startGameRequest.put(Flag.Request.toString(), Request.START_GAME);
+        RequestBuffer.getInstance().registerRequest(startGameRequest);
     }
 
     public void sendMessage() {
-        CommandBuffer.getInstance().registerCommand("SEND_CHAT");
-        DataBuffer.getInstance().setMessage(messageInput.getText());
+        JSONObject sendMessageRequest = RequestBuffer.getInstance().getRequestObject();
+        sendMessageRequest.put(Flag.Request.toString(), Request.SEND_MESSAGE);
+        sendMessageRequest.put(Flag.Message.toString(), messageInput.getText());
+        RequestBuffer.getInstance().registerRequest(sendMessageRequest);
     }
 
     /**

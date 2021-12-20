@@ -1,6 +1,5 @@
 package com.example.app;
 
-import com.netcom.websocket.WebSocketClient;
 import com.ui.component.MainFrame;
 
 import javax.swing.*;
@@ -29,9 +28,11 @@ public class App {
         }
 
         MainFrame mainFrame = MainFrame.getMainFrame(appTitle);
-        CommandManager commandManager = new CommandManager(mainFrame);
+        RequestManager requestManager = new RequestManager();
+        ResultManager resultManager = new ResultManager(mainFrame);
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(commandManager);
+        executor.submit(requestManager);
+        executor.submit(resultManager);
         executor.shutdown();
     }
 }

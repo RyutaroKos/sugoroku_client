@@ -1,8 +1,5 @@
 package com.ui.component;
 
-import com.data.buffer.CommandBuffer;
-import com.data.buffer.DataBuffer;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;

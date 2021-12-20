@@ -1,10 +1,12 @@
 package com.ui.component;
 
-import com.data.buffer.CommandBuffer;
-import com.data.buffer.DataBuffer;
+import com.data.Flag;
+import com.data.Request;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.dialog.LoginDialog;
 import com.ui.component.dialog.SignupDialog;
 import com.ui.scheme.*;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,15 +72,19 @@ public class TopPanel extends JPanel {
     }
 
     private void login() {
-        CommandBuffer.getInstance().registerCommand("LOGIN");
-        DataBuffer.getInstance().setUsername(usernameInput.getText());
-        DataBuffer.getInstance().setPassword(String.valueOf(passwordInput.getPassword()));
+        JSONObject loginRequest = RequestBuffer.getInstance().getRequestObject();
+        loginRequest.put(Flag.Request.toString(), Request.LOGIN);
+        loginRequest.put(Flag.Username.toString(), usernameInput.getText());
+        loginRequest.put(Flag.Password.toString(), passwordInput.getPassword());
+        RequestBuffer.getInstance().registerRequest(loginRequest);
     }
 
     private void signup() {
-        CommandBuffer.getInstance().registerCommand("SIGNUP");
-        DataBuffer.getInstance().setUsername(usernameInput.getText());
-        DataBuffer.getInstance().setPassword(String.valueOf(passwordInput.getPassword()));
+        JSONObject signupRequest = RequestBuffer.getInstance().getRequestObject();
+        signupRequest.put(Flag.Request.toString(), Request.SIGNUP);
+        signupRequest.put(Flag.Username.toString(), usernameInput.getText());
+        signupRequest.put(Flag.Password.toString(), passwordInput.getPassword());
+        RequestBuffer.getInstance().registerRequest(signupRequest);
     }
 
     /**
