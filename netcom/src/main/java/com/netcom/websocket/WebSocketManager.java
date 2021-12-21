@@ -3,6 +3,8 @@ package com.netcom.websocket;
 import jakarta.websocket.ContainerProvider;
 import jakarta.websocket.Session;
 import jakarta.websocket.WebSocketContainer;
+
+import java.io.IOException;
 import java.net.URI;
 
 public class WebSocketManager {
@@ -16,18 +18,16 @@ public class WebSocketManager {
     }
     
     public boolean isConnected() {
-        System.out.println("Client is connected?: " + session.isOpen());
+//        System.out.println("Client is connected?: " + session.isOpen());
         return session.isOpen();
     }
 
-    public boolean connect() {
+    public void connect() {
         System.out.println("Client connected to: " + uri);
         try {
             session = container.connectToServer(new WebSocketEndpoint(), uri);
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 
@@ -37,6 +37,12 @@ public class WebSocketManager {
             session.getBasicRemote().sendText(requestMessage);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void disconnect() throws IOException {
+        if (!session.isOpen()) {
+            session.close();
         }
     }
 }

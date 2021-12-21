@@ -1,6 +1,8 @@
 package com.netcom.websocket;
 
+import com.data.buffer.ResultBuffer;
 import jakarta.websocket.*;
+import org.json.JSONObject;
 
 @ClientEndpoint
 public class WebSocketEndpoint {
@@ -11,7 +13,9 @@ public class WebSocketEndpoint {
 
     @OnMessage
     public void onMessage(String replyMessage) {
-        System.out.println("Client received reply message:\n" + replyMessage);
+        JSONObject result = new JSONObject(replyMessage);
+        ResultBuffer.getInstance().registerResult(result);
+        System.out.println("Client received reply message:\n" + result);
     }
 
     @OnError
