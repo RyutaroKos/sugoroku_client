@@ -28,11 +28,11 @@ public class App {
         }
 
         MainFrame mainFrame = MainFrame.getMainFrame(appTitle);
-        RequestManager requestManager = new RequestManager();
-        ResultManager resultManager = new ResultManager(mainFrame);
+        RequestHandler requestHandler = new RequestHandler();
+        ResultHandler resultHandler = new ResultHandler(mainFrame);
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
-        executor.submit(requestManager);
-        executor.submit(resultManager);
+        executor.submit(requestHandler);
+        executor.submit(resultHandler);
         executor.shutdown();
     }
 }

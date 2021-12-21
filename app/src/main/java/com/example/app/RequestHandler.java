@@ -6,10 +6,10 @@ import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
-public class RequestManager implements Runnable {
+public class RequestHandler implements Runnable {
     WebSocketClient webSocketClient;
 
-    RequestManager() {
+    RequestHandler() {
         webSocketClient = WebSocketClient.getInstance();
     }
 

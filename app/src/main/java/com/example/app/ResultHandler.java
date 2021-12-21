@@ -8,10 +8,10 @@ import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
-public class ResultManager implements Runnable {
+public class ResultHandler implements Runnable {
     MainFrame mainFrame;
 
-    ResultManager(MainFrame mainFrame) {
+    ResultHandler(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
     }
 
