@@ -1,7 +1,5 @@
 package com.netcom.websocket;
 
-import java.util.concurrent.TimeUnit;
-
 public class WebSocketClient {
     private static final WebSocketClient instance = new WebSocketClient();
     private String serverEndpoint;
