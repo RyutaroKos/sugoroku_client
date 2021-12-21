@@ -6,6 +6,11 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+/**
+ * ロビーパネルの上部バナークラス。
+ * 本質はロビーパネルのサブパネル。
+ */
+
 public class LobbyPanelBanner extends JPanel {
     LobbyPanelBanner() {
         setPreferredSize(new Dimension(800, 100));

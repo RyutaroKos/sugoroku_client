@@ -2,6 +2,13 @@ package com.ui.scheme;
 
 import java.awt.*;
 
+/**
+ * 文字フォントをピックアップするためのライブラリクラス。
+ * 基本的にパネルや、ダイアログごとに分類、
+ * さらに細分すると、メッセージ、ラベル、ボタンなど、
+ * 必要に応じて追加可能。
+ */
+
 interface innerFontScheme {
     Font getFont();
 }

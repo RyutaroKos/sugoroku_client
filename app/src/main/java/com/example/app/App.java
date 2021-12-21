@@ -3,6 +3,12 @@ package com.example.app;
 import com.ui.component.MainFrame;
 
 import javax.swing.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
+/**
+ * クライアントのメインクラス
+ */
 
 public class App {
     private static final String appTitle = "Sugoroku";
@@ -21,6 +27,12 @@ public class App {
             System.out.println("Nimbus look and feel not found, using default look and feel instead.");
         }
 
-        MainFrame.createFrame(appTitle);
+        MainFrame mainFrame = MainFrame.getMainFrame(appTitle);
+        RequestManager requestManager = new RequestManager();
+        ResultManager resultManager = new ResultManager(mainFrame);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+        executor.submit(requestManager);
+        executor.submit(resultManager);
+        executor.shutdown();
     }
 }

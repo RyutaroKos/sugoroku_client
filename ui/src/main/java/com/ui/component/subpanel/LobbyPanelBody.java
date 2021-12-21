@@ -8,6 +8,11 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+/**
+ * ロビーパネルの下部ボディークラス。
+ * 本質はロビーパネルのサブパネル。
+ */
+
 public class LobbyPanelBody extends JPanel {
     LobbyPanelBody(String title) {
         setPreferredSize(new Dimension(400, 600));

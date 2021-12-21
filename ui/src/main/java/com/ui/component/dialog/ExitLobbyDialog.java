@@ -8,8 +8,8 @@ public class ExitLobbyDialog extends AppDialog {
         super(mainFrame);
         dialogMessage.setText("退室しますか？");
         positiveButton.addActionListener(actionEvent -> {
-            mainFrame.changePanel(mainFrame.getMatchingPanel());
             lobbyPanel.exitLobby();
+            mainFrame.changePanel(mainFrame.getMatchingPanel());
         });
         buttonHolder.add(negativeButton);
     }

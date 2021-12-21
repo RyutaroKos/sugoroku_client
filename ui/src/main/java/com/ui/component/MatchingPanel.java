@@ -1,8 +1,12 @@
 package com.ui.component;
 
+import com.data.Flag;
+import com.data.Request;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.dialog.GameRecordDialog;
 import com.ui.component.dialog.RequestPrivateMatchDialog;
 import com.ui.scheme.*;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -12,6 +16,10 @@ import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+
+/**
+ * ログイン成功後表示する第二の画面：マッチングパネル
+ */
 
 public class MatchingPanel extends JPanel {
     MainFrame parentFrame;
@@ -54,7 +62,7 @@ public class MatchingPanel extends JPanel {
         buttonHolder = new Container();
 
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule.txt");
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("game_rule.txt"); //ゲームルールの編集はこちら、場所はmainのresourcesフォルダ
             String str = new String(Objects.requireNonNull(inputStream).readAllBytes(), StandardCharsets.UTF_8);
             textArea.setText(str);
         } catch (Exception e) {
@@ -66,8 +74,8 @@ public class MatchingPanel extends JPanel {
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         scrollPane.setPreferredSize(new Dimension(400, 600));
         scrollPane.setBorder(new LineBorder(Color.BLACK, 1, false));
-        randomMatchButton.addActionListener(new RandomMatchingAction());
-        privateMatchButton.addActionListener(new PrivateMatchingAction());
+        randomMatchButton.addActionListener(new RandomMatchAction());
+        privateMatchButton.addActionListener(new PrivateMatchAction());
         checkRecordButton.addActionListener(new CheckRecordAction());
         randomMatchPane.setLayout(new GridBagLayout());
         privateMatchPane.setLayout(new GridBagLayout());
@@ -87,30 +95,66 @@ public class MatchingPanel extends JPanel {
         add(buttonHolder, LayoutScheme.MATCHING_BUTTONHOLDER.getLayout());
     }
 
-    class RandomMatchingAction implements ActionListener {
+    private MatchingPanel getCurrentPanel() {
+        return this;
+    }
+
+    private void randomMatch() {
+        JSONObject randomMatchRequest = RequestBuffer.getInstance().getRequestObject();
+        randomMatchRequest.put(Flag.Request.toString(), Request.RANDOM_MATCH);
+        RequestBuffer.getInstance().registerRequest(randomMatchRequest);
+    }
+
+    public void privateMatch(String privateMatchID) {
+        JSONObject privateMatchRequest = RequestBuffer.getInstance().getRequestObject();
+        privateMatchRequest.put(Flag.Request.toString(), Request.PRIVATE_MATCH);
+        privateMatchRequest.put(Flag.LobbyID.toString(), privateMatchID);
+        RequestBuffer.getInstance().registerRequest(privateMatchRequest);
+    }
+
+    private void checkRecord() {
+        JSONObject checkRecordRequest = RequestBuffer.getInstance().getRequestObject();
+        checkRecordRequest.put(Flag.Request.toString(), Request.CHECK_RECORD);
+        RequestBuffer.getInstance().registerRequest(checkRecordRequest);
+    }
+
+    /**
+     * ランダムマッチボタンに合わせたランダムマッチングアクションクラス
+     */
+    class RandomMatchAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add random matching action
+            //TODO: 具体的なランダムマッチング処理が必要
 
-            parentFrame.changePanel(new LobbyPanel(parentFrame, "random", "0023"));
+            //効果展示用、実装に合わせて調整する必要がある
+            randomMatch();
+            parentFrame.changePanel(parentFrame.getLobbyPanel("random", "xb23"));
         }
     }
 
-    class PrivateMatchingAction implements ActionListener {
+    /**
+     * プライベートマッチボタンに合わせたプライベートマッチングアクションクラス
+     */
+    class PrivateMatchAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add private matching action
+            //TODO: 具体的なプライベートマッチング処理が必要
 
-            RequestPrivateMatchDialog.getDialog(parentFrame, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
-//            parentFrame.changePanel(new LobbyPanel(parentFrame, "private", "0024"));
+            //効果展示用、実装に合わせて調整する必要がある
+            RequestPrivateMatchDialog.getDialog(parentFrame, getCurrentPanel(), "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
         }
     }
 
+    /**
+     * 対戦成績確認ボタンに合わせた成績確認アクションクラス
+     */
     class CheckRecordAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add check record action
+            //TODO: 具体的な成績確認処理が必要
 
+            //効果展示用、実装に合わせて調整する必要がある
+            checkRecord();
             GameRecordDialog.getDialog(parentFrame, "ここで戦績を確認できます").setVisible(true);
         }
     }

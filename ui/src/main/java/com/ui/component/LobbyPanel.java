@@ -1,14 +1,25 @@
 package com.ui.component;
 
+import com.data.Flag;
+import com.data.Request;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.dialog.ExitLobbyDialog;
 import com.ui.scheme.*;
 import com.ui.component.subpanel.*;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * マッチング成功後表示する第三の画面：ロビーパネル。
+ * 現時点ではまだ雛形、
+ * プレイヤーリストや、チャット内容の表示は未実装。
+ * ArrayList<UserList>、ArrayList<ChatList>などが必要かも。
+ */
 
 public class LobbyPanel extends JPanel {
     MainFrame parentFrame;
@@ -69,6 +80,7 @@ public class LobbyPanel extends JPanel {
         messageInput.setPreferredSize(new Dimension(265, 40));
         messageInput.setBorder(new LineBorder(Color.BLACK, 1 , false));
         messageInput.setFont(FontScheme.LOBBY_BODYPANEL_BUTTON.getFont());
+        sendMessageButton.addActionListener(new SendMessageAction());
         messageInputPane.setLayout(new GridBagLayout());
 
         lobbyBannerPane.add(exitButton, LayoutScheme.LOBBY_EXITBUTTON.getLayout());
@@ -94,33 +106,63 @@ public class LobbyPanel extends JPanel {
         idBanner.setText("ID: " + ID);
     }
 
-    private LobbyPanel getLobbyPanel() {
+    private LobbyPanel getCurrentLobby() {
         return this;
     }
 
     public void exitLobby() {
-        //TODO: add exit lobby action
+        JSONObject exitLobbyRequest = RequestBuffer.getInstance().getRequestObject();
+        exitLobbyRequest.put(Flag.Request.toString(), Request.EXIT_LOBBY);
+        RequestBuffer.getInstance().registerRequest(exitLobbyRequest);
     }
 
+    public void startGame() {
+        JSONObject startGameRequest = RequestBuffer.getInstance().getRequestObject();
+        startGameRequest.put(Flag.Request.toString(), Request.START_GAME);
+        RequestBuffer.getInstance().registerRequest(startGameRequest);
+    }
+
+    public void sendMessage() {
+        JSONObject sendMessageRequest = RequestBuffer.getInstance().getRequestObject();
+        sendMessageRequest.put(Flag.Request.toString(), Request.SEND_MESSAGE);
+        sendMessageRequest.put(Flag.Message.toString(), messageInput.getText());
+        RequestBuffer.getInstance().registerRequest(sendMessageRequest);
+    }
+
+    /**
+     * 退室ボタンに合わせた退室アクションクラス
+     */
     class ExitLobbyAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            ExitLobbyDialog.getDialog(parentFrame, getLobbyPanel()).setVisible(true);
+            //TODO: 具体的な退室処理が必要
+
+            //効果展示用、実装に合わせて調整する必要がある
+            ExitLobbyDialog.getDialog(parentFrame, getCurrentLobby()).setVisible(true);
         }
     }
 
+    /**
+     * 開始ボタンに合わせたゲーム開始アクションクラス
+     */
     class StartGameAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: add start game action
+            //TODO: 具体的なゲーム開始処理が必要
 
+            startGame();
         }
     }
 
+    /**
+     * 送信ボタンに合わせたメッセージ送信アクションクラス
+     */
     class SendMessageAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            //TODO: 具体的なチャット送信処理が必要
 
+            sendMessage();
         }
     }
 }

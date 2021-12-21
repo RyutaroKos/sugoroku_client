@@ -2,6 +2,14 @@ package com.ui.scheme;
 
 import java.awt.*;
 
+/**
+ * UIコンポーネントのレイアウトをピックアップするためのライブラリクラス。
+ * 基本的にGridBagLayoutを採用したコンポーネントのレイアウト情報だけを記載。
+ * パネルや、ダイアログごとに分類、
+ * さらに細分すると、サブパネル、バナー、ラベル、ボタンなど、
+ * 必要に応じて追加可能。
+ */
+
 interface innerLayoutScheme {
     GridBagConstraints getLayout();
 }
@@ -39,26 +47,6 @@ public enum LayoutScheme implements innerLayoutScheme {
             return gbc;
         }
     },
-//    DIALOG_POSITIVEBUTTON {
-//        @Override
-//        public GridBagConstraints getLayout() {
-//            GridBagConstraints gbc = new GridBagConstraints();
-//            gbc.gridx = 0;
-//            gbc.gridy = 0;
-//            gbc.anchor = GridBagConstraints.CENTER;
-//            return gbc;
-//        }
-//    },
-//    DIALOG_NEGATIVEBUTTON {
-//        @Override
-//        public GridBagConstraints getLayout() {
-//            GridBagConstraints gbc = new GridBagConstraints();
-//            gbc.gridx = 1;
-//            gbc.gridy = 0;
-//            gbc.anchor = GridBagConstraints.CENTER;
-//            return gbc;
-//        }
-//    },
     TOP_LOGO {
         @Override
         public GridBagConstraints getLayout() {

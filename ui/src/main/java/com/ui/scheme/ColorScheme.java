@@ -2,6 +2,11 @@ package com.ui.scheme;
 
 import java.awt.*;
 
+/**
+ * 色をピックアップするためのライブラリクラス。
+ * 必要に応じて追加可能。
+ */
+
 interface innerColorScheme {
     Color getColor();
 }
