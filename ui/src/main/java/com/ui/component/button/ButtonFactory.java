@@ -14,14 +14,17 @@ import javax.swing.*;
 public class ButtonFactory implements ComponentFactory {
     @Override
     public JButton getButton(String panel, String label) {
-        return switch (panel) {
-            case "top" -> new TopPanelButton(label);
-            case "matching" -> new MatchingPanelButton(label);
-            case "lobby" -> new LobbyPanelButton(label);
-            case "game" -> null; //TODO: ゲームパネルボタンクラスの作成が必要
-            case "dialog" -> new DialogButton(label);
-            default -> null;
-        };
+        switch (panel) {
+            case "top":
+                return new TopPanelButton(label);
+            case "matching":
+                return new MatchingPanelButton(label);
+            case "lobby":
+                return new LobbyPanelButton(label);
+            case "game": return null; //TODO: ゲームパネルボタンクラスの作成が必要
+            case "dialog": return new DialogButton(label);
+            default: return null;
+        }
     }
 
     //ボタンファクトリーであるため、ボタン以外の生成メソッドはnullのまま
