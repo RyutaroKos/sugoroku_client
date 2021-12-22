@@ -16,7 +16,7 @@ import java.util.ArrayDeque;
  * マッチング成功後表示する第三の画面：ロビーパネル。
  * 現時点ではまだ雛形、
  * プレイヤーリストや、チャット内容の表示は未実装。
- * ArrayList<UserList>、ArrayList<ChatList>などが必要かも。
+ * ArrayDeque<String> playerList、ArrayDeque<String> chatRecordなどが必要かも。
  */
 
 public class LobbyPanel extends JPanel { //TODO: add player list and chat record

@@ -68,7 +68,7 @@ public class ResultHandler implements Runnable {
                     case RANDOM_MATCH -> randomMatch();
                     case PRIVATE_MATCH -> privateMatch();
                     case CHECK_RECORD -> checkRecord();
-                    default -> System.out.println("Unsupported protocol.");
+                    default -> System.err.println("Error: illegal protocol detected.");
                 }
             } else {
                 try {
