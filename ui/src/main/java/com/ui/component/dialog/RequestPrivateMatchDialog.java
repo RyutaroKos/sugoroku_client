@@ -6,8 +6,6 @@ import com.ui.scheme.LayoutScheme;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -40,22 +38,7 @@ public class RequestPrivateMatchDialog extends AppDialog {
             }
         });
         positiveButton.setEnabled(false); //確認ボタンの初期化（無効）
-        positiveButton.addActionListener(new requestPrivateMatchAction());
+        positiveButton.addActionListener(actionEvent -> parentPanel.requestPrivateMatch(privateMatchIDField.getText()));
         contentPane.add(privateMatchIDField, LayoutScheme.DIALOG_TEXTFIELD.getLayout());
-    }
-
-    public static RequestPrivateMatchDialog getDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
-        return new RequestPrivateMatchDialog(mainFrame, matchingPanel, label);
-    }
-
-    class requestPrivateMatchAction implements ActionListener {
-        //TODO: 実装に合わせて調整する必要ある
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            String id = privateMatchIDField.getText();
-            parentPanel.privateMatch(id);
-            parentFrame.changePanel(parentFrame.getLobbyPanel("private", id));
-        }
     }
 }

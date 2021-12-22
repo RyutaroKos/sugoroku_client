@@ -2,6 +2,7 @@ package com.ui.component;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayDeque;
 import java.util.Objects;
 
 /**
@@ -12,6 +13,8 @@ import java.util.Objects;
  */
 
 public class MainFrame extends JFrame {
+    MatchingPanel matchingPanel;
+    LobbyPanel lobbyPanel;
     Container contentPane;
 
     MainFrame(String title) {
@@ -24,19 +27,29 @@ public class MainFrame extends JFrame {
             e.printStackTrace();
         }
 
+        matchingPanel = null;
+        lobbyPanel = null;
         contentPane = getContentPane();
 
-        contentPane.add(new TopPanel(this));
+        contentPane.add(new MatchingPanel(this));
         pack();
         setVisible(true);
     }
 
-    public MatchingPanel getMatchingPanel() {
-        return new MatchingPanel(this);
+    public void setMatchingPanel() {
+        matchingPanel = new MatchingPanel(this);
     }
 
-    public LobbyPanel getLobbyPanel(String lobbyType, String lobbyID) {
-        return new LobbyPanel(this, lobbyType, lobbyID);
+    public MatchingPanel getMatchingPanel() {
+        return matchingPanel;
+    }
+
+    public void setLobbyPanel(String lobbyType, String lobbyID) { //TODO: add player list and chat record
+        lobbyPanel = new LobbyPanel(this, lobbyType, lobbyID);
+    }
+
+    public LobbyPanel getLobbyPanel() {
+        return lobbyPanel;
     }
 
     public GamePanel getGamePanel() {
@@ -51,6 +64,6 @@ public class MainFrame extends JFrame {
     }
 
     public static MainFrame getMainFrame(String title) {
-        return new MainFrame(title); //return値は要検討
+        return new MainFrame(title);
     }
 }

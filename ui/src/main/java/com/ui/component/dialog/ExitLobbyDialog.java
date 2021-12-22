@@ -8,13 +8,9 @@ public class ExitLobbyDialog extends AppDialog {
         super(mainFrame);
         dialogMessage.setText("退室しますか？");
         positiveButton.addActionListener(actionEvent -> {
-            lobbyPanel.exitLobby();
+            lobbyPanel.requestExitLobby();
             mainFrame.changePanel(mainFrame.getMatchingPanel());
         });
         buttonHolder.add(negativeButton);
-    }
-
-    public static ExitLobbyDialog getDialog(MainFrame mainFrame, LobbyPanel lobbyPanel) {
-        return new ExitLobbyDialog(mainFrame, lobbyPanel);
     }
 }

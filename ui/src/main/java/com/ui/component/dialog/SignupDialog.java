@@ -2,8 +2,6 @@ package com.ui.component.dialog;
 
 import com.ui.component.MainFrame;
 
-import javax.swing.*;
-
 public class SignupDialog extends AppDialog {
     SignupDialog(MainFrame mainFrame, boolean bool) {
         super(mainFrame);
@@ -12,9 +10,5 @@ public class SignupDialog extends AppDialog {
         } else {
             dialogMessage.setText("同じ名前のユーザーはすでに存在しています");
         }
-    }
-
-    public static JDialog getDialog(MainFrame mainFrame, boolean bool) {
-        return new SignupDialog(mainFrame, bool);
     }
 }

@@ -1,6 +1,8 @@
 package com.ui.component.label;
 
+import com.ui.component.UIKeyword;
 import com.ui.component.ComponentFactory;
+import com.ui.component.MainFrame;
 
 import javax.swing.*;
 
@@ -13,19 +15,23 @@ import javax.swing.*;
 
 public class LabelFactory implements ComponentFactory {
     @Override
-    public JLabel getLabel(String panel, String label) {
+    public JDialog getDialog(MainFrame mainFrame, UIKeyword dialog, Boolean status, String message) {
+        return null;
+    }
+
+    @Override
+    public JLabel getLabel(UIKeyword panel, String label) {
         return switch (panel) {
-            case "top" -> new TopPanelLabel(label);
-            case "matching" -> new MatchingPanelLabel(label);
-            case "lobby" -> new LobbyPanelLabel();
-            case "game" -> null; //TODO: ゲームパネルラベルクラスは要作成
+            case TopPanel -> new TopPanelLabel(label);
+            case MatchingPanel -> new MatchingPanelLabel(label);
+            case LobbyPanel -> new LobbyPanelLabel();
+            case GamePanel -> null; //TODO: ゲームパネルラベルクラスは要作成
             default -> null;
         };
     }
 
-    //ラベルファクトリーであるため、ラベル以外の生成メソッドはnullのまま
     @Override
-    public JButton getButton(String panel, String label) {
+    public JButton getButton(UIKeyword panel, String label) {
         return null;
     }
 }

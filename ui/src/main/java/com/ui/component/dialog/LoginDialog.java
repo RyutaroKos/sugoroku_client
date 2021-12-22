@@ -7,8 +7,4 @@ public class LoginDialog extends AppDialog {
         super(mainFrame);
         dialogMessage.setText("<html>ユーザー名、<br>またはパスワードが間違っています</html>");
     }
-
-    public static LoginDialog getDialog(MainFrame mainFrame) {
-        return new LoginDialog(mainFrame);
-    }
 }

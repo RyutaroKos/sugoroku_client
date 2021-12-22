@@ -1,7 +1,10 @@
 package com.data;
 
+/**
+ * リクエストキーワード
+ */
 public enum Request {
-    LOGIN, SIGNUP, //トップパネルコマンド
-    RANDOM_MATCH, PRIVATE_MATCH, CHECK_RECORD, //マッチングパネルコマンド
-    EXIT_LOBBY, START_GAME, SEND_MESSAGE, //ロビーパネルコマンド
+    LOGIN, SIGNUP,
+    RANDOM_MATCH, PRIVATE_MATCH, CHECK_RECORD,
+    EXIT_LOBBY, START_GAME, SEND_CHAT,
 }
