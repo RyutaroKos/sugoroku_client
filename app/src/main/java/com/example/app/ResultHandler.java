@@ -53,7 +53,7 @@ public class ResultHandler implements Runnable {
     }
 
     private void checkRecord() {
-        String gameRecord = "あなたの成績：" + resultObject.getInt("Win") + "勝、" + resultObject.getInt("Lose") + "敗です";
+        String gameRecord = "あなたの対戦成績：" + resultObject.getInt("Win") + "勝、" + resultObject.getInt("Lose") + "敗です";
         FactoryConstructor.getFactory(UIKeyword.Dialog).getDialog(mainFrame, UIKeyword.GameRecordDialog, null, gameRecord).setVisible(true);
     }
 
