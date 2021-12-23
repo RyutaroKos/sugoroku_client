@@ -68,6 +68,12 @@ public enum FontScheme implements innerFontScheme {
             return new Font(Font.SANS_SERIF, Font.PLAIN, 24);
         }
     },
+    LOBBY_BODYPANEL {
+        @Override
+        public Font getFont() {
+            return new Font(Font.SANS_SERIF, Font.PLAIN, 20);
+        }
+    },
     LOBBY_BODYPANEL_BUTTON {
         @Override
         public Font getFont() {
@@ -79,5 +85,5 @@ public enum FontScheme implements innerFontScheme {
         public Font getFont() {
             return new Font(Font.SANS_SERIF, Font.PLAIN, 32);
         }
-    }
+    },
 }

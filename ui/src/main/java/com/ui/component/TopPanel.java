@@ -2,6 +2,7 @@ package com.ui.component;
 
 import com.data.Protocol;
 import com.data.Request;
+import com.data.buffer.GameBuffer;
 import com.data.buffer.RequestBuffer;
 import com.ui.scheme.*;
 import org.json.JSONObject;
@@ -70,6 +71,7 @@ public class TopPanel extends JPanel {
         loginRequest.put(Protocol.Username.toString(), usernameInput.getText());
         loginRequest.put(Protocol.Password.toString(), String.valueOf(passwordInput.getPassword()));
         RequestBuffer.getInstance().registerRequest(loginRequest);
+        GameBuffer.getInstance().setUsername(usernameInput.getText());
     }
 
     private void signup() {

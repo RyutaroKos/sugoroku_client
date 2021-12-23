@@ -2,6 +2,7 @@ package com.ui.component;
 
 import com.data.Protocol;
 import com.data.Request;
+import com.data.buffer.GameBuffer;
 import com.data.buffer.RequestBuffer;
 import com.ui.scheme.*;
 import com.ui.component.subpanel.*;
@@ -10,7 +11,6 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.util.ArrayDeque;
 
 /**
  * マッチング成功後表示する第三の画面：ロビーパネル。
@@ -64,11 +64,13 @@ public class LobbyPanel extends JPanel { //TODO: add player list and chat record
         startButton.addActionListener(actionEvent -> startGameAction());
         playerListArea.setEditable(false);
         playerListArea.setLineWrap(true);
+        playerListArea.setFont(FontScheme.LOBBY_BODYPANEL.getFont());
         playerListArea.setBorder(new LineBorder(Color.BLACK, 1, false));
         playerListArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         playerListArea.setPreferredSize(new Dimension(350, 500));
         chatArea.setEditable(false);
         chatArea.setLineWrap(true);
+        chatArea.setFont(FontScheme.LOBBY_BODYPANEL.getFont());
         chatArea.setBorder(new LineBorder(Color.BLACK, 1, false));
         chatArea.setBackground(Color.WHITE);
         chatScrollPane.setPreferredSize(new Dimension(350, 455));
@@ -93,14 +95,23 @@ public class LobbyPanel extends JPanel { //TODO: add player list and chat record
         add(chatPane, LayoutScheme.LOBBY_CHATPANEL.getLayout());
     }
 
+    public JTextArea getPlayerListArea() {
+        return playerListArea;
+    }
+
+    public JTextArea getChatArea() {
+        return chatArea;
+    }
+
     private void exitLobbyAction() {
-        FactoryConstructor.getFactory(UIKeyword.Dialog).getDialog(parentFrame, UIKeyword.ExitLobbyDialog, null, null);
+        FactoryConstructor.getFactory(UIKeyword.Dialog).getDialog(parentFrame, UIKeyword.ExitLobbyDialog, null, null).setVisible(true);
     }
 
     public void requestExitLobby() {
         JSONObject exitLobbyRequest = RequestBuffer.getInstance().getRequestObject();
         exitLobbyRequest.put(Protocol.Request.toString(), Request.EXIT_LOBBY);
         RequestBuffer.getInstance().registerRequest(exitLobbyRequest);
+        GameBuffer.getInstance().clearLobbyID();
     }
 
     private void startGameAction() {
@@ -110,6 +121,7 @@ public class LobbyPanel extends JPanel { //TODO: add player list and chat record
     }
 
     private void sendChatAction() {
+        chatArea.append("・" + GameBuffer.getInstance().getUsername() + ": " + messageInput.getText() + '\n');
         JSONObject sendChatRequest = RequestBuffer.getInstance().getRequestObject();
         sendChatRequest.put(Protocol.Request.toString(), Request.SEND_CHAT);
         sendChatRequest.put(Protocol.Message.toString(), messageInput.getText());

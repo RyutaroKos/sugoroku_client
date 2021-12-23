@@ -2,7 +2,6 @@ package com.ui.component;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayDeque;
 import java.util.Objects;
 
 /**
@@ -26,12 +25,10 @@ public class MainFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        matchingPanel = null;
-        lobbyPanel = null;
         contentPane = getContentPane();
 
-        contentPane.add(new MatchingPanel(this));
+        setMatchingPanel();
+        contentPane.add(matchingPanel); //TODO: under test
         pack();
         setVisible(true);
     }
@@ -44,7 +41,7 @@ public class MainFrame extends JFrame {
         return matchingPanel;
     }
 
-    public void setLobbyPanel(String lobbyType, String lobbyID) { //TODO: add player list and chat record
+    public void setLobbyPanel(String lobbyType, String lobbyID) {
         lobbyPanel = new LobbyPanel(this, lobbyType, lobbyID);
     }
 

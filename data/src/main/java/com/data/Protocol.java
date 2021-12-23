@@ -6,5 +6,5 @@ package com.data;
 public enum Protocol {
     Request, Result, Status,
     Username, Password,
-    LobbyID, PlayerList, Message,
+    LobbyID, PlayerList, Message, Win, Lose,
 }
