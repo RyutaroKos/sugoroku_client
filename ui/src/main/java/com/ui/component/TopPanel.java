@@ -66,12 +66,12 @@ public class TopPanel extends JPanel {
     }
 
     private void login() {
+        GameBuffer.getInstance().setUsername(usernameInput.getText());
         JSONObject loginRequest = RequestBuffer.getInstance().getRequestObject();
         loginRequest.put(Protocol.Request.toString(), Request.LOGIN);
         loginRequest.put(Protocol.Username.toString(), usernameInput.getText());
         loginRequest.put(Protocol.Password.toString(), String.valueOf(passwordInput.getPassword()));
         RequestBuffer.getInstance().registerRequest(loginRequest);
-        GameBuffer.getInstance().setUsername(usernameInput.getText());
     }
 
     private void signup() {
