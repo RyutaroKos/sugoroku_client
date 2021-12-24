@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    mainModule = 'client.app.main'
+    mainModule = 'client.app.app.main'
     mainClass = 'com.example.app.App'
 }
 
