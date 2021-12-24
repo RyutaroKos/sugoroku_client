@@ -34,6 +34,5 @@ public class App {
         executor.submit(requestManager);
         executor.submit(resultManager);
         executor.shutdown();
-        System.out.println("try");
     }
 }
