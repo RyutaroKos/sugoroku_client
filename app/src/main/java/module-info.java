@@ -1,4 +1,4 @@
-module client.app.main {
+module client.app.app.main {
     requires org.json;
     requires java.desktop;
     requires client.app.ui.main;
