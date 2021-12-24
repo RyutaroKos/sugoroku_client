@@ -1,28 +1,15 @@
 plugins {
-    id 'java'
+    id 'client'
     id 'application'
 }
 
-group 'univ.shibaura-it'
-version '1.0-SNAPSHOT'
-
 application {
+    mainModule = 'client.app.main'
     mainClass = 'com.example.app.App'
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
     implementation projects.ui
     implementation projects.data
     implementation projects.netcom
-    implementation 'org.json:json:20211205'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-}
-
-test {
-    useJUnitPlatform()
 }
