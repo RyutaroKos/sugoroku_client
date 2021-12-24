@@ -1,11 +1,13 @@
 # - Project exclude paths -
 # Gradle Setting Path
 /.gradle/
+/buildSrc/.gradle/
 
 # IDE Setting Path
 /.idea/
 
 # Build Path
+/buildSrc/build/
 /app/build/
 /netcom/build/
 /ui/build/

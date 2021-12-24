@@ -21,8 +21,10 @@ public class ResultManager implements Runnable {
             if (!ResultBuffer.getInstance().isEmpty()) {
                 JSONObject resultObject = ResultBuffer.getInstance().retrieveResult();
                 switch (Request.valueOf(resultObject.getString(Flag.Result.toString()))) {
-                    case LOGIN -> System.out.println("Result received.");
-                    default -> System.out.println("Unsupported protocol.");
+                    case LOGIN:
+                        System.out.println("Result received.");
+                    default:
+                        System.out.println("Unsupported protocol.");
                 }
             } else {
                 try {

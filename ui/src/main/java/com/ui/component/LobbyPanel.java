@@ -124,7 +124,7 @@ public class LobbyPanel extends JPanel {
 
     public void sendMessage() {
         JSONObject sendMessageRequest = RequestBuffer.getInstance().getRequestObject();
-        sendMessageRequest.put(Flag.Request.toString(), Request.SEND_MESSAGE);
+        sendMessageRequest.put(Flag.Request.toString(), Request.SEND_CHAT);
         sendMessageRequest.put(Flag.Message.toString(), messageInput.getText());
         RequestBuffer.getInstance().registerRequest(sendMessageRequest);
     }
