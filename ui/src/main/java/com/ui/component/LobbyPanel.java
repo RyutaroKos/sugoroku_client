@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * マッチング成功後表示する第三の画面：ロビーパネル。
@@ -118,7 +120,10 @@ public class LobbyPanel extends JPanel { //TODO: add player list and chat record
     }
 
     private void sendChatAction() {
-        chatArea.append("・" + GameBuffer.getInstance().getUsername() + ": " + messageInput.getText() + '\n');
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        chatArea.append("・" + GameBuffer.getInstance().getUsername() + " - " + dateTimeFormatter.format(now) + "\n　" + messageInput.getText() + '\n');
+        messageInput.setText("");
         JSONObject sendChatRequest = RequestBuffer.getInstance().getRequestObject();
         sendChatRequest.put(Protocol.Request.toString(), Request.SEND_CHAT);
         sendChatRequest.put(Protocol.Message.toString(), messageInput.getText());

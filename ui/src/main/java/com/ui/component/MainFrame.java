@@ -28,9 +28,10 @@ public class MainFrame extends JFrame {
         }
         contentPane = getContentPane();
 
-//        setMatchingPanel();
-        setTopPanel();
-        contentPane.add(topPanel); //TODO: under test
+//        setTopPanel();
+//        contentPane.add(topPanel);
+        setMatchingPanel();
+        contentPane.add(matchingPanel);
         pack();
         setVisible(true);
     }

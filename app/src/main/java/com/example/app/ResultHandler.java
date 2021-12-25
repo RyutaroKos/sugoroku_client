@@ -11,6 +11,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 public class ResultHandler implements Runnable {
@@ -21,8 +24,8 @@ public class ResultHandler implements Runnable {
         this.mainFrame = mainFrame;
     }
 
-    private void connection() {
-        if (resultObject.getBoolean(Protocol.Status.toString())) {
+    private void connection() { //TODO: remove mainFrame.getTopPanel() != null after test
+        if (resultObject.getBoolean(Protocol.Status.toString()) && mainFrame.getTopPanel() != null) {
             mainFrame.getTopPanel().onConnection();
         }
     }
@@ -91,8 +94,11 @@ public class ResultHandler implements Runnable {
     }
 
     private void receiveChat() {
-        SwingUtilities.invokeLater(() -> mainFrame.getLobbyPanel().getChatArea()
-                .append("・" + resultObject.getString(Protocol.Username.toString()) + ": " + resultObject.getString(Protocol.Message.toString()) + '\n'));
+        SwingUtilities.invokeLater(() -> {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            mainFrame.getLobbyPanel().getChatArea().append("・" + resultObject.getString(Protocol.Username.toString()) + " - " + dateTimeFormatter.format(now) + "\n　" + resultObject.getString(Protocol.Message.toString()) + '\n');
+        });
     }
 
     @Override
