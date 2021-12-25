@@ -105,26 +105,26 @@ public class ResultHandler implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (!ResultBuffer.getInstance().isEmpty()) {
-                resultObject = ResultBuffer.getInstance().retrieveResult();
-                switch (Request.valueOf(resultObject.getString(Protocol.Result.toString()))) {
-                    case CONNECTION -> connection();
-                    case LOGIN -> login();
-                    case SIGNUP -> signup();
-                    case RANDOM_MATCH -> randomMatch();
-                    case PRIVATE_MATCH -> privateMatch();
-                    case CHECK_RECORD -> checkRecord();
-                    case EXIT_LOBBY -> exitLobby();
-                    case START_GAME -> startGame();
-                    case SEND_CHAT -> receiveChat();
-                    default -> System.err.println("Error: illegal protocol detected.");
-                }
-            } else {
-                try {
+            try {
+                if (!ResultBuffer.getInstance().isEmpty()) {
+                    resultObject = ResultBuffer.getInstance().retrieveResult();
+                    switch (Request.valueOf(resultObject.getString(Protocol.Result.toString()))) {
+                        case CONNECTION -> connection();
+                        case LOGIN -> login();
+                        case SIGNUP -> signup();
+                        case RANDOM_MATCH -> randomMatch();
+                        case PRIVATE_MATCH -> privateMatch();
+                        case CHECK_RECORD -> checkRecord();
+                        case EXIT_LOBBY -> exitLobby();
+                        case START_GAME -> startGame();
+                        case SEND_CHAT -> receiveChat();
+                        default -> System.err.println("Error: illegal protocol detected.");
+                    }
+                } else {
                     TimeUnit.MICROSECONDS.sleep(100); //result読み取り処理が追いつかない場合、このタイムアウトを延長
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
