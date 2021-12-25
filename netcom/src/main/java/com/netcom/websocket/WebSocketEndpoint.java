@@ -1,5 +1,7 @@
 package com.netcom.websocket;
 
+import com.data.Protocol;
+import com.data.Request;
 import com.data.buffer.ResultBuffer;
 import jakarta.websocket.*;
 import org.json.JSONObject;
@@ -8,6 +10,10 @@ import org.json.JSONObject;
 public class WebSocketEndpoint {
     @OnOpen
     public void onOpen(Session session) {
+        JSONObject result = new JSONObject();
+        result.put(Protocol.Result.toString(), Request.CONNECTION.toString());
+        result.put(Protocol.Status.toString(), true);
+        ResultBuffer.getInstance().registerResult(result);
         System.out.println("Client session opened with id: " + session.getId());
     }
 

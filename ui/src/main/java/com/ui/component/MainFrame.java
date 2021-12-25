@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 
 public class MainFrame extends JFrame {
+    TopPanel topPanel;
     MatchingPanel matchingPanel;
     LobbyPanel lobbyPanel;
     Container contentPane;
@@ -27,10 +28,19 @@ public class MainFrame extends JFrame {
         }
         contentPane = getContentPane();
 
-        setMatchingPanel();
-        contentPane.add(matchingPanel); //TODO: under test
+//        setMatchingPanel();
+        setTopPanel();
+        contentPane.add(topPanel); //TODO: under test
         pack();
         setVisible(true);
+    }
+
+    public void setTopPanel() {
+        topPanel = new TopPanel(this);
+    }
+
+    public TopPanel getTopPanel() {
+        return topPanel;
     }
 
     public void setMatchingPanel() {

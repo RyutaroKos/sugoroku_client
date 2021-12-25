@@ -21,6 +21,12 @@ public class ResultHandler implements Runnable {
         this.mainFrame = mainFrame;
     }
 
+    private void connection() {
+        if (resultObject.getBoolean(Protocol.Status.toString())) {
+            mainFrame.getTopPanel().onConnection();
+        }
+    }
+
     private void login() {
         if (resultObject.getBoolean(Protocol.Status.toString())) {
             SwingUtilities.invokeLater(() -> {
@@ -95,6 +101,7 @@ public class ResultHandler implements Runnable {
             if (!ResultBuffer.getInstance().isEmpty()) {
                 resultObject = ResultBuffer.getInstance().retrieveResult();
                 switch (Request.valueOf(resultObject.getString(Protocol.Result.toString()))) {
+                    case CONNECTION -> connection();
                     case LOGIN -> login();
                     case SIGNUP -> signup();
                     case RANDOM_MATCH -> randomMatch();

@@ -51,6 +51,8 @@ public class TopPanel extends JPanel {
         passwordInput.setEchoChar('･');
         loginButton.addActionListener(actionEvent -> login());
         signupButton.addActionListener(actionEvent -> signup());
+        loginButton.setEnabled(false);
+        signupButton.setEnabled(false);
         inputField.setLayout(new GridBagLayout());
         buttonHolder.setLayout(new GridBagLayout());
 
@@ -63,6 +65,11 @@ public class TopPanel extends JPanel {
         add(logo, LayoutScheme.TOP_LOGO.getLayout());
         add(inputField, LayoutScheme.TOP_INPUTFIELD.getLayout());
         add(buttonHolder, LayoutScheme.TOP_BUTTONHOLDER.getLayout());
+    }
+
+    public void onConnection() {
+        loginButton.setEnabled(true);
+        signupButton.setEnabled(true);
     }
 
     private void login() {
