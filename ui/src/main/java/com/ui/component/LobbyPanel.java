@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
  * マッチング成功後表示する第三の画面：ロビーパネル。
  */
 
-public class LobbyPanel extends JPanel { //TODO: add player list and chat record
+public class LobbyPanel extends JPanel {
     MainFrame parentFrame;
     JPanel lobbyBannerPane;
     JPanel playerListPane;

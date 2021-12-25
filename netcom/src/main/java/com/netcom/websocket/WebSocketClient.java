@@ -6,7 +6,7 @@ public class WebSocketClient {
     private WebSocketManager webSocketManager;
 
     private WebSocketClient() {
-        serverEndpoint = "ws://localhost:8080/app/sample";
+        serverEndpoint = "ws://localhost:8080/app/sample"; //必要に応じてエンドポイントを調整
         webSocketManager = new WebSocketManager(serverEndpoint);
         webSocketManager.connect();
     }
@@ -33,18 +33,4 @@ public class WebSocketClient {
     public static WebSocketClient getInstance() {
         return instance;
     }
-
-//    @Override
-//    public void run() {
-//        while (true) {
-//            if (webSocketManager.isConnected()) {
-//                webSocketManager.sendRequestMessage("test");
-//            }
-//            try {
-//                TimeUnit.MICROSECONDS.sleep(100);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 }

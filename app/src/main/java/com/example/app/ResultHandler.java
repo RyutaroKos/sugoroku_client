@@ -4,6 +4,7 @@ import com.data.Protocol;
 import com.data.Request;
 import com.data.buffer.GameBuffer;
 import com.data.buffer.ResultBuffer;
+import com.netcom.websocket.WebSocketClient;
 import com.ui.component.UIKeyword;
 import com.ui.component.FactoryConstructor;
 import com.ui.component.MainFrame;
@@ -11,7 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
@@ -90,7 +90,8 @@ public class ResultHandler implements Runnable {
     }
 
     private void startGame() {
-
+        WebSocketClient.getInstance().switchServer("ws://localhost:8080/app/example"); //必要に応じてエンドポイントを調整
+        System.out.println("Game start");
     }
 
     private void receiveChat() {
