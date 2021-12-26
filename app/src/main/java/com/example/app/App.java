@@ -33,6 +33,8 @@ public class App {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
         executor.submit(requestManager);
         executor.submit(resultManager);
+        
+        
         executor.shutdown();
     }
 }
