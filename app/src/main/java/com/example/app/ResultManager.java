@@ -10,9 +10,36 @@ import java.util.concurrent.TimeUnit;
 
 public class ResultManager implements Runnable {
     MainFrame mainFrame;
-
+    
     ResultManager(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+    }
+    
+    public void login() {
+    	/*
+    	if(reslutObject.get(Flag.Status.toString())) {
+    		mainFrame.changePannel(mainFrame.getMachingPannel());
+    	}
+    	else {
+    		LoginDialog.getDialog(mainFrame).setVisible(true);
+    	}
+    	*/
+    }
+    
+    public void signUp() {
+    	//SignupDialog signupDialog = new SignupDialog(this.mainFrame,resultObject.get(Flag.Status));
+    }
+    
+    public void randomMatch() {
+    	
+    }
+    
+    public void privateMatch() {
+    	
+    }
+    
+    public void checkRecord() {
+    	
     }
 
     @Override
@@ -23,12 +50,20 @@ public class ResultManager implements Runnable {
                 switch (Request.valueOf(resultObject.getString(Flag.Result.toString()))) {
                     case LOGIN:
                         System.out.println("Result received.");
+                    case SIGNUP:
+                    	signUp();
+                    case RANDOM_MATCH:
+                    	randomMatch();
+                    case PRIVATE_MATCH:
+                    	privateMatch();
+                    case CHECK_RECORD:
+                    	
                     default:
                         System.out.println("Unsupported protocol.");
                 }
             } else {
                 try {
-                    TimeUnit.MICROSECONDS.sleep(100); //result読み取り処理が追いつかない場合、このタイムアウトを延長
+                    TimeUnit.MICROSECONDS.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
