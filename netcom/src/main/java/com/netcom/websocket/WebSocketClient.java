@@ -22,7 +22,6 @@ public class WebSocketClient {
     public void switchServer(String endpoint) {
         try {
             serverEndpoint = endpoint;
-            webSocketManager.disconnect();
             webSocketManager = new WebSocketManager(endpoint);
             webSocketManager.connect();
         } catch (Exception e) {
