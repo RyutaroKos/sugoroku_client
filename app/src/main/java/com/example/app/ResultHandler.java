@@ -24,7 +24,7 @@ public class ResultHandler implements Runnable {
         this.mainFrame = mainFrame;
     }
 
-    private void connection() { //TODO: remove mainFrame.getTopPanel() != null after test
+    private void connection() { //remove mainFrame.getTopPanel() != null after test
         if (resultObject.getBoolean(Protocol.Status.toString()) && mainFrame.getTopPanel() != null) {
             mainFrame.getTopPanel().onConnection();
         }
