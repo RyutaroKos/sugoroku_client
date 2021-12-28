@@ -125,6 +125,7 @@ public class ResultHandler implements Runnable {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                break;
             }
         }
     }

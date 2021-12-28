@@ -26,6 +26,7 @@ public class RequestHandler implements Runnable {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                break;
             }
         }
     }
