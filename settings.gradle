@@ -1,7 +1,0 @@
-rootProject.name = 'client_app'
-include 'ui'
-include 'app'
-include 'netcom'
-include 'data'
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
