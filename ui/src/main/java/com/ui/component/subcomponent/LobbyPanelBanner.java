@@ -1,4 +1,4 @@
-package com.ui.component.subpanel;
+package com.ui.component.subcomponent;
 
 import com.ui.scheme.ColorScheme;
 

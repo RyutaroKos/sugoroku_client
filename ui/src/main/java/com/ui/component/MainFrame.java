@@ -15,6 +15,7 @@ public class MainFrame extends JFrame {
     TopPanel topPanel;
     MatchingPanel matchingPanel;
     LobbyPanel lobbyPanel;
+    GamePanel gamePanel;
     Container contentPane;
 
     MainFrame(String title) {
@@ -30,8 +31,10 @@ public class MainFrame extends JFrame {
 
 //        setTopPanel();
 //        contentPane.add(topPanel);
-        setMatchingPanel();
-        contentPane.add(matchingPanel);
+//        setMatchingPanel();
+//        contentPane.add(matchingPanel);
+        setGamePanel();
+        contentPane.add(gamePanel);
         pack();
         setVisible(true);
     }
@@ -60,8 +63,12 @@ public class MainFrame extends JFrame {
         return lobbyPanel;
     }
 
+    public void setGamePanel() {
+        gamePanel = new GamePanel(this);
+    }
+
     public GamePanel getGamePanel() {
-        return null; //TODO: ゲームパネルクラス完成後は要修正
+        return gamePanel;
     }
 
     public void changePanel(JPanel nextPanel) {

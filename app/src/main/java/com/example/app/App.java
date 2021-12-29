@@ -24,7 +24,7 @@ public class App {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Nimbus look and feel not found, using default look and feel instead.");
+            System.out.println("INFO: Nimbus look and feel not found, using default look and feel instead.");
         }
 
         MainFrame mainFrame = MainFrame.getMainFrame(appTitle);

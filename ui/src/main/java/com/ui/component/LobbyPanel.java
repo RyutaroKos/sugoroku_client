@@ -5,7 +5,7 @@ import com.data.Request;
 import com.data.buffer.GameBuffer;
 import com.data.buffer.RequestBuffer;
 import com.ui.scheme.*;
-import com.ui.component.subpanel.*;
+import com.ui.component.subcomponent.*;
 import org.json.JSONObject;
 
 import javax.swing.*;
