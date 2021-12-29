@@ -8,22 +8,21 @@ import java.awt.geom.Rectangle2D;
 
 public class GamePanelMap extends JPanel {
     MapGrid[][] mapGrids = {
-            {MapGrid.BLANK, MapGrid.BLANK, MapGrid.CROSSROAD, MapGrid.BLANK, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.BACKWARD, MapGrid.RENDEZVOUS, MapGrid.BLANK, MapGrid.ALL_GET, MapGrid.NULL, MapGrid.GOAL},
-            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK},
-            {MapGrid.GET, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK},
-            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BACKWARD},
-            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.ALL_LOST, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.BLANK},
+            {MapGrid.BLANK, MapGrid.BLANK, MapGrid.CROSSROAD, MapGrid.BLANK, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.BACKWARD, MapGrid.RENDEZVOUS, MapGrid.BLANK, MapGrid.ALL_GET_ITEM, MapGrid.NULL, MapGrid.GOAL},
+            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK},
+            {MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK},
+            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BACKWARD},
+            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.ALL_LOSE_ITEM, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.BLANK},
             {MapGrid.BLANK, MapGrid.NULL, MapGrid.RESTART, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.FORWARD},
             {MapGrid.BLANK, MapGrid.NULL, MapGrid.RESTART, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK},
-            {MapGrid.GET, MapGrid.NULL, MapGrid.RESTART, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK},
-            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.FORWARD},
-            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.ALL_LOST, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.ALL_LOST},
-            {MapGrid.BLANK, MapGrid.NULL, MapGrid.ALL_LOST, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK},
-            {MapGrid.START, MapGrid.NULL, MapGrid.GET, MapGrid.GET, MapGrid.RENDEZVOUS, MapGrid.ALL_GET, MapGrid.CROSSROAD, MapGrid.BLANK, MapGrid.BLANK, MapGrid.NULL, MapGrid.GET, MapGrid.BLANK, MapGrid.GET}
+            {MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.RESTART, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BLANK},
+            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.FORWARD, MapGrid.NULL, MapGrid.FORWARD},
+            {MapGrid.BLANK, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.ALL_LOSE_ITEM, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.ALL_LOSE_ITEM},
+            {MapGrid.BLANK, MapGrid.NULL, MapGrid.ALL_LOSE_ITEM, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK, MapGrid.NULL, MapGrid.BACKWARD, MapGrid.NULL, MapGrid.BLANK},
+            {MapGrid.START, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.GET_ITEM, MapGrid.RENDEZVOUS, MapGrid.ALL_GET_ITEM, MapGrid.CROSSROAD, MapGrid.BLANK, MapGrid.BLANK, MapGrid.NULL, MapGrid.GET_ITEM, MapGrid.BLANK, MapGrid.GET_ITEM}
     };
-    private final int row = 12;
-    private final int column = 13;
     private final int gridWidth = 60;
+    private final int gridHeight = 60;
     private final GamePanelPiece[] piece;
 
     public GamePanelMap() {
@@ -31,7 +30,7 @@ public class GamePanelMap extends JPanel {
         setBackground(ColorScheme.LIGHT_ORANGE.getColor());
         piece = new GamePanelPiece[4];
         for (int i = 0; i < 4; i++) {
-            piece[i] = new GamePanelPiece(i);
+            piece[i] = new GamePanelPiece(i, gridWidth, gridHeight);
         }
     }
 
@@ -87,6 +86,12 @@ public class GamePanelMap extends JPanel {
         repaint();
     }
 
+    public void restart(int i) {
+        piece[i].X = 0;
+        piece[i].Y = 11;
+        repaint();
+    }
+
     public void setKeepDirection(int i) {
         piece[i].keepDirection = true;
     }
@@ -94,25 +99,27 @@ public class GamePanelMap extends JPanel {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
+        final int column = 13; //X axis grid number
+        final int row = 12; //Y axis grid number
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 if (mapGrids[i][j] != MapGrid.NULL) {
                     g2.setPaint(Color.BLACK);
-                    g2.drawRect(j * gridWidth, i * gridWidth, gridWidth, gridWidth);
+                    g2.drawRect(j * gridWidth, i * gridHeight, gridWidth, gridHeight);
                     switch (mapGrids[i][j]) {
                         case START -> g2.setPaint(ColorScheme.DARK_BLUE.getColor());
                         case GOAL -> g2.setPaint(ColorScheme.DARK_RED.getColor());
-                        case BLANK -> g2.setPaint(ColorScheme.LIGHT_GRAY.getColor());
-                        case GET -> g2.setPaint(ColorScheme.LIGHT_GOLD.getColor());
+                        case BLANK -> g2.setPaint(ColorScheme.WHITE.getColor());
+                        case GET_ITEM -> g2.setPaint(ColorScheme.LIGHT_GOLD.getColor());
                         case FORWARD -> g2.setPaint(ColorScheme.LIGHT_RED.getColor());
                         case BACKWARD -> g2.setPaint(ColorScheme.LIGHT_BLUE.getColor());
                         case CROSSROAD -> g2.setPaint(ColorScheme.DARK_GREEN.getColor());
                         case RENDEZVOUS -> g2.setPaint(ColorScheme.LIGHT_GREEN.getColor());
-                        case ALL_GET -> g2.setPaint(ColorScheme.GOLD.getColor());
-                        case ALL_LOST -> g2.setPaint(ColorScheme.INDIGO.getColor());
+                        case ALL_GET_ITEM -> g2.setPaint(ColorScheme.GOLD.getColor());
+                        case ALL_LOSE_ITEM -> g2.setPaint(ColorScheme.INDIGO.getColor());
                         case RESTART -> g2.setPaint(ColorScheme.DARK_GRAY.getColor());
                     }
-                    g2.fill(new Rectangle2D.Double(j * gridWidth + 1, i * gridWidth + 1, gridWidth - 1, gridWidth - 1));
+                    g2.fill(new Rectangle2D.Double(j * gridWidth + 1, i * gridHeight + 1, gridWidth - 1, gridHeight - 1));
                 }
             }
         }

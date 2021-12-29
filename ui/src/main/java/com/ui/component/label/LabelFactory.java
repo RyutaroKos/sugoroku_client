@@ -25,7 +25,7 @@ public class LabelFactory implements ComponentFactory {
             case TopPanel -> new TopPanelLabel(label);
             case MatchingPanel -> new MatchingPanelLabel(label);
             case LobbyPanel -> new LobbyPanelLabel();
-            case GamePanel -> null; //TODO: ゲームパネルラベルクラスは要作成
+            case GamePanel -> new GamePanelLabel(label);
             default -> null;
         };
     }

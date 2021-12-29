@@ -60,10 +60,10 @@ public enum ColorScheme implements innerColorScheme {
             return new Color(222, 220, 230);
         }
     },
-    LIGHT_GRAY {
+    WHITE {
         @Override
         public Color getColor() {
-            return new Color(238, 238, 238);
+            return new Color(255, 255, 255);
         }
     },
     RED {
