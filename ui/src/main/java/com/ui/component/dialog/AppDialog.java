@@ -1,5 +1,6 @@
 package com.ui.component.dialog;
 
+import com.ui.component.UIKeyword;
 import com.ui.component.MainFrame;
 import com.ui.component.button.ButtonFactory;
 import com.ui.scheme.ColorScheme;
@@ -8,7 +9,6 @@ import com.ui.scheme.LayoutScheme;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -41,8 +41,8 @@ public class AppDialog extends JDialog {
         dialogMessage.setFont(FontScheme.DIALOG_MESSAGE.getFont());
         dialogMessage.setHorizontalAlignment(SwingConstants.CENTER);
         ButtonFactory buttonFactory = new ButtonFactory();
-        positiveButton = buttonFactory.getButton("dialog", "はい");
-        negativeButton = buttonFactory.getButton("dialog", "いいえ");
+        positiveButton = buttonFactory.getButton(UIKeyword.Dialog, "はい");
+        negativeButton = buttonFactory.getButton(UIKeyword.Dialog, "いいえ");
         disposeDialogListener = actionEvent -> dispose();
         positiveButton.addActionListener(disposeDialogListener);
         negativeButton.addActionListener(disposeDialogListener);

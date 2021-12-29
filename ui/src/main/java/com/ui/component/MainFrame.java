@@ -12,6 +12,9 @@ import java.util.Objects;
  */
 
 public class MainFrame extends JFrame {
+    TopPanel topPanel;
+    MatchingPanel matchingPanel;
+    LobbyPanel lobbyPanel;
     Container contentPane;
 
     MainFrame(String title) {
@@ -23,20 +26,38 @@ public class MainFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         contentPane = getContentPane();
 
-        contentPane.add(new TopPanel(this));
+//        setTopPanel();
+//        contentPane.add(topPanel);
+        setMatchingPanel();
+        contentPane.add(matchingPanel);
         pack();
         setVisible(true);
     }
 
-    public MatchingPanel getMatchingPanel() {
-        return new MatchingPanel(this);
+    public void setTopPanel() {
+        topPanel = new TopPanel(this);
     }
 
-    public LobbyPanel getLobbyPanel(String lobbyType, String lobbyID) {
-        return new LobbyPanel(this, lobbyType, lobbyID);
+    public TopPanel getTopPanel() {
+        return topPanel;
+    }
+
+    public void setMatchingPanel() {
+        matchingPanel = new MatchingPanel(this);
+    }
+
+    public MatchingPanel getMatchingPanel() {
+        return matchingPanel;
+    }
+
+    public void setLobbyPanel(String lobbyType, String lobbyID) {
+        lobbyPanel = new LobbyPanel(this, lobbyType, lobbyID);
+    }
+
+    public LobbyPanel getLobbyPanel() {
+        return lobbyPanel;
     }
 
     public GamePanel getGamePanel() {
@@ -51,6 +72,6 @@ public class MainFrame extends JFrame {
     }
 
     public static MainFrame getMainFrame(String title) {
-        return new MainFrame(title); //return値は要検討
+        return new MainFrame(title);
     }
 }

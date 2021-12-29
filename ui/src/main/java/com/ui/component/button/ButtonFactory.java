@@ -1,6 +1,8 @@
 package com.ui.component.button;
 
+import com.ui.component.UIKeyword;
 import com.ui.component.ComponentFactory;
+import com.ui.component.MainFrame;
 
 import javax.swing.*;
 
@@ -13,23 +15,24 @@ import javax.swing.*;
 
 public class ButtonFactory implements ComponentFactory {
     @Override
-    public JButton getButton(String panel, String label) {
-        switch (panel) {
-            case "top":
-                return new TopPanelButton(label);
-            case "matching":
-                return new MatchingPanelButton(label);
-            case "lobby":
-                return new LobbyPanelButton(label);
-            case "game": return null; //TODO: ゲームパネルボタンクラスの作成が必要
-            case "dialog": return new DialogButton(label);
-            default: return null;
-        }
+    public JDialog getDialog(MainFrame mainFrame, UIKeyword dialog, Boolean status, String message) {
+        return null;
     }
 
-    //ボタンファクトリーであるため、ボタン以外の生成メソッドはnullのまま
     @Override
-    public JLabel getLabel(String panel, String label) {
+    public JLabel getLabel(UIKeyword panel, String label) {
         return null;
+    }
+
+    @Override
+    public JButton getButton(UIKeyword panel, String label) {
+        return switch (panel) {
+            case TopPanel -> new TopPanelButton(label);
+            case MatchingPanel -> new MatchingPanelButton(label);
+            case LobbyPanel -> new LobbyPanelButton(label);
+            case GamePanel -> null; //TODO: ゲームパネルボタンクラスの作成が必要
+            case Dialog -> new DialogButton(label);
+            default -> null;
+        };
     }
 }

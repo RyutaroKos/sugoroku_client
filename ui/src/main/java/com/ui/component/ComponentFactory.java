@@ -10,6 +10,7 @@ import javax.swing.*;
  */
 
 public interface ComponentFactory {
-    JLabel getLabel(String panel, String label);
-    JButton getButton(String panel, String label);
+    JDialog getDialog(MainFrame mainFrame, UIKeyword dialog, Boolean status, String message);
+    JLabel getLabel(UIKeyword panel, String label);
+    JButton getButton(UIKeyword panel, String label);
 }

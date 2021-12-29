@@ -18,7 +18,6 @@ public class WebSocketManager {
     }
     
     public boolean isConnected() {
-//        System.out.println("Client is connected?: " + session.isOpen());
         return session.isOpen();
     }
 
@@ -41,7 +40,7 @@ public class WebSocketManager {
     }
 
     public void disconnect() throws IOException {
-        if (!session.isOpen()) {
+        if (isConnected()) {
             session.close();
         }
     }

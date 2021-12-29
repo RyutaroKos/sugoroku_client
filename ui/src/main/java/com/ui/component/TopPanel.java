@@ -1,17 +1,14 @@
 package com.ui.component;
 
-import com.data.Flag;
+import com.data.Protocol;
 import com.data.Request;
+import com.data.buffer.GameBuffer;
 import com.data.buffer.RequestBuffer;
-import com.ui.component.dialog.LoginDialog;
-import com.ui.component.dialog.SignupDialog;
 import com.ui.scheme.*;
 import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 /**
@@ -29,24 +26,21 @@ public class TopPanel extends JPanel {
     JButton signupButton;
     Container inputField;
     Container buttonHolder;
-    ComponentFactory componentFactory;
 
-    TopPanel(MainFrame parentFrame) {
+    TopPanel(MainFrame mainFrame) {
         setBackground(ColorScheme.LIGHT_ORANGE.getColor());
         setLayout(new GridBagLayout());
 
-        this.parentFrame = parentFrame;
+        parentFrame = mainFrame;
         try {
             logo = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));
-            componentFactory = FactoryConstructor.getFactory("label");
-            usernameLabel = componentFactory.getLabel("top", "ユーザー名：");
-            passwordLabel = componentFactory.getLabel("top", "パスワード：");
-            componentFactory = FactoryConstructor.getFactory("button");
-            loginButton = componentFactory.getButton("top", "ログイン");
-            signupButton = componentFactory.getButton("top", "初回登録");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        usernameLabel = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.TopPanel, "ユーザー名：");
+        passwordLabel = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.TopPanel, "パスワード：");
+        loginButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.TopPanel, "ログイン");
+        signupButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.TopPanel, "初回登録");
         usernameInput = new JTextField(10);
         passwordInput = new JPasswordField(10);
         inputField = new Container();
@@ -55,8 +49,10 @@ public class TopPanel extends JPanel {
         usernameInput.setFont(FontScheme.TOP_TEXTFIELD.getFont());
         passwordInput.setFont(FontScheme.TOP_TEXTFIELD.getFont());
         passwordInput.setEchoChar('･');
-        loginButton.addActionListener(new LoginAction());
-        signupButton.addActionListener(new SignupAction());
+        loginButton.addActionListener(actionEvent -> login());
+        signupButton.addActionListener(actionEvent -> signup());
+        loginButton.setEnabled(false);
+        signupButton.setEnabled(false);
         inputField.setLayout(new GridBagLayout());
         buttonHolder.setLayout(new GridBagLayout());
 
@@ -71,51 +67,25 @@ public class TopPanel extends JPanel {
         add(buttonHolder, LayoutScheme.TOP_BUTTONHOLDER.getLayout());
     }
 
+    public void onConnection() {
+        loginButton.setEnabled(true);
+        signupButton.setEnabled(true);
+    }
+
     private void login() {
+        GameBuffer.getInstance().setUsername(usernameInput.getText());
         JSONObject loginRequest = RequestBuffer.getInstance().getRequestObject();
-        loginRequest.put(Flag.Request.toString(), Request.LOGIN);
-        loginRequest.put(Flag.Username.toString(), String.valueOf(usernameInput.getText()));
-        loginRequest.put(Flag.Password.toString(), String.valueOf(passwordInput.getPassword()));
+        loginRequest.put(Protocol.Request.toString(), Request.LOGIN);
+        loginRequest.put(Protocol.Username.toString(), usernameInput.getText());
+        loginRequest.put(Protocol.Password.toString(), String.valueOf(passwordInput.getPassword()));
         RequestBuffer.getInstance().registerRequest(loginRequest);
     }
 
     private void signup() {
         JSONObject signupRequest = RequestBuffer.getInstance().getRequestObject();
-        signupRequest.put(Flag.Request.toString(), Request.SIGNUP);
-        signupRequest.put(Flag.Username.toString(), String.valueOf(usernameInput.getText()));
-        signupRequest.put(Flag.Password.toString(), String.valueOf(passwordInput.getPassword()));
+        signupRequest.put(Protocol.Request.toString(), Request.SIGNUP);
+        signupRequest.put(Protocol.Username.toString(), usernameInput.getText());
+        signupRequest.put(Protocol.Password.toString(), String.valueOf(passwordInput.getPassword()));
         RequestBuffer.getInstance().registerRequest(signupRequest);
-    }
-
-    /**
-     * ログインボタンに合わせたログインアクションクラス
-     */
-    class LoginAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: 具体的なログイン処理が必要
-
-            //効果展示用、実装に合わせて調整する必要がある
-            login();
-            if (false) {
-                LoginDialog.getDialog(parentFrame).setVisible(true);
-            } else {
-                parentFrame.changePanel(parentFrame.getMatchingPanel());
-            }
-        }
-    }
-
-    /**
-     * 初回登録ボタンに合わせたサインアップアクションクラス
-     */
-    class SignupAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            //TODO: 具体的な初回登録処理が必要
-
-            //効果展示用、実装に合わせて調整する必要がある
-            signup();
-            SignupDialog.getDialog(parentFrame, false).setVisible(true);
-        }
     }
 }
