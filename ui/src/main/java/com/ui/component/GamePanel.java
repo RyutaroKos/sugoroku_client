@@ -1,6 +1,5 @@
 package com.ui.component;
 
-import com.ui.component.label.GamePanelLabel;
 import com.ui.component.subcomponent.GamePanelMap;
 import com.ui.scheme.ColorScheme;
 

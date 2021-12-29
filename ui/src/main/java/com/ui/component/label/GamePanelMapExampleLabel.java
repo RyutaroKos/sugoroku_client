@@ -6,11 +6,11 @@ import com.ui.scheme.ColorScheme;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanelLabel extends JLabel {
+public class GamePanelMapExampleLabel extends JLabel {
     String label;
     LabelIcon labelIcon;
 
-    GamePanelLabel(String label) {
+    GamePanelMapExampleLabel(String label) {
         super();
         this.label = label;
         try {
