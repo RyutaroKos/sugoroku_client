@@ -42,8 +42,8 @@ public class LobbyPanel extends JPanel {
         lobbyBannerPane = LobbyPanelBanner.getPanel();
         playerListPane = LobbyPanelBody.getPanel("参加者");
         chatPane = LobbyPanelBody.getPanel("フリーチャット");
-        typeBanner = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.LobbyPanel, lobbyType);
-        idBanner = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.LobbyPanel, ID);
+        typeBanner = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.LobbyPanelLabel, null);
+        idBanner = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.LobbyPanelLabel, null);
         exitButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanel, "退室");
         startButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanel, "開始");
         sendMessageButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanel, "送信");

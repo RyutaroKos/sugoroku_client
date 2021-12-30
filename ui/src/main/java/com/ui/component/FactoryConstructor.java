@@ -6,17 +6,17 @@ import com.ui.component.label.LabelFactory;
 
 /**
  * UI的なコンポーネントを生成するファクトリーを選ぶためのクラス。
- * 現時点での実装：ラベルファクトリー、ボタンファクトリー。
- * 後ほど追加可能：ダイアログファクトリーなど。
+ * 現時点での実装：DialogFactory、LabelFactoryとButtonFactory、
+ * 検討中の実装：SubComponentFactory
  */
 
 public class FactoryConstructor {
-    public static ComponentFactory getFactory(UIKeyword uiKeyword) {
-        return switch (uiKeyword) {
+    public static ComponentFactory getFactory(UIKeyword componentType) {
+        return switch (componentType) {
             case Dialog -> new DialogFactory();
             case Label -> new LabelFactory();
             case Button -> new ButtonFactory();
-            default -> null;
+            default -> throw new IllegalArgumentException("Unexpected value: " + componentType);
         };
     }
 }

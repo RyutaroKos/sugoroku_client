@@ -37,10 +37,10 @@ public class TopPanel extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        usernameLabel = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.TopPanel, "ユーザー名：");
-        passwordLabel = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.TopPanel, "パスワード：");
-        loginButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.TopPanel, "ログイン");
-        signupButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.TopPanel, "初回登録");
+        usernameLabel = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.TopPanelLabel, "ユーザー名：");
+        passwordLabel = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.TopPanelLabel, "パスワード：");
+        loginButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.TopPanelButton, "ログイン");
+        signupButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.TopPanelButton, "初回登録");
         usernameInput = new JTextField(10);
         passwordInput = new JPasswordField(10);
         inputField = new Container();

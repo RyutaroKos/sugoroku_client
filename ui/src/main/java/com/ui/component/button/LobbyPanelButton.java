@@ -7,30 +7,29 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LobbyPanelButton extends JButton {
-    LobbyPanelButton(String label) {
-        super(label);
-        setStyle(label);
+    LobbyPanelButton(String text) {
+        super(text);
+        setStyle(text);
     }
 
-    private void setStyle(String label) {
-        switch (label) {
-            case "退室":
+    private void setStyle(String text) {
+        switch (text) {
+            case "退室" -> {
                 setBackground(ColorScheme.LIGHT_BRICK.getColor());
                 setPreferredSize(new Dimension(150, 70));
                 setFont(FontScheme.LOBBY_BANNER_BUTTON.getFont());
-                break;
-            case "開始":
+            }
+            case "開始" -> {
                 setBackground(ColorScheme.LIGHT_YELLOW.getColor());
                 setPreferredSize(new Dimension(150, 70));
                 setFont(FontScheme.LOBBY_BANNER_BUTTON.getFont());
-                break;
-            case "送信":
+            }
+            case "送信" -> {
                 setBackground(ColorScheme.LIGHT_INDIGO.getColor());
                 setPreferredSize(new Dimension(80, 45));
                 setFont(FontScheme.LOBBY_BODYPANEL_BUTTON.getFont());
-                break;
-            default:
-                break;
+            }
+            default -> throw new IllegalArgumentException("Unexpected value: " + text);
         }
     }
 }

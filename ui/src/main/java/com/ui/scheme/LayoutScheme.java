@@ -319,5 +319,61 @@ public enum LayoutScheme implements innerLayoutScheme {
             gbc.anchor = GridBagConstraints.CENTER;
             return gbc;
         }
+    },
+    GAME_MAP {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridheight = 3;
+            gbc.insets = new Insets(0, 0, 0, 30);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    GAME_MAP_LABEL {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(20, 0, 20, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
+    },
+    GAME_MAP_EXAMPLE {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(0, 20, 0, 0);
+            gbc.anchor = GridBagConstraints.WEST;
+            return gbc;
+        }
+    },
+    GAME_BUTTONHOLDER {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 1;
+            gbc.gridy = 2;
+            gbc.anchor = GridBagConstraints.SOUTH;
+            return gbc;
+        }
+    },
+    GAME_PLAYERCARD_PANE {
+        @Override
+        public GridBagConstraints getLayout() {
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.gridwidth = 2;
+            gbc.insets = new Insets(20, 0, 0, 0);
+            gbc.anchor = GridBagConstraints.CENTER;
+            return gbc;
+        }
     }
 }

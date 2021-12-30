@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TopPanelButton extends JButton {
-    TopPanelButton(String label) {
-        super(label);
+    TopPanelButton(String text) {
+        super(text);
         setPreferredSize(new Dimension(250, 100));
-        setBackgroundColor(label);
+        setBackgroundColor(text);
         setFont(FontScheme.TOP_BUTTON.getFont());
     }
 

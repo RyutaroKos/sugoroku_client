@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DialogButton extends JButton {
-    DialogButton(String label) {
-        super(label);
+    DialogButton(String text) {
+        super(text);
         setPreferredSize(new Dimension(100, 50));
-        setColor(label);
+        setColor(text);
         setFont(FontScheme.DIALOG_BUTTON.getFont());
     }
 

@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 
 public class App {
-    private static final String appTitle = "Sugoroku";
+    private static final String appTitle = "すごろくゲーム";
 
     public static void main(String[] args) {
         System.setProperty("awt.useSystemAAFontSettings", "on");

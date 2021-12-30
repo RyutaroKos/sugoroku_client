@@ -15,24 +15,24 @@ import javax.swing.*;
 
 public class ButtonFactory implements ComponentFactory {
     @Override
-    public JDialog getDialog(MainFrame mainFrame, UIKeyword dialog, Boolean status, String message) {
+    public JDialog getDialog(MainFrame mainFrame, UIKeyword dialogType, Boolean status, String message) {
         return null;
     }
 
     @Override
-    public JLabel getLabel(UIKeyword panel, String label) {
+    public JLabel getLabel(UIKeyword labelType, String label) {
         return null;
     }
 
     @Override
-    public JButton getButton(UIKeyword panel, String label) {
-        return switch (panel) {
-            case TopPanel -> new TopPanelButton(label);
-            case MatchingPanel -> new MatchingPanelButton(label);
-            case LobbyPanel -> new LobbyPanelButton(label);
-            case GamePanel -> null; //TODO: ゲームパネルボタンクラスの作成が必要
-            case Dialog -> new DialogButton(label);
-            default -> null;
+    public JButton getButton(UIKeyword buttonType, String text) {
+        return switch (buttonType) {
+            case DialogButton -> new DialogButton(text);
+            case TopPanelButton -> new TopPanelButton(text);
+            case MatchingPanelButton -> new MatchingPanelButton(text);
+            case LobbyPanelButton -> new LobbyPanelButton(text);
+            case GamePanelButton -> new GamePanelButton(text);
+            default -> throw new IllegalArgumentException("Unexpected value: " + buttonType);
         };
     }
 }

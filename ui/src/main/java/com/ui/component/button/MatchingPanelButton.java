@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MatchingPanelButton extends JButton {
-    MatchingPanelButton(String label) {
-        super(label);
+    MatchingPanelButton(String text) {
+        super(text);
         setPreferredSize(new Dimension(350, 100));
         setBackground(ColorScheme.LIGHT_GOLD.getColor());
         setFont(FontScheme.MATCHING_BUTTON.getFont());
