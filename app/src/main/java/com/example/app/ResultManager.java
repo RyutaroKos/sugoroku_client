@@ -36,7 +36,7 @@ public class ResultManager implements Runnable {
     }
     
     public void checkRecord() {
-    	/*マッチングパネルクラスの中(呼び出し方)*/
+    	/*マッチングパネルクラスの中(呼び出し方)1*/
     }
 
     @Override
