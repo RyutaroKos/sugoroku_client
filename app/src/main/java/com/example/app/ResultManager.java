@@ -16,22 +16,19 @@ public class ResultManager implements Runnable {
     }
     
     public void login() {
-    	/*
     	if(reslutObject.get(Flag.Status.toString())) {
-    		mainFrame.changePannel(mainFrame.getMachingPannel());
+    		this.mainFrame.changePannel(this.mainFrame.getMachingPannel());
     	}
     	else {
-    		LoginDialog.getDialog(mainFrame).setVisible(true);
+    		LoginDialog.getDialog(this.mainFrame).setVisible(true);
     	}
-    	*/
     }
     
     public void signUp() {
-    	//SignupDialog signupDialog = new SignupDialog(this.mainFrame,resultObject.get(Flag.Status));
+       SignupDialog.getDialog(this.mainFrame,resultObject.get(Flag.Status.toString())).setVisible(true);
     }
     
     public void randomMatch() {
-    	
     }
     
     public void privateMatch() {
@@ -39,7 +36,7 @@ public class ResultManager implements Runnable {
     }
     
     public void checkRecord() {
-    	
+    	/*マッチングパネルクラスの中(呼び出し方)*/checkRecord();
     }
 
     @Override
@@ -49,15 +46,16 @@ public class ResultManager implements Runnable {
                 JSONObject resultObject = ResultBuffer.getInstance().retrieveResult();
                 switch (Request.valueOf(resultObject.getString(Flag.Result.toString()))) {
                     case LOGIN:
+                    	this.login();
                         System.out.println("Result received.");
                     case SIGNUP:
-                    	signUp();
+                    	this.signUp();
                     case RANDOM_MATCH:
-                    	randomMatch();
+                    	this.randomMatch();
                     case PRIVATE_MATCH:
-                    	privateMatch();
+                    	this.privateMatch();
                     case CHECK_RECORD:
-                    	
+                    	this.checkRecord();
                     default:
                         System.out.println("Unsupported protocol.");
                 }

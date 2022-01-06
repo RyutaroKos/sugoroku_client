@@ -22,7 +22,7 @@ public class RequestManager implements Runnable {
                 System.out.println(requestObject);
             } else {
                 try {
-                    TimeUnit.MICROSECONDS.sleep(100); //request読み取り処理が追いつかない場合、このタイムアウトを延長
+                    TimeUnit.MICROSECONDS.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
