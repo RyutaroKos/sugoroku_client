@@ -23,8 +23,8 @@ public class GamePanelMapExampleLabel extends JLabel {
                 case GOAL -> setText("ゴール地点");
                 case BLANK -> setText("効果なし");
                 case GET_ITEM -> setText("道具獲得");
-                case FORWARD -> setText("１マス前進");
-                case BACKWARD -> setText("１マス後退");
+                case FORWARD -> setText("１〜４マス前進");
+                case BACKWARD -> setText("１〜３マス後退");
                 case CROSSROAD -> setText("分岐地点");
                 case RENDEZVOUS -> setText("合流地点");
                 case ALL_GET_ITEM -> setText("全員道具獲得");
