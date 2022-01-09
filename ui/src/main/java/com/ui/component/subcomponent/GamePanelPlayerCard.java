@@ -2,7 +2,6 @@ package com.ui.component.subcomponent;
 
 import com.ui.scheme.ColorScheme;
 import com.ui.scheme.FontScheme;
-import com.ui.scheme.LayoutScheme;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -35,7 +34,7 @@ public class GamePanelPlayerCard extends JPanel {
         setPreferredSize(new Dimension(300, 150));
         setBorder(new LineBorder(Color.BLACK, 1, false));
         setLayout(new GridLayout(3, 1, 10, 10));
-        playerName = new JLabel("・名前：");
+        playerName = new JLabel();
         playerStatus = new JLabel("・状態：");
 
         playerLabel.setFont(FontScheme.GAME_MAP_EXAMPLE.getFont());
@@ -45,6 +44,18 @@ public class GamePanelPlayerCard extends JPanel {
         add(playerLabel);
         add(playerName);
         add(playerStatus);
+    }
+
+    public void setPlayerName(String name) {
+        playerName.setText("・名前：" + name);
+    }
+
+    public void setPlayerStatus(Boolean status) {
+        if (status) {
+            playerStatus.setText("・状態：行動中");
+        } else {
+            playerStatus.setText("・状態：待機中");
+        }
     }
 
     public static GamePanelPlayerCard getPlayerCard(Player player) {

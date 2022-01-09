@@ -3,11 +3,13 @@ package com.example.app;
 import com.data.Protocol;
 import com.data.Request;
 import com.data.buffer.GameBuffer;
+import com.data.buffer.RequestBuffer;
 import com.data.buffer.ResultBuffer;
 import com.netcom.websocket.WebSocketClient;
 import com.ui.component.UIKeyword;
 import com.ui.component.FactoryConstructor;
 import com.ui.component.MainFrame;
+import com.ui.component.subcomponent.GamePanelPlayerCard;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -90,8 +92,14 @@ public class ResultHandler implements Runnable {
     }
 
     private void startGame() {
-        WebSocketClient.getInstance().switchServer("ws://localhost:8080/app/example"); //必要に応じてエンドポイントを調整
-        System.out.println("Game start");
+        if (resultObject.getBoolean(Protocol.Status.toString())) {
+            WebSocketClient.getInstance().switchServer("ws://localhost:8080/app/example"); //必要に応じてエンドポイントを調整
+            JSONObject joinGameRequest = new JSONObject();
+            joinGameRequest.put(Protocol.Request.toString(), Request.JOIN_GAME);
+            joinGameRequest.put(Protocol.Username.toString(), GameBuffer.getInstance().getUsername());
+            RequestBuffer.getInstance().registerRequest(joinGameRequest);
+            System.out.println("INFO: connect to application server.");
+        }
     }
 
     private void receiveChat() {
@@ -100,6 +108,74 @@ public class ResultHandler implements Runnable {
             LocalDateTime now = LocalDateTime.now();
             mainFrame.getLobbyPanel().getChatArea().append("・" + resultObject.getString(Protocol.Username.toString()) + " - " + dateTimeFormatter.format(now) + "\n　" + resultObject.getString(Protocol.Message.toString()) + '\n');
         });
+    }
+
+    private void setGamePlayers() {
+        JSONArray jsonArray = resultObject.getJSONArray(Protocol.PlayerList.toString());
+        for (int i = 0; i < jsonArray.length(); i++) {
+            ((GamePanelPlayerCard) mainFrame.getGamePanel().getPlayerCards()[i]).setPlayerName(jsonArray.getString(i));
+            if (jsonArray.getString(i).equals(GameBuffer.getInstance().getUsername())) {
+                GameBuffer.getInstance().setMyTurn(i);
+            }
+        }
+    }
+
+    private void joinGame() {
+        if (resultObject.getBoolean(Protocol.Status.toString())) {
+            SwingUtilities.invokeLater(() -> {
+                mainFrame.setGamePanel();
+                mainFrame.changePanel(mainFrame.getGamePanel());
+                setGamePlayers();
+                GameBuffer.getInstance().setGameTurn();
+                mainFrame.getGamePanel().startMyTurn();
+            });
+        }
+    }
+
+    private void pieceMoveForward() {
+        for (int i = 0; i < resultObject.getInt(Protocol.Roll.toString()); i++) {
+            try {
+                mainFrame.getGamePanel().getGameMap().moveForward(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+                TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void pieceMoveBackward() {
+        for (int i = 0; i < resultObject.getInt(Protocol.Roll.toString()); i++) {
+            try {
+                mainFrame.getGamePanel().getGameMap().moveBackward(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+                TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void pieceBackToStart() {
+        mainFrame.getGamePanel().getGameMap().backToStart(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+    }
+
+    private void rollDice() {
+        if (GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() == GameBuffer.getInstance().getMyTurn()) {
+            //TODO: show roll dice dialog
+        }
+        if (resultObject.getInt(Protocol.NextDiceNum.toString()) == 0) {
+            SwingUtilities.invokeLater(() -> {
+                pieceMoveForward();
+                GameBuffer.getInstance().nextTurn();
+                mainFrame.getGamePanel().startMyTurn(); //move to gird effect method?
+            });
+        } else {
+            SwingUtilities.invokeLater(this::pieceMoveForward);
+            //TODO: show select route dialog
+        }
+    }
+
+    private void selectRoute() {
+
     }
 
     @Override
@@ -118,6 +194,9 @@ public class ResultHandler implements Runnable {
                         case EXIT_LOBBY -> exitLobby();
                         case START_GAME -> startGame();
                         case SEND_CHAT -> receiveChat();
+                        case JOIN_GAME -> joinGame();
+                        case ROLL_DICE -> rollDice();
+                        case SELECT_ROUTE -> selectRoute();
                         default -> System.err.println("Error: illegal protocol detected.");
                     }
                 } else {

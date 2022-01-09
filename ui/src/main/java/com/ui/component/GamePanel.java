@@ -1,11 +1,16 @@
 package com.ui.component;
 
+import com.data.Protocol;
+import com.data.Request;
+import com.data.buffer.GameBuffer;
+import com.data.buffer.RequestBuffer;
 import com.ui.component.subcomponent.GamePanelMap;
 import com.ui.component.subcomponent.GamePanelPlayerCard;
 import com.ui.component.subcomponent.MapGrid;
 import com.ui.component.subcomponent.Player;
 import com.ui.scheme.ColorScheme;
 import com.ui.scheme.LayoutScheme;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,8 +57,10 @@ public class GamePanel extends JPanel {
         buttonHolder = new Container();
         playerCardPane = new Container();
 
-        useItemButton.addActionListener(e -> useItemAction());
-        rollDiceButton.addActionListener(e -> rollDiceAction());
+        useItemButton.addActionListener(e -> useItem());
+        rollDiceButton.addActionListener(e -> rollDice());
+        useItemButton.setEnabled(false);
+        rollDiceButton.setEnabled(false);
         mapExamplePane.setLayout(new GridLayout(MapGrid.values().length + Player.values().length - 1, 1, 5, 10));
         buttonHolder.setLayout(new GridLayout(1, 2, 5, 5));
         playerCardPane.setLayout(new GridLayout(1, 4, 5, 5));
@@ -73,11 +80,38 @@ public class GamePanel extends JPanel {
         add(playerCardPane, LayoutScheme.GAME_PLAYERCARD_PANE.getLayout());
     }
 
-    private void useItemAction() {
+    public void startMyTurn() {
+        if (GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() == GameBuffer.getInstance().getMyTurn()) {
+            useItemButton.setEnabled(true);
+            rollDiceButton.setEnabled(true);
+            ((GamePanelPlayerCard) playerCards[GameBuffer.getInstance().getMyTurn() - 1]).setPlayerStatus(true);
+        } else {
+            ((GamePanelPlayerCard) playerCards[GameBuffer.getInstance().getMyTurn() - 1]).setPlayerStatus(false);
+        }
+    }
+
+    private void endMyTurn() {
+        useItemButton.setEnabled(false);
+        rollDiceButton.setEnabled(false);
+    }
+
+    public JPanel[] getPlayerCards() {
+        return playerCards;
+    }
+
+    public GamePanelMap getGameMap() {
+        return gameMap;
+    }
+
+    private void useItem() {
         //TODO:
     }
 
-    private void rollDiceAction() {
-        //TODO:
+    private void rollDice() {
+        JSONObject rollDiceRequest = new JSONObject();
+        rollDiceRequest.put(Protocol.Request.toString(), Request.ROLL_DICE);
+//        rollDiceRequest.put(Protocol.Username.toString(), GameBuffer.getInstance().getUsername());
+        RequestBuffer.getInstance().registerRequest(rollDiceRequest);
+        endMyTurn();
     }
 }

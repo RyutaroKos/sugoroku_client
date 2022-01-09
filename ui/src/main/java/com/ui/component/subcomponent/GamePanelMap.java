@@ -86,7 +86,7 @@ public class GamePanelMap extends JPanel {
         repaint();
     }
 
-    public void restart(int i) {
+    public void backToStart(int i) {
         pieces[i].X = 0;
         pieces[i].Y = 11;
         repaint();
