@@ -104,7 +104,7 @@ public class GamePanel extends JPanel {
     }
 
     private void useItem() {
-        //TODO:
+        //TODO: complete useItem()
     }
 
     private void rollDice() {

@@ -15,11 +15,6 @@ import javax.swing.*;
 
 public class ButtonFactory implements ComponentFactory {
     @Override
-    public JDialog getDialog(MainFrame mainFrame, UIKeyword dialogType, Boolean status, String message) {
-        return null;
-    }
-
-    @Override
     public JLabel getLabel(UIKeyword labelType, String label) {
         return null;
     }

@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
         return matchingPanel;
     }
 
-    public void setLobbyPanel(String lobbyType, String lobbyID) {
+    public void setLobbyPanel(UIKeyword lobbyType, String lobbyID) {
         lobbyPanel = new LobbyPanel(this, lobbyType, lobbyID);
     }
 

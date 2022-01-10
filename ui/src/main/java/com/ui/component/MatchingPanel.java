@@ -3,6 +3,7 @@ package com.ui.component;
 import com.data.Protocol;
 import com.data.Request;
 import com.data.buffer.RequestBuffer;
+import com.ui.component.dialog.RequestPrivateMatchDialog;
 import com.ui.scheme.*;
 import org.json.JSONObject;
 
@@ -91,9 +92,7 @@ public class MatchingPanel extends JPanel {
     }
 
     private void privateMatchAction() {
-        FactoryConstructor.getFactory(UIKeyword.Dialog)
-                .getDialog(parentFrame, UIKeyword.RequestPrivateMatchDialog, null, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>")
-                .setVisible(true);
+        RequestPrivateMatchDialog.getDialog(parentFrame, this, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
     }
 
     public void requestPrivateMatch(String privateMatchID) {

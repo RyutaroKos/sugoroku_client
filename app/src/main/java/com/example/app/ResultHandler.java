@@ -7,8 +7,8 @@ import com.data.buffer.RequestBuffer;
 import com.data.buffer.ResultBuffer;
 import com.netcom.websocket.WebSocketClient;
 import com.ui.component.UIKeyword;
-import com.ui.component.FactoryConstructor;
 import com.ui.component.MainFrame;
+import com.ui.component.dialog.*;
 import com.ui.component.subcomponent.GamePanelPlayerCard;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,16 +39,15 @@ public class ResultHandler implements Runnable {
                 mainFrame.changePanel(mainFrame.getMatchingPanel());
             });
         } else {
-            FactoryConstructor.getFactory(UIKeyword.Dialog).getDialog(mainFrame, UIKeyword.LoginDialog, null, null).setVisible(true);
+            LoginDialog.getDialog(mainFrame).setVisible(true);
         }
     }
 
     private void signup() {
-        FactoryConstructor.getFactory(UIKeyword.Dialog)
-                .getDialog(mainFrame, UIKeyword.SignupDialog, resultObject.getBoolean(Protocol.Status.toString()), null).setVisible(true);
+        SignupDialog.getDialog(mainFrame, resultObject.getBoolean(Protocol.Status.toString())).setVisible(true);
     }
 
-    private void updatePlayerList() {
+    private void updatePlayerList() { //required by randomMatch() and privateMatch()
         JSONArray jsonArray = resultObject.getJSONArray(Protocol.PlayerList.toString());
         mainFrame.getLobbyPanel().getPlayerListArea().setText("");
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -60,7 +59,7 @@ public class ResultHandler implements Runnable {
         if (resultObject.getBoolean(Protocol.Status.toString()) && GameBuffer.getInstance().getLobbyID() == null) {
             GameBuffer.getInstance().setLobbyID(resultObject.getString(Protocol.LobbyID.toString()));
             SwingUtilities.invokeLater(() -> {
-                mainFrame.setLobbyPanel(UIKeyword.RandomLobby.toString(), resultObject.getString(Protocol.LobbyID.toString()));
+                mainFrame.setLobbyPanel(UIKeyword.RandomLobby, resultObject.getString(Protocol.LobbyID.toString()));
                 mainFrame.changePanel(mainFrame.getLobbyPanel());
                 updatePlayerList();
             });
@@ -73,7 +72,7 @@ public class ResultHandler implements Runnable {
         if (resultObject.getBoolean(Protocol.Status.toString()) && GameBuffer.getInstance().getLobbyID() == null) {
             GameBuffer.getInstance().setLobbyID(resultObject.getString(Protocol.LobbyID.toString()));
             SwingUtilities.invokeLater(() -> {
-                mainFrame.setLobbyPanel(UIKeyword.PrivateLobby.toString(), resultObject.getString(Protocol.LobbyID.toString()));
+                mainFrame.setLobbyPanel(UIKeyword.PrivateLobby, resultObject.getString(Protocol.LobbyID.toString()));
                 mainFrame.changePanel(mainFrame.getLobbyPanel());
                 updatePlayerList();
             });
@@ -83,8 +82,8 @@ public class ResultHandler implements Runnable {
     }
 
     private void checkRecord() {
-        String gameRecord = "あなたの対戦成績：" + resultObject.getInt(Protocol.Win.toString()) + "勝、" + resultObject.getInt(Protocol.Lose.toString()) + "敗です";
-        FactoryConstructor.getFactory(UIKeyword.Dialog).getDialog(mainFrame, UIKeyword.GameRecordDialog, null, gameRecord).setVisible(true);
+        String gameRecord = "あなたの対戦成績：" + resultObject.getInt(Protocol.Win.toString()) + "勝、" + resultObject.getInt(Protocol.Lose.toString()) + "敗";
+        GameRecordDialog.getDialog(mainFrame, gameRecord).setVisible(true);
     }
 
     private void exitLobby() {
@@ -110,7 +109,7 @@ public class ResultHandler implements Runnable {
         });
     }
 
-    private void setGamePlayers() {
+    private void setGamePlayers() { //required by joinGame()
         JSONArray jsonArray = resultObject.getJSONArray(Protocol.PlayerList.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             ((GamePanelPlayerCard) mainFrame.getGamePanel().getPlayerCards()[i]).setPlayerName(jsonArray.getString(i));
@@ -132,19 +131,23 @@ public class ResultHandler implements Runnable {
         }
     }
 
-    private void pieceMoveForward() {
-        for (int i = 0; i < resultObject.getInt(Protocol.Roll.toString()); i++) {
-            try {
-                mainFrame.getGamePanel().getGameMap().moveForward(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
-                TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void pieceMoveForward(Protocol protocol) { //required by rollDice(), selectRoute() and girdEffect(int type)
+        if (protocol == Protocol.Roll || protocol == Protocol.Value) {
+            for (int i = 0; i < resultObject.getInt(protocol.toString()); i++) {
+                try {
+                    mainFrame.getGamePanel().getGameMap().moveForward(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+                    TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+        } else {
+            System.err.println("ERROR: unsupported protocol for pieceMoveForward() in ResultHandler.java");
         }
     }
 
-    private void pieceMoveBackward() {
-        for (int i = 0; i < resultObject.getInt(Protocol.Roll.toString()); i++) {
+    private void pieceMoveBackward() { //required by girdEffect(int type)
+        for (int i = 0; i < resultObject.getInt(Protocol.Value.toString()); i++) {
             try {
                 mainFrame.getGamePanel().getGameMap().moveBackward(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
                 TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second
@@ -154,27 +157,63 @@ public class ResultHandler implements Runnable {
         }
     }
 
-    private void pieceBackToStart() {
+    private void pieceBackToStart() { //required by girdEffect(int type)
         mainFrame.getGamePanel().getGameMap().backToStart(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+    }
+
+    private void getItem() { //required by gridEffect(int type)
+        //TODO: complete getItem()
+    }
+
+    private void allGetItem() { //required by gridEffect(int type)
+        //TODO: complete allGetItem()
+    }
+
+    private void allLoseItem() { //required by gridEffect(int type)
+        //TODO: complete allLoseItem()
+    }
+
+    private void gridEffect(int type) {
+        switch (type) {
+            case 0 -> {}
+            case 1 -> getItem();
+            case 2 -> pieceMoveForward(Protocol.Value);
+            case 3 -> pieceMoveBackward();
+            case 4 -> pieceBackToStart();
+            case 5 -> allGetItem();
+            case 6 -> allLoseItem();
+            default -> System.err.println("ERROR: unsupported grid effect type for gridEffect() in ResultHandler.java");
+        }
     }
 
     private void rollDice() {
         if (GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() == GameBuffer.getInstance().getMyTurn()) {
-            //TODO: show roll dice dialog
+            RollDiceDialog.getDialog(mainFrame, resultObject.getInt(Protocol.Roll.toString()) + resultObject.getInt(Protocol.NextDiceNum.toString())).setVisible(true);
         }
         if (resultObject.getInt(Protocol.NextDiceNum.toString()) == 0) {
             SwingUtilities.invokeLater(() -> {
-                pieceMoveForward();
+                pieceMoveForward(Protocol.Roll);
+                gridEffect(resultObject.getInt(Protocol.Effect.toString()));
                 GameBuffer.getInstance().nextTurn();
-                mainFrame.getGamePanel().startMyTurn(); //move to gird effect method?
+                mainFrame.getGamePanel().startMyTurn(); //move to girdEffect()?
             });
         } else {
-            SwingUtilities.invokeLater(this::pieceMoveForward);
-            //TODO: show select route dialog
+            SwingUtilities.invokeLater(() -> pieceMoveForward(Protocol.Roll));
+            SelectRouteDialog.getDialog(mainFrame).setVisible(true);
         }
     }
 
     private void selectRoute() {
+        if (resultObject.getInt(Protocol.NextDiceNum.toString()) == 0) {
+            SwingUtilities.invokeLater(() -> {
+                pieceMoveForward(Protocol.Roll);
+                GameBuffer.getInstance().nextTurn();
+                mainFrame.getGamePanel().startMyTurn(); //move to girdEffect()?
+            });
+        }
+    }
+
+    private void endGame() {
 
     }
 
@@ -197,7 +236,8 @@ public class ResultHandler implements Runnable {
                         case JOIN_GAME -> joinGame();
                         case ROLL_DICE -> rollDice();
                         case SELECT_ROUTE -> selectRoute();
-                        default -> System.err.println("Error: illegal protocol detected.");
+                        case END_GAME -> endGame();
+                        default -> System.err.println("ERROR: illegal protocol detected.");
                     }
                 } else {
                     TimeUnit.MICROSECONDS.sleep(100); //result読み取り処理が追いつかない場合、このタイムアウトを延長

@@ -4,6 +4,7 @@ import com.data.Protocol;
 import com.data.Request;
 import com.data.buffer.GameBuffer;
 import com.data.buffer.RequestBuffer;
+import com.ui.component.dialog.ExitLobbyDialog;
 import com.ui.scheme.*;
 import com.ui.component.subcomponent.*;
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ public class LobbyPanel extends JPanel {
     JTextField messageInput;
     Container messageInputPane;
 
-    LobbyPanel(MainFrame mainFrame, String lobbyType, String ID) {
+    LobbyPanel(MainFrame mainFrame, UIKeyword lobbyType, String ID) {
         setBackground(ColorScheme.LIGHT_ORANGE.getColor());
         setLayout(new GridBagLayout());
 
@@ -44,23 +45,23 @@ public class LobbyPanel extends JPanel {
         chatPane = LobbyPanelBody.getPanel("フリーチャット");
         typeBanner = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.LobbyPanelLabel, null);
         idBanner = FactoryConstructor.getFactory(UIKeyword.Label).getLabel(UIKeyword.LobbyPanelLabel, null);
-        exitButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanel, "退室");
-        startButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanel, "開始");
-        sendMessageButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanel, "送信");
+        exitButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanelButton, "退室");
+        startButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanelButton, "開始");
+        sendMessageButton = FactoryConstructor.getFactory(UIKeyword.Button).getButton(UIKeyword.LobbyPanelButton, "送信");
         playerListArea = new JTextArea();
         chatArea = new JTextArea();
         chatScrollPane = new JScrollPane(chatArea);
         messageInput = new JTextField();
         messageInputPane = new Container();
 
-        typeBanner.setText(switch (UIKeyword.valueOf(lobbyType)) {
+        typeBanner.setText(switch (lobbyType) {
             case RandomLobby -> "ランダムロビー";
             case PrivateLobby -> "プライベートロビー";
             default -> null;
         });
         idBanner.setText("ID: " + ID);
-        exitButton.addActionListener(actionEvent -> exitLobbyAction());
-        startButton.addActionListener(actionEvent -> startGameAction());
+        exitButton.addActionListener(e -> exitLobbyAction());
+        startButton.addActionListener(e -> startGameAction());
         playerListArea.setEditable(false);
         playerListArea.setLineWrap(true);
         playerListArea.setFont(FontScheme.LOBBY_BODYPANEL.getFont());
@@ -103,7 +104,7 @@ public class LobbyPanel extends JPanel {
     }
 
     private void exitLobbyAction() {
-        FactoryConstructor.getFactory(UIKeyword.Dialog).getDialog(parentFrame, UIKeyword.ExitLobbyDialog, null, null).setVisible(true);
+        ExitLobbyDialog.getDialog(parentFrame, this).setVisible(true);
     }
 
     public void requestExitLobby() {

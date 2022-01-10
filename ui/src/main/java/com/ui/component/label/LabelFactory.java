@@ -15,11 +15,6 @@ import javax.swing.*;
 
 public class LabelFactory implements ComponentFactory {
     @Override
-    public JDialog getDialog(MainFrame mainFrame, UIKeyword dialogType, Boolean status, String message) {
-        return null;
-    }
-
-    @Override
     public JLabel getLabel(UIKeyword labelType, String text) {
         return switch (labelType) {
             case TopPanelLabel -> new TopPanelLabel(text);

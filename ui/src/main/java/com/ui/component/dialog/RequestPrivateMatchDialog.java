@@ -16,6 +16,7 @@ public class RequestPrivateMatchDialog extends AppDialog {
 
     RequestPrivateMatchDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
         super(mainFrame);
+        setTitle("ID入力");
         dialogMessage.setText(label);
         parentFrame = mainFrame;
         parentPanel = matchingPanel;
@@ -38,7 +39,11 @@ public class RequestPrivateMatchDialog extends AppDialog {
             }
         });
         positiveButton.setEnabled(false); //確認ボタンの初期化（無効）
-        positiveButton.addActionListener(actionEvent -> parentPanel.requestPrivateMatch(privateMatchIDField.getText()));
+        positiveButton.addActionListener(e -> parentPanel.requestPrivateMatch(privateMatchIDField.getText()));
         contentPane.add(privateMatchIDField, LayoutScheme.DIALOG_TEXTFIELD.getLayout());
+    }
+
+    public static JDialog getDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
+        return new RequestPrivateMatchDialog(mainFrame, matchingPanel, label);
     }
 }

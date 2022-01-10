@@ -7,5 +7,5 @@ public enum Protocol {
     Request, Result, Status,
     Username, Password,
     LobbyID, PlayerList, Message, Win, Lose,
-    Roll, NextDiceNum, Route,
+    Roll, NextDiceNum, Route, Effect, Value
 }

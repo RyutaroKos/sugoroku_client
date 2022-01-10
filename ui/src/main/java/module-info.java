@@ -4,4 +4,5 @@ module client.app.ui.main {
     requires client.app.data.main;
     exports com.ui.component;
     exports com.ui.component.subcomponent;
+    exports com.ui.component.dialog;
 }
