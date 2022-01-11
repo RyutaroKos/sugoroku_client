@@ -1,17 +1,20 @@
 package com.data.buffer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameBuffer {
     private static final GameBuffer instance = new GameBuffer();
     private String username;
     private String lobbyID;
-    private int myTurn;
-    private int gameTurn;
+    private String currentPlayer;
+    private final List<String> playerList;
 
     private GameBuffer() {
         username = null;
         lobbyID = null;
-        myTurn = 0;
-        gameTurn = 0;
+        currentPlayer = null;
+        playerList = new ArrayList<>();
     }
 
     public void setUsername(String username) {
@@ -34,29 +37,30 @@ public class GameBuffer {
         lobbyID = null;
     }
 
-    public void setMyTurn(int myTurn) {
-        this.myTurn = ++myTurn;
+    public void setCurrentPlayer(String playerName) {
+        currentPlayer = playerName;
     }
 
-    public int getMyTurn() {
-        return myTurn;
+    public void setPlayerList(String playerName) {
+        playerList.add(playerName);
     }
 
-    public void setGameTurn() {
-        gameTurn = 1;
+    public List<String> getPlayerList() {
+        return playerList;
     }
 
-    public void nextTurn() {
-        gameTurn++;
+    public boolean isMyTurn() {
+        return username.equals(currentPlayer);
     }
 
-    public int getGameTurn() {
-        return gameTurn;
+    public int getCurrentIndex() {
+        return playerList.indexOf(currentPlayer);
     }
 
-    public void clearTurnData() {
-        myTurn = 0;
-        gameTurn = 0;
+    public void clearInGameData() {
+        lobbyID = null;
+        currentPlayer = null;
+        playerList.clear();
     }
 
     public static GameBuffer getInstance() {

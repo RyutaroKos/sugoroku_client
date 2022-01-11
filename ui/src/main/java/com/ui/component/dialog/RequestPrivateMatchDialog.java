@@ -14,10 +14,10 @@ public class RequestPrivateMatchDialog extends AppDialog {
     MatchingPanel parentPanel;
     JTextField privateMatchIDField;
 
-    RequestPrivateMatchDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
+    RequestPrivateMatchDialog(MainFrame mainFrame, MatchingPanel matchingPanel) {
         super(mainFrame);
         setTitle("ID入力");
-        dialogMessage.setText(label);
+        dialogMessage.setText("<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>");
         parentFrame = mainFrame;
         parentPanel = matchingPanel;
 
@@ -43,7 +43,7 @@ public class RequestPrivateMatchDialog extends AppDialog {
         contentPane.add(privateMatchIDField, LayoutScheme.DIALOG_TEXTFIELD.getLayout());
     }
 
-    public static JDialog getDialog(MainFrame mainFrame, MatchingPanel matchingPanel, String label) {
-        return new RequestPrivateMatchDialog(mainFrame, matchingPanel, label);
+    public static JDialog getDialog(MainFrame mainFrame, MatchingPanel matchingPanel) {
+        return new RequestPrivateMatchDialog(mainFrame, matchingPanel);
     }
 }

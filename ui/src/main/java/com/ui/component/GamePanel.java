@@ -80,13 +80,13 @@ public class GamePanel extends JPanel {
         add(playerCardPane, LayoutScheme.GAME_PLAYERCARD_PANE.getLayout());
     }
 
-    public void startMyTurn() {
-        if (GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() == GameBuffer.getInstance().getMyTurn()) {
+    public void startPlayerTurn() {
+        if (GameBuffer.getInstance().isMyTurn()) {
             useItemButton.setEnabled(true);
             rollDiceButton.setEnabled(true);
-            ((GamePanelPlayerCard) playerCards[GameBuffer.getInstance().getMyTurn() - 1]).setPlayerStatus(true);
-        } else {
-            ((GamePanelPlayerCard) playerCards[GameBuffer.getInstance().getMyTurn() - 1]).setPlayerStatus(false);
+        }
+        for (int i = 0; i < GameBuffer.getInstance().getPlayerList().size(); i++) {
+            ((GamePanelPlayerCard) playerCards[i]).setPlayerStatus(i == GameBuffer.getInstance().getCurrentIndex());
         }
     }
 

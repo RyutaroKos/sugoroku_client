@@ -92,7 +92,7 @@ public class ResultHandler implements Runnable {
 
     private void startGame() {
         if (resultObject.getBoolean(Protocol.Status.toString())) {
-            WebSocketClient.getInstance().switchServer("ws://localhost:8080/app/example"); //必要に応じてエンドポイントを調整
+            WebSocketClient.getInstance().switchToAppServer();
             JSONObject joinGameRequest = new JSONObject();
             joinGameRequest.put(Protocol.Request.toString(), Request.JOIN_GAME);
             joinGameRequest.put(Protocol.Username.toString(), GameBuffer.getInstance().getUsername());
@@ -113,9 +113,7 @@ public class ResultHandler implements Runnable {
         JSONArray jsonArray = resultObject.getJSONArray(Protocol.PlayerList.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             ((GamePanelPlayerCard) mainFrame.getGamePanel().getPlayerCards()[i]).setPlayerName(jsonArray.getString(i));
-            if (jsonArray.getString(i).equals(GameBuffer.getInstance().getUsername())) {
-                GameBuffer.getInstance().setMyTurn(i);
-            }
+            GameBuffer.getInstance().setPlayerList(jsonArray.getString(i));
         }
     }
 
@@ -125,17 +123,21 @@ public class ResultHandler implements Runnable {
                 mainFrame.setGamePanel();
                 mainFrame.changePanel(mainFrame.getGamePanel());
                 setGamePlayers();
-                GameBuffer.getInstance().setGameTurn();
-                mainFrame.getGamePanel().startMyTurn();
+                mainFrame.getGamePanel().startPlayerTurn();
             });
         }
+    }
+
+    private void nextTurn() {
+        GameBuffer.getInstance().setCurrentPlayer(resultObject.getString(Protocol.Username.toString()));
+        mainFrame.getGamePanel().startPlayerTurn();
     }
 
     private void pieceMoveForward(Protocol protocol) { //required by rollDice(), selectRoute() and girdEffect(int type)
         if (protocol == Protocol.Roll || protocol == Protocol.Value) {
             for (int i = 0; i < resultObject.getInt(protocol.toString()); i++) {
                 try {
-                    mainFrame.getGamePanel().getGameMap().moveForward(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+                    mainFrame.getGamePanel().getGameMap().moveForward(GameBuffer.getInstance().getCurrentIndex());
                     TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -149,7 +151,7 @@ public class ResultHandler implements Runnable {
     private void pieceMoveBackward() { //required by girdEffect(int type)
         for (int i = 0; i < resultObject.getInt(Protocol.Value.toString()); i++) {
             try {
-                mainFrame.getGamePanel().getGameMap().moveBackward(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+                mainFrame.getGamePanel().getGameMap().moveBackward(GameBuffer.getInstance().getCurrentIndex());
                 TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second
             } catch (Exception e) {
                 e.printStackTrace();
@@ -158,7 +160,7 @@ public class ResultHandler implements Runnable {
     }
 
     private void pieceBackToStart() { //required by girdEffect(int type)
-        mainFrame.getGamePanel().getGameMap().backToStart(GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() - 1);
+        mainFrame.getGamePanel().getGameMap().backToStart(GameBuffer.getInstance().getCurrentIndex());
     }
 
     private void getItem() { //required by gridEffect(int type)
@@ -187,15 +189,13 @@ public class ResultHandler implements Runnable {
     }
 
     private void rollDice() {
-        if (GameBuffer.getInstance().getGameTurn() % GameBuffer.getInstance().getMyTurn() == GameBuffer.getInstance().getMyTurn()) {
+        if (GameBuffer.getInstance().isMyTurn()) {
             RollDiceDialog.getDialog(mainFrame, resultObject.getInt(Protocol.Roll.toString()) + resultObject.getInt(Protocol.NextDiceNum.toString())).setVisible(true);
         }
         if (resultObject.getInt(Protocol.NextDiceNum.toString()) == 0) {
             SwingUtilities.invokeLater(() -> {
                 pieceMoveForward(Protocol.Roll);
                 gridEffect(resultObject.getInt(Protocol.Effect.toString()));
-                GameBuffer.getInstance().nextTurn();
-                mainFrame.getGamePanel().startMyTurn(); //move to girdEffect()?
             });
         } else {
             SwingUtilities.invokeLater(() -> pieceMoveForward(Protocol.Roll));
@@ -205,16 +205,15 @@ public class ResultHandler implements Runnable {
 
     private void selectRoute() {
         if (resultObject.getInt(Protocol.NextDiceNum.toString()) == 0) {
-            SwingUtilities.invokeLater(() -> {
-                pieceMoveForward(Protocol.Roll);
-                GameBuffer.getInstance().nextTurn();
-                mainFrame.getGamePanel().startMyTurn(); //move to girdEffect()?
-            });
+            SwingUtilities.invokeLater(() -> pieceMoveForward(Protocol.Roll));
         }
     }
 
     private void endGame() {
-
+        EndGameDialog.getDialog(mainFrame, resultObject.getString(Protocol.Username.toString()));
+        GameBuffer.getInstance().clearInGameData();
+        WebSocketClient.getInstance().switchToClientServer();
+        SwingUtilities.invokeLater(() -> mainFrame.changePanel(mainFrame.getMatchingPanel()));
     }
 
     @Override
@@ -234,6 +233,7 @@ public class ResultHandler implements Runnable {
                         case START_GAME -> startGame();
                         case SEND_CHAT -> receiveChat();
                         case JOIN_GAME -> joinGame();
+                        case NEXT_TURN -> nextTurn();
                         case ROLL_DICE -> rollDice();
                         case SELECT_ROUTE -> selectRoute();
                         case END_GAME -> endGame();

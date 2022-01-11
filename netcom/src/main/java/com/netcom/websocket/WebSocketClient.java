@@ -2,28 +2,34 @@ package com.netcom.websocket;
 
 public class WebSocketClient {
     private static final WebSocketClient instance = new WebSocketClient();
-    private String serverEndpoint;
-    private WebSocketManager webSocketManager;
+    private final WebSocketManager webSocketManager;
+    private WebSocketManager currentManager;
 
     private WebSocketClient() {
-        serverEndpoint = "ws://localhost:8080/app/sample"; //必要に応じてエンドポイントを調整
-        webSocketManager = new WebSocketManager(serverEndpoint);
+        String clientServerEndpoint = "ws://localhost:8080/app/sample"; //必要に応じてエンドポイントを調整
+        webSocketManager = new WebSocketManager(clientServerEndpoint);
         webSocketManager.connect();
+        currentManager = webSocketManager;
     }
 
     public boolean getConnectionStatus() {
-        return webSocketManager.isConnected();
+        return currentManager.isConnected();
     }
 
     public void sendRequest(String request) {
-        webSocketManager.sendRequestMessage(request);
+        currentManager.sendRequestMessage(request);
     }
 
-    public void switchServer(String endpoint) {
+    public void switchToAppServer() {
+        String appServerEndpoint = "ws://localhost:8080/app/example"; //必要に応じてエンドポイントを調整
+        currentManager = new WebSocketManager(appServerEndpoint);
+        currentManager.connect();
+    }
+
+    public void switchToClientServer() {
         try {
-            serverEndpoint = endpoint;
-            webSocketManager = new WebSocketManager(endpoint);
-            webSocketManager.connect();
+            currentManager.disconnect();
+            currentManager = webSocketManager;
         } catch (Exception e) {
             e.printStackTrace();
         }

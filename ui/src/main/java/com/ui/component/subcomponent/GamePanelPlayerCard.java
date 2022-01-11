@@ -35,7 +35,7 @@ public class GamePanelPlayerCard extends JPanel {
         setBorder(new LineBorder(Color.BLACK, 1, false));
         setLayout(new GridLayout(3, 1, 10, 10));
         playerName = new JLabel();
-        playerStatus = new JLabel("・状態：");
+        playerStatus = new JLabel();
 
         playerLabel.setFont(FontScheme.GAME_MAP_EXAMPLE.getFont());
         playerName.setFont(FontScheme.GAME_MAP_EXAMPLE.getFont());

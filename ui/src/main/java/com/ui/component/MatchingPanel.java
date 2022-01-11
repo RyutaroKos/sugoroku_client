@@ -92,7 +92,7 @@ public class MatchingPanel extends JPanel {
     }
 
     private void privateMatchAction() {
-        RequestPrivateMatchDialog.getDialog(parentFrame, this, "<html>プライベートロビーIDを入力ください<br>（4桁半角英数字）</html>").setVisible(true);
+        RequestPrivateMatchDialog.getDialog(parentFrame, this).setVisible(true);
     }
 
     public void requestPrivateMatch(String privateMatchID) {
