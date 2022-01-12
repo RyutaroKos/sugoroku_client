@@ -121,13 +121,13 @@ public class LobbyPanel extends JPanel {
     }
 
     private void sendChatAction() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        chatArea.append("・" + GameBuffer.getInstance().getUsername() + " - " + dateTimeFormatter.format(now) + "\n　" + messageInput.getText() + '\n');
-        messageInput.setText("");
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+//        LocalDateTime now = LocalDateTime.now();
+//        chatArea.append("・" + GameBuffer.getInstance().getUsername() + " - " + dateTimeFormatter.format(now) + "\n　" + messageInput.getText() + '\n');
         JSONObject sendChatRequest = RequestBuffer.getInstance().getRequestObject();
         sendChatRequest.put(Protocol.Request.toString(), Request.SEND_CHAT);
         sendChatRequest.put(Protocol.Message.toString(), messageInput.getText());
         RequestBuffer.getInstance().registerRequest(sendChatRequest);
+        messageInput.setText("");
     }
 }
