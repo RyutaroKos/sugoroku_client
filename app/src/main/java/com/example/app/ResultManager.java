@@ -38,6 +38,21 @@ public class ResultManager implements Runnable {
     public void checkRecord() {
     	/*マッチングパネルクラスの中(呼び出し方)1*/
     }
+    
+    public void sendChat() {
+    	//サーバーに貯めたchatを表示
+    	//自分が送ったchatはそのまま表示、他人のchatはseverから受け取って表示
+    	
+    }
+    
+    public void startGame() {
+    	//同様にアプリケーションサーバ―に接続
+    }
+    
+    public void exitLobby() {
+    	//抜けるときにseverに名前が送信され、「その名前+が退出しました」をLobbyに表示
+    	
+    }
 
     @Override
     public void run() {
@@ -56,6 +71,12 @@ public class ResultManager implements Runnable {
                     	this.privateMatch();
                     case CHECK_RECORD:
                     	this.checkRecord();
+                    case SEND_CHAT:
+                    	this.sendChat();
+                    case START_GAME:
+                    	this.startGame();
+                    case EXIT_LOBBY:
+                    	this.exitLobby();
                     default:
                         System.out.println("Unsupported protocol.");
                 }
