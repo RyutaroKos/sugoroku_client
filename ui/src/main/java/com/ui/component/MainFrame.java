@@ -13,6 +13,7 @@ import java.util.Objects;
 
 public class MainFrame extends JFrame {
     Container contentPane;
+    MatchingPanel matchingPanel = new MatchingPanel(this);
 
     MainFrame(String title) {
         super(title);
@@ -32,7 +33,8 @@ public class MainFrame extends JFrame {
     }
 
     public MatchingPanel getMatchingPanel() {
-        return new MatchingPanel(this);
+        /*return new MatchingPanel(this);*/
+    	return this.matchingPanel;
     }
 
     public LobbyPanel getLobbyPanel(String lobbyType, String lobbyID) {
