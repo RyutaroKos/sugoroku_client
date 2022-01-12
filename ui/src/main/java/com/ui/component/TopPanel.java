@@ -49,8 +49,8 @@ public class TopPanel extends JPanel {
         usernameInput.setFont(FontScheme.TOP_TEXTFIELD.getFont());
         passwordInput.setFont(FontScheme.TOP_TEXTFIELD.getFont());
         passwordInput.setEchoChar('･');
-        loginButton.addActionListener(actionEvent -> login());
-        signupButton.addActionListener(actionEvent -> signup());
+        loginButton.addActionListener(e -> login());
+        signupButton.addActionListener(e -> signup());
         loginButton.setEnabled(false);
         signupButton.setEnabled(false);
         inputField.setLayout(new GridBagLayout());

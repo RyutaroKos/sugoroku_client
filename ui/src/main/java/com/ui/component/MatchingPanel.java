@@ -64,9 +64,9 @@ public class MatchingPanel extends JPanel {
         textArea.setBackground(ColorScheme.LIGHT_GOLD.getColor());
         scrollPane.setPreferredSize(new Dimension(400, 600));
         scrollPane.setBorder(new LineBorder(Color.BLACK, 1, false));
-        randomMatchButton.addActionListener(actionEvent -> randomMatchAction());
-        privateMatchButton.addActionListener(actionEvent -> privateMatchAction());
-        checkRecordButton.addActionListener(actionEvent -> checkRecordAction());
+        randomMatchButton.addActionListener(e -> randomMatch());
+        privateMatchButton.addActionListener(e -> privateMatch());
+        checkRecordButton.addActionListener(e -> checkRecord());
         randomMatchPane.setLayout(new GridBagLayout());
         privateMatchPane.setLayout(new GridBagLayout());
         checkRecordPane.setLayout(new GridBagLayout());
@@ -85,13 +85,13 @@ public class MatchingPanel extends JPanel {
         add(buttonHolder, LayoutScheme.MATCHING_BUTTONHOLDER.getLayout());
     }
 
-    private void randomMatchAction() {
+    private void randomMatch() {
         JSONObject randomMatchRequest = RequestBuffer.getInstance().getRequestObject();
         randomMatchRequest.put(Protocol.Request.toString(), Request.RANDOM_MATCH);
         RequestBuffer.getInstance().registerRequest(randomMatchRequest);
     }
 
-    private void privateMatchAction() {
+    private void privateMatch() {
         RequestPrivateMatchDialog.getDialog(parentFrame, this).setVisible(true);
     }
 
@@ -102,7 +102,7 @@ public class MatchingPanel extends JPanel {
         RequestBuffer.getInstance().registerRequest(privateMatchRequest);
     }
 
-    private void checkRecordAction() {
+    private void checkRecord() {
         JSONObject checkRecordRequest = RequestBuffer.getInstance().getRequestObject();
         checkRecordRequest.put(Protocol.Request.toString(), Request.CHECK_RECORD);
         RequestBuffer.getInstance().registerRequest(checkRecordRequest);

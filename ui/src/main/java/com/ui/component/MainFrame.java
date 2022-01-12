@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
     MainFrame(String title) {
         super(title);
 //        setResizable(false);
-        setPreferredSize(new Dimension(1440, 1024)); //画面の最小サイズを制限、画面内のコンポーネントが崩れた場合ここを拡大
+        setMinimumSize(new Dimension(1440, 1024)); //画面の最小サイズを制限、画面内のコンポーネントが崩れた場合ここを拡大
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         try {
             setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("icon.png"))).getImage());

@@ -135,7 +135,7 @@ public class ResultHandler implements Runnable {
 
     private void pieceMoveForward(Protocol protocol) { //required by rollDice(), selectRoute() and girdEffect(int type)
         if (protocol == Protocol.Roll || protocol == Protocol.Value) {
-            for (int i = 0; i < resultObject.getInt(protocol.toString()); i++) {
+            for (int i = 0; i < resultObject.getInt(protocol.toString()) - resultObject.getInt(Protocol.NextDiceNum.toString()); i++) {
                 try {
                     mainFrame.getGamePanel().getGameMap().moveForward(GameBuffer.getInstance().getCurrentIndex());
                     TimeUnit.MILLISECONDS.sleep(500); //piece movement animation, repaints every 0.5 second

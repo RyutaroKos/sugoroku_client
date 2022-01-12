@@ -12,8 +12,6 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * マッチング成功後表示する第三の画面：ロビーパネル。
@@ -60,8 +58,8 @@ public class LobbyPanel extends JPanel {
             default -> null;
         });
         idBanner.setText("ID: " + ID);
-        exitButton.addActionListener(e -> exitLobbyAction());
-        startButton.addActionListener(e -> startGameAction());
+        exitButton.addActionListener(e -> exitLobby());
+        startButton.addActionListener(e -> startGame());
         playerListArea.setEditable(false);
         playerListArea.setLineWrap(true);
         playerListArea.setFont(FontScheme.LOBBY_BODYPANEL.getFont());
@@ -78,7 +76,7 @@ public class LobbyPanel extends JPanel {
         messageInput.setPreferredSize(new Dimension(265, 40));
         messageInput.setBorder(new LineBorder(Color.BLACK, 1 , false));
         messageInput.setFont(FontScheme.LOBBY_BODYPANEL_BUTTON.getFont());
-        sendMessageButton.addActionListener(actionEvent -> sendChatAction());
+        sendMessageButton.addActionListener(e -> sendChat());
         messageInputPane.setLayout(new GridBagLayout());
 
         lobbyBannerPane.add(exitButton, LayoutScheme.LOBBY_EXITBUTTON.getLayout());
@@ -103,7 +101,7 @@ public class LobbyPanel extends JPanel {
         return chatArea;
     }
 
-    private void exitLobbyAction() {
+    private void exitLobby() {
         ExitLobbyDialog.getDialog(parentFrame, this).setVisible(true);
     }
 
@@ -114,16 +112,13 @@ public class LobbyPanel extends JPanel {
         GameBuffer.getInstance().clearLobbyID();
     }
 
-    private void startGameAction() {
+    private void startGame() {
         JSONObject startGameRequest = RequestBuffer.getInstance().getRequestObject();
         startGameRequest.put(Protocol.Request.toString(), Request.START_GAME);
         RequestBuffer.getInstance().registerRequest(startGameRequest);
     }
 
-    private void sendChatAction() {
-//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-//        LocalDateTime now = LocalDateTime.now();
-//        chatArea.append("・" + GameBuffer.getInstance().getUsername() + " - " + dateTimeFormatter.format(now) + "\n　" + messageInput.getText() + '\n');
+    private void sendChat() {
         JSONObject sendChatRequest = RequestBuffer.getInstance().getRequestObject();
         sendChatRequest.put(Protocol.Request.toString(), Request.SEND_CHAT);
         sendChatRequest.put(Protocol.Message.toString(), messageInput.getText());
